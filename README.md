@@ -1,6 +1,4 @@
-
-
-![Logo](Demo/readme_logo.gif)
+![Logo](Demo/RedTeam_logo.gif)
 
 # RedTeam Toolkit
 
@@ -9,7 +7,7 @@ RedTeam Toolkit is an Open-Source project which tries to keep the useful offensi
 This project has tried to use open-source projects such as nmap, rustscan, dirsearch, shreder, circl, crowbar, etc which will be a powerful toolkit together.
 
 \
-Currently it supports the following options:
+**Currently it supports the following options:**
 - FullScan (scan ports and vulnerabilities/CVEs on the target - PDF output)
 - Livehosts (scan all live hosts in the network scale - PDF output)
 - DirScan (scan all directories on a target - PDF output)
@@ -17,7 +15,10 @@ Currently it supports the following options:
 - SSH Dictionary Attack
 - RDP BruteForce
 - Linux Section to exploit major Linux CVEs (UNDER MAINTENANCE)
-- Windows Section to exploit major windows CVEs (UNDER MAINTENANCE)
+- Windows Section to exploit major windows CVEs (UNDER MAINTENANCE)\
+\
+![Demo](Demo/Dashboard.png)
+
 ## Installation Guide
 Currently only tested on Debian/Ubuntu. If you have tested in any other distribution and all the tools run smoothly, to add the distribution to this guide, please refer to the contributing section.
 ### Ubuntu/Debian
