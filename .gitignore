@@ -44,3 +44,5 @@ ipython_config.py
 
 # Secrets
 secrets.json
+
+/venv

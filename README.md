@@ -24,9 +24,9 @@ Currently only tested on Debian/Ubuntu. If you have tested in any other distribu
 ### Ubuntu/Debian
 - #### Install Required packages:
 ```bash
-$ sudo apt update && sudo apt install python3-pip python3-django postgresql postgresql-contrib nmap git openvpn freerdp2-x11 tigervnc-viewer 
+$ sudo apt update && sudo apt install python3-pip python3-venv python3-django postgresql postgresql-contrib nmap git openvpn freerdp2-x11 tigervnc-viewer 
 $ wget https://github.com/RustScan/RustScan/releases/download/2.0.1/rustscan_2.0.1_amd64.deb && sudo apt install ./rustscan_2.0.1_amd64.deb
-$ git clone https://github.com/signorrayan/RedTeam-toolkit.git $$ cd RedTeam-toolkit
+$ git clone https://github.com/signorrayan/RedTeam_toolkit.git $$ cd RedTeam_toolkit
 ```
 - #### Set-up Postgresql DB for django:
 (set-up your password or you can set-up your new user & role):
@@ -45,28 +45,33 @@ postgres=# \q
 ```
 
 - put your ``` SECRET_KEY ``` in a new file ``` RedTeam-toolkit/.env.py ``` (you can generate that in online sources, search Django Secret Key Generator)
+```python
+# RedTeam-toolkit/.env.py
+SECRET_KEY = 'Your Secret Key'
+```
 
 - #### active venv and Install the python packages:
 
 ```
+$ python3 -m venv venv
 $ source venv/bin/activate
 $ pip3 install -r requirements.txt
 ```
 
-- #### migration for the Database :
+- #### Database migration:
 ```
-python3 manage.py makemigrations
-python3 manage.py migrate
+python manage.py makemigrations
+python manage.py migrate
 ```
 
 - #### Create a superuser to manage admin page :
 you will need this user to login in the Web-UI
 ```
-python3 manage.py createsuperuser
+python manage.py createsuperuser
 ```
 - #### Start the project :
 ```
-python3 manage.py runserver
+python manage.py runserver
 ```
 
 - #### You can access that via:
@@ -96,9 +101,11 @@ if you have any question about the Installation, ask me in the issues section.
 
 ## Contributing
 Thanks to all Open-Source project that help me in this project .\
-If you want to help us, Don't be afraid to contribute! We have many things you can do to help out.\
-to contribute you can create an issue or (better) you can fork & create a pull request.\
-If you have any suggestions such as adding other open-source tools to this project and do not know where to start, please contact me by email mo.sarayloo@protonmail.com
+I'm not a web developer, if you see any issues, or you can make the project works better, i'm glad to see your contributing.
+If you want to help us, don't be afraid to contribute! We have many things you can do to help out.\
+to contribute you can create an **issue** or (better) you can **fork & create a pull request**.
+
+If you have any suggestions such as adding other open-source tools to this project or make this project better and do not know where to start, please contact me by email mo.sarayloo@protonmail.com
 
 
   
