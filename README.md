@@ -1,4 +1,4 @@
-![Logo](Demo/RedTeam_logo.gif)
+![Logo](Demo/RedTeam_logo2.gif)
 
 # RedTeam Toolkit
 
