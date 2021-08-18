@@ -1,0 +1,46 @@
+### Python template
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+.idea/
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+.env
+
+# Django stuff:
+*.log
+*.out
+
+# Sphinx documentation
+docs/_build/
+
+# IPython
+profile_default/
+ipython_config.py
+
+
+# Media and Static directories
+/media/
+!/media/.gitkeep
+/toolkit/media/
+
+# Secrets
+secrets.json

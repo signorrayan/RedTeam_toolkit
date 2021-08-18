@@ -1,0 +1,127 @@
+from fpdf import FPDF
+from datetime import datetime
+import os
+import re
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+
+class PDF(FPDF):
+    def header(self):
+        # Logo
+        self.image(f"{BASE_DIR}/static/toolkit/pdf_logo.png", 10, 8, 33)
+
+        self.set_font('Arial', 'B', 15)
+        # Calculate width of title and position
+        w = self.get_string_width(title) + 6
+        self.set_x((210 - w) / 2)
+        # Colors of frame, background and text
+        #0, 80, 180
+        self.set_draw_color(166, 1, 3)
+        #128, 143, 164
+        self.set_fill_color(1,1,3)
+        #254, 253, 254
+        self.set_text_color(254, 253, 254)
+        # Thickness of frame (1 mm)
+        self.set_line_width(1)
+        # Title
+        self.cell(w, 9, title, 1, 1, 'C', 1)
+        self.ln(3)
+
+        # User
+        uw = self.get_string_width(u[0]) + 2
+        self.set_x((230 - uw + 1))
+        self.set_text_color(1, 1, 3)
+        self.set_font('Arial', 'I', 9)
+        self.cell(uw, -20, u[0])
+        uw = self.get_string_width(u[1]) + 2
+        self.set_x((204 - uw + 1))
+        self.set_text_color(1, 1, 3)
+        self.set_font('Arial', 'I', 9)
+        self.cell(uw, -10, u[1])
+        #self.ln(20)
+
+        #Report Type
+        rt = self.get_string_width(report_type) + 6
+        self.set_x((200 - rt) / 2)
+        self.set_text_color(1, 1, 3)
+        self.set_font('Arial','B', 15)
+        self.cell(15, 20, report_type, 'C', 1)
+
+        #Time
+        cd = self.get_string_width(cdate) + 6
+        self.set_text_color(1,1,3)
+        self.set_x(8)
+        self.set_font('Arial', 'B', 13)
+        self.cell(8, 10, cdate, 'C', 1)
+        # Line break
+        #self.ln(15)
+
+        #Header Line
+        self.set_x(0)
+        self.cell(0, 5, '______________________________________________________________________________________', 0, 1)
+        self.ln(5)
+
+
+    # Page footer
+    def footer(self):
+        # Position at 1.5 cm from bottom
+        self.set_y(-15)
+        # Arial italic 8
+        self.set_font('Arial', 'I', 8)
+        # Page number
+        self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
+
+
+def convert_to_pdf(output, user_name, ip, function_name):
+    import codecs
+    with open(f"{BASE_DIR}/static/toolkit/c.bin", 'r') as n:
+        n = codecs.decode(n.readline().rstrip(), "hex").decode("utf-8")
+
+    pdf = PDF()
+    global title, report_type, u
+    u = str(n).split(',')
+    report_type = f"[ {str(function_name).upper()} ]"
+    title = ip
+    directory = f"{BASE_DIR}/media/toolkit/reports/{user_name}"
+    if not os.path.isdir(directory):
+        os.mkdir(directory)
+
+    pdf.alias_nb_pages()
+    pdf.add_page()
+    pdf.set_text_color(1,1,3)
+
+    if function_name == "fullscan":
+        pdf.set_font('Times', '', 9)
+    else:
+        pdf.set_font('Times', '', 11)
+    #pdf.set_font('Times', '', 9)
+    for line in output:
+        pdf.cell(0, 7, line, 0, 1)
+
+
+    if re.match(r"[\d\.]+\/\d+", str(ip)):
+        ip = str(ip).split("/")[0]
+    elif re.match(r"http\w?\://\S+", str(ip)):
+        ip = str(ip).split('/')[2]
+
+    pdf.output(f"{directory}/{function_name}-{str(ip)}.pdf", 'F')
+
+cdate = datetime.now().strftime("%Y-%m-%d %H:%M")
+
+
+#output = ['___gewgwegew___________tretrete_____________qgeqgwegwe______tertetet_____________wdqwdfw______________rtetretertert___________dsdwddwedfewefwefwefeghgrgwf']
+#user_name = "sarayloo"
+#ip = "www.roadstershop.com"
+#function_name = "hostscan"
+##n = "Mohammadreza Sarayloo"
+#
+#import codecs
+#import subprocess
+#
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#n = subprocess.run(["cat", f"{BASE_DIR}/c.bin"],
+#                   capture_output=True, encoding="utf-8")
+#n = codecs.decode(n.stdout.split()[0], "hex").decode("utf-8").split(',')
+#convert_to_pdf(output, user_name, n, ip, function_name)
