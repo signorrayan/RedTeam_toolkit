@@ -19,7 +19,7 @@ This project has tried to use open-source projects such as nmap, rustscan, dirse
 \
 ![Demo](Demo/Dashboard.png)
 
-## Installation Guide
+## :blue_book: Installation Guide
 Currently only tested on Debian/Ubuntu. If you have tested in any other distribution and all the tools run smoothly, to add the distribution to this guide, please refer to the contributing section.
 ### Ubuntu/Debian
 - #### Install Required packages:
@@ -84,7 +84,7 @@ Enter your superuser information and in the management page, you can add a new u
 login and start using that.\
 if you have any question about the Installation, ask me in the issues section.
 
-## Demo
+## :computer: Demo
 - #### Fullscan
 
 ![Logo](Demo/fullscan.gif)
@@ -105,7 +105,7 @@ Thanks to all Open-Source projects that helped me in this project .
 If 
 - :exclamation: You see any issues 
 - :dizzy: You can make the project works better
-- :bulb: You have any suggestions/idea such as adding other open-source tools
+- :bulb: You have any suggestions/ideas such as adding other open-source tools
 - :star2: You have created a script that can add a useful functionality to this project and solve a problem
 
 
