@@ -26,7 +26,7 @@ Currently only tested on Debian/Ubuntu. If you have tested in any other distribu
 ```bash
 $ sudo apt update && sudo apt install python3-pip python3-venv python3-django postgresql postgresql-contrib nmap git openvpn freerdp2-x11 tigervnc-viewer 
 $ wget https://github.com/RustScan/RustScan/releases/download/2.0.1/rustscan_2.0.1_amd64.deb && sudo apt install ./rustscan_2.0.1_amd64.deb
-$ git clone https://github.com/signorrayan/RedTeam_toolkit.git $$ cd RedTeam_toolkit
+$ git clone https://github.com/signorrayan/RedTeam_toolkit.git && cd RedTeam_toolkit
 ```
 - #### Set-up Postgresql DB for django:
 (set-up your password or you can set-up your new user & role):
@@ -106,7 +106,7 @@ If
 - :exclamation: You see any issues 
 - :dizzy: You can make the project works better
 - :bulb: You have any suggestions/ideas such as adding other open-source tools
-- :star2: You have created a script that can add a useful functionality to this project and solve a problem
+- :star2: You have created a script that can add an useful functionality to this project and solve a problem
 
 
 
