@@ -77,6 +77,7 @@ def livehost(request):
             function_name = livehost.__name__
             user_name = request.user
             rustscan.rustscan_script(ip, user_name, function_name)
+            ip = str(ip).split(',')[0]
 
         except ValueError:
             return render(request, 'toolkit/dashboard.html', {'form':IpscanForm()}, {'error':'Bad data passed in. Try again.'})

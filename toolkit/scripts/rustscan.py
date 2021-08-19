@@ -12,7 +12,7 @@ def rustscan_script(ip, user_name, function_name):
     #pre_output = ' , '.join(str(pre_output))
     #ansi_escape = re.compile(r'(?:\[\d?\;?\d+\w+)')
     #result = ansi_escape.sub('', pre_output)
-    pre_output = pre_output[10:-3]
+    pre_output = pre_output[0:-3]
     delete_list = [
                    "increasing ulimit",
                    "lowering it",
@@ -30,6 +30,7 @@ def rustscan_script(ip, user_name, function_name):
                 break
 
     if check():
+        ip = str(ip).split(',')[0]
         convert_to_pdf(output, user_name, ip, function_name)
 
     else:
