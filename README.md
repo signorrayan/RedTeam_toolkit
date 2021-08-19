@@ -99,13 +99,21 @@ if you have any question about the Installation, ask me in the issues section.
 ![Logo](Demo/cve_description.gif)
 
 
-## Contributing
-Thanks to all Open-Source project that help me in this project .\
-If you see any issues, or you can make the project works better, i'm glad to see your contributing.
+## :trident: Contributing
+Thanks to all Open-Source projects that helped me in this project .
+
+If 
+- :exclamation: You see any issues 
+- :dizzy: You can make the project works better
+- :bulb: You have any suggestions/idea such as adding other open-source tools
+- :star2: You have created a script that can add a useful functionality to this project and solve a problem
+
+
+
+Please consider contributing to this project .\
 If you want to help us, don't be afraid to contribute! We have many things you can do to help out.\
-to contribute you can create an **issue** or (better) you can **fork & create a pull request**.
+To contributing you can create an issue or (better) you can **fork & create a pull request**.
 
-If you have any suggestions such as adding other open-source tools to this project or make this project better and do not know where to start, please contact me by email mo.sarayloo@protonmail.com
-
+if you do not know where to start, please contact me by email mo.sarayloo@protonmail.com
 
   
