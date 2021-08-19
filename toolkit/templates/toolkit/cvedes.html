@@ -21,19 +21,19 @@
 	left: 50%;
 	margin: 0 0 0 -450px;
 	position: absolute;
-	width: 1000px;
+	width: 0;
 }
 
 .webdesigntuts-workshop:before {
 	background: #444;
 	background: linear-gradient(left, #151515, #444, #151515);
-	top: 192px;
+	top: auto;
 }
 
 .webdesigntuts-workshop:after {
 	background: #000;
 	background: linear-gradient(left, #151515, #000, #151515);
-	top: 191px;
+	top: auto;
 }
 
 .webdesigntuts-workshop form {
@@ -149,6 +149,40 @@
     }
 }
 
+
+table {
+  width:800px;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin-left:auto;
+  margin-right:auto;
+}
+th, td {
+  padding: 15px;
+  text-align: center;
+}
+#t01 tr:nth-child(even) {
+  background-color: #363333;
+}
+#t01 tr:nth-child(odd) {
+ background-color: #363333;
+}
+#t02 tr:nth-child(even) {
+  background-color: #363333;
+}
+#t02 tr:nth-child(odd) {
+ background-color: #363333;
+}
+#t01 th {
+  background-color: darkred;
+  color: darkgray;
+}
+#t02 th {
+  background-color: #131c36;
+  color: darkgray;
+}
 </style>
 <title>
     {% block title %}
@@ -167,12 +201,32 @@
 <div class="container webdesigntuts-workshop">
 		<section class="pattern-description">
         {% if result %}
-			    <p><b>CVE ID:</b> {{ result.cve_id}}</p>
-                <p><b>Published:</b> {{ result.published}}</p>
-<!--                <h4>Modified: {{ result.modified}}</h4>     -->
-                <p><b>CVSS:</b> {{ result.cvss}}</p>
-<!--                <h4>Complexity: {{ result.complexity}}</h4> -->
-                <h5><b>Summary:</b> {{ result.summary }}</h5>
+        <table id="t01">
+            <tr>
+                <th style="text-align:center">CVE ID</th>
+                <th style="text-align:center">Published</th>
+                <th style="text-align:center">Modified</th>
+                <th style="text-align:center">CVSS</th>
+                <th style="text-align:center">Complexity</th>
+            </tr>
+            <tr>
+                <td style="text-align:center">{{ result.cve_id}}</td>
+                <td style="text-align:center">{{ result.published}}</td>
+                <td style="text-align:center">{{ result.modified}}</td>
+                <td style="text-align:center">{{ result.cvss}}</td>
+                <td style="text-align:center">{{ result.complexity}}</td>
+            </tr>
+        </table>
+        <br>
+        <table id="t02">
+            <tr>
+                <th style="text-align:center">Summary</th>
+            </tr>
+            <tr>
+                <td style="text-align:center">{{ result.summary }}</td>
+            </tr>
+        </table>
+
 <!--                <h4>Capec:</h4>
                 {% for l in result.capec %}
                     <h4>{{ l }}</h4>

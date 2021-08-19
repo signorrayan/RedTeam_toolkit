@@ -6,7 +6,7 @@ from .checksum import check
 
 def rustscan_script(ip, user_name, function_name):
     #"--range", "1-10000"
-    p = subprocess.run(["rustscan", "-a", f"{ip}", "--ulimit", "50000"],
+    p = subprocess.run(["rustscan", "-a", f"{ip}", "--accessible", "--ulimit", "15000"],
                        capture_output=True, encoding="utf-8")
     pre_output = p.stdout.split('\n')
     #pre_output = ' , '.join(str(pre_output))

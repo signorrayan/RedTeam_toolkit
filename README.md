@@ -11,7 +11,7 @@ This project has tried to use open-source projects such as nmap, rustscan, dirse
 - FullScan (scan ports and vulnerabilities/CVEs on the target - PDF output)
 - Livehosts (scan all live hosts in the network scale - PDF output)
 - DirScan (scan all directories on a target - PDF output)
-- CVE Description (search a CVE-ID and show the information about that) - UNDER MAINTENANCE
+- CVE Description (search a CVE-ID and get information, vendors will be added soon) - UNDER MAINTENANCE
 - SSH Dictionary Attack
 - RDP BruteForce
 - Linux Section to exploit major Linux CVEs (UNDER MAINTENANCE)
@@ -96,12 +96,12 @@ if you have any question about the Installation, ask me in the issues section.
 
 - #### CVE Description
 
-![Logo](Demo/cvedes.gif)
+![Logo](Demo/cve_description.gif)
 
 
 ## Contributing
 Thanks to all Open-Source project that help me in this project .\
-I'm not a web developer, if you see any issues, or you can make the project works better, i'm glad to see your contributing.
+If you see any issues, or you can make the project works better, i'm glad to see your contributing.
 If you want to help us, don't be afraid to contribute! We have many things you can do to help out.\
 to contribute you can create an **issue** or (better) you can **fork & create a pull request**.
 
