@@ -86,6 +86,7 @@ if you have any question about the Installation, ask me in the issues section.
 
 ## :computer: Demo
 - #### Fullscan
+All pdf reports are placed in ```toolkit/media/toolkit/reports/``` 
 
 ![Logo](Demo/fullscan.gif)
 
