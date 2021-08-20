@@ -8,7 +8,7 @@ charset-normalizer==2.0.4
 click==8.0.1
 colorama==0.4.4
 cryptography==3.4.7
-dirhunt==0.8.1
+dirsearch==0.4.2
 Django==3.2.6
 fpdf==1.7.2
 google==3.0.0

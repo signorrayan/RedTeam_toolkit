@@ -17,5 +17,6 @@ urlpatterns = [
     path('windows/nightmare/', views.nightmare, name='nightmare'),
     path('windows/rdpbruteforce/', views.rdpbruteforce, name='rdpbruteforce'),
     path('download/', views.download_file, name='download_file'),
+    path('stream/', views.stream, name='stream'),
     #<str:filepath>/
 ]

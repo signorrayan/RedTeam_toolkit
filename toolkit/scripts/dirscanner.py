@@ -1,24 +1,31 @@
 import subprocess
+import time
 from .ctpdf import convert_to_pdf
-import re
+from .checksum import check
+import os, sys
+import dirsearch
 
-def dirscan_script(ip, user_name,full_name, function_name):
-    #p = subprocess.run(["python3", "/home/pytm/dirsearch/dirsearch.py", "--quiet", "-u", f"{ip}"],
-    #                   capture_output=True, encoding="utf-8")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    p = subprocess.run(["dirhunt", f"{str(ip)}"], capture_output=True, encoding='utf-8') #
 
-    ansi_escape = re.compile(r'\\x1b(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
-    result = ansi_escape.sub('', str(p))
-    output = re.findall(r"http\w?://[^\)]+\)|\s*\S+\s+to\:\s+[^\\]*", result) #
+def dirscan_script(ip, user_name, function_name):
 
+    command = ['dirsearch', '-e', 'txt,asp,php', '-t', '50', '--format=simple',
+               '--no-color', '-q', '--exclude-status=500', '-u', f"{ip}"]
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    output = []
+    for line in process.stdout:
+        #sys.stdout.write(str(line))
+        output.append(line.decode('utf-8'))
+        yield f"{line.decode('utf-8')}"
+        time.sleep(0.5)
 
     if check():
-        convert_to_pdf(output[2:-1], user_name, ip, function_name)
+        convert_to_pdf(output, user_name, ip, function_name)
 
 
 #user_name = "sarayloo"
-#ip = "roadstershop.com"
+#ip = "https://respect-shoes.com.ua"
 #function_name = "dirscan"
 #full_name = "Mohammadreza Sarayloo"
-#dirscan_script(ip,user_name, full_name, function_name)
+#dirscan_script(ip,user_name, function_name)

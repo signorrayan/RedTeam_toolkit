@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.http.response import HttpResponse,HttpResponseRedirect, Http404
+from django.http.response import HttpResponse,HttpResponseRedirect, Http404, StreamingHttpResponse
 from django.contrib.auth import login, logout, authenticate
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
@@ -90,22 +90,30 @@ def dirscan(request):
     if request.method == 'GET':
         return render(request, 'toolkit/dirscan.html', {'form':IpscanForm()})
 
-    else:
+    elif request.method == 'POST':
         try:
             global ip, user_name, function_name
             form = IpscanForm(request.POST)
             if form.is_valid():
                 ip = form.cleaned_data.get('ip')
             function_name = dirscan.__name__
-            #validate_ipv46_address(ip)
             user_name = request.user
-            dirscanner.dirscan_script(ip, user_name, function_name)
 
 
         except ValueError:
             return render(request, 'toolkit/dashboard.html', {'form':IpscanForm()}, {'error':'Bad data passed in. Try again.'})
 
+    response = StreamingHttpResponse(dirscanner.dirscan_script(ip, user_name, function_name))  # Accept generator/yield
+    response['Content-Type'] = 'text/event-stream'
+    return response
+
     return render(request, 'toolkit/download.html')
+
+
+def stream(request):
+    response = StreamingHttpResponse()  # Accept generator/yield
+    response['Content-Type'] = 'text/event-stream'
+    return response
 
 
 @login_required(login_url='/login/')
