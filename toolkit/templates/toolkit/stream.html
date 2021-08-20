@@ -1,0 +1,20 @@
+{% extends "toolkit/base.html" %}
+
+{% block content %}
+{% load static %}
+
+<script>
+    var eventsource = new EventSource("{% url 'stream'%}")
+    eventsource.onopen = function(){
+        console.log("Connection opened");
+    }
+    eventsource.onmessage = function () {
+        console.log(e);
+    }
+    eventsource.onerror = function (){
+        console.log('error:')
+    }
+</script>
+
+
+{% endblock %}

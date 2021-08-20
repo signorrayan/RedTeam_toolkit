@@ -98,14 +98,14 @@ def dirscan(request):
                 ip = form.cleaned_data.get('ip')
             function_name = dirscan.__name__
             user_name = request.user
-
+            response = StreamingHttpResponse(
+                dirscanner.dirscan_script(ip, user_name, function_name)
+            )  # Accept generator/yield
+            response['Content-Type'] = 'text/event-stream'
+            return response
 
         except ValueError:
             return render(request, 'toolkit/dashboard.html', {'form':IpscanForm()}, {'error':'Bad data passed in. Try again.'})
-
-    response = StreamingHttpResponse(dirscanner.dirscan_script(ip, user_name, function_name))  # Accept generator/yield
-    response['Content-Type'] = 'text/event-stream'
-    return response
 
     return render(request, 'toolkit/download.html')
 
