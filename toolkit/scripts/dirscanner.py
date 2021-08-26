@@ -5,8 +5,6 @@ from .checksum import check
 import os, sys
 import dirsearch
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 def dirscan_script(ip, user_name, function_name):
 
@@ -24,10 +22,3 @@ def dirscan_script(ip, user_name, function_name):
         convert_to_pdf(output, user_name, ip, function_name)
         #pdf_coutput = True
         #return pdf_coutput
-
-
-#user_name = "sarayloo"
-#ip = ""
-#function_name = "dirscan"
-#full_name = "Mohammadreza Sarayloo"
-#dirscan_script(ip,user_name, function_name)

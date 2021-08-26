@@ -1,10 +1,12 @@
+import json
+
 import requests
 from urllib.parse import urljoin
 
 
 class CVESearch(object):
 
-    def __init__(self, base_url='https://cve.circl.lu', proxies=None):
+    def __init__(self, base_url='https://cvepremium.circl.lu', proxies=None):
         self.base_url = base_url
         self.session = requests.Session()
         self.session.proxies = proxies
@@ -94,7 +96,27 @@ def cve_search(cve_id):
     else:
         return None
 
-    #
+
+#searching CVE from DB
+#f = open('/home/pytm/Downloads/cves.json', 'r')
+#data = json.load(f)
+#
+#for i in range (len(data["CVE_Items"])):
+#    if data["CVE_Items"][i]['cve']['CVE_data_meta']['ID'] == "CVE-2021-34527":
+#        result = {
+#            'cve_id' : data["CVE_Items"][i]['cve']['CVE_data_meta']['ID'],
+#            'published': data["CVE_Items"][i]['publishedDate'],
+#            'modified': data["CVE_Items"][i]['lastModifiedDate'],
+#            'cvss': data["CVE_Items"][i]['impact']['baseMetricV3']['cvssV3']['baseScore'],
+#            'complexity': data["CVE_Items"][i]['impact']['baseMetricV3']['cvssV3']['attackComplexity'],
+#            'vector': data["CVE_Items"][i]['impact']['baseMetricV3']['cvssV3']['attackVector'],
+#            'summary': data["CVE_Items"][i]['cve']['description']['description_data'][0]['value'],
+#    }
+#        for key, val in result.items():
+#            print(f"{key}: {val}")
+#
+#        break
+
     #for key, val in result.items():
     #    if isinstance(val, list):
     #        print(f"{key} :")
@@ -102,10 +124,3 @@ def cve_search(cve_id):
     #    else:
     #        print(f"{key} : {val}")
 #
-#user_name = "sarayloo"
-#ip = "www.roadstershop.com"
-#function_name = "cvescan"
-#full_name = "Mohammadreza Sarayloo"
-#nmap_script(ip, user_name,full_name, function_name)
-
-#print(cve_search('CVE-2021-34527'))

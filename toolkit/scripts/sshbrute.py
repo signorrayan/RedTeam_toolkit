@@ -7,7 +7,7 @@ from shreder import Shreder
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def ssh_bruteforce(target_username, target_ip):
     shreder = Shreder()
-    password = shreder.brute(target_ip, 22, target_username, f"{BASE_DIR}/scripts/wordlist/password.txt")
+    password = shreder.brute(target_ip, 22, target_username, f"{BASE_DIR}/scripts/wordlist/password.txt", delay=2)
     if password is not None:
         result = {
             'username' : target_username,
