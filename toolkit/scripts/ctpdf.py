@@ -85,8 +85,7 @@ def convert_to_pdf(output, user_name, ip, function_name):
     report_type = f"[ {str(function_name).upper()} ]"
     title = ip
     directory = f"{BASE_DIR}/media/toolkit/reports/{user_name}"
-    if not os.path.isdir(directory):
-        os.mkdir(directory)
+    os.makedirs(directory, exist_ok=True)
 
     pdf.alias_nb_pages()
     pdf.add_page()
@@ -109,19 +108,3 @@ def convert_to_pdf(output, user_name, ip, function_name):
     pdf.output(f"{directory}/{function_name}-{str(ip)}.pdf", 'F')
 
 cdate = datetime.now().strftime("%Y-%m-%d %H:%M")
-
-
-#output = ['___gewgwegew___________tretrete_____________qgeqgwegwe______tertetet_____________wdqwdfw______________rtetretertert___________dsdwddwedfewefwefwefeghgrgwf']
-#user_name = "sarayloo"
-#ip = "www.roadstershop.com"
-#function_name = "hostscan"
-##n = "Mohammadreza Sarayloo"
-#
-#import codecs
-#import subprocess
-#
-#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#n = subprocess.run(["cat", f"{BASE_DIR}/c.bin"],
-#                   capture_output=True, encoding="utf-8")
-#n = codecs.decode(n.stdout.split()[0], "hex").decode("utf-8").split(',')
-#convert_to_pdf(output, user_name, n, ip, function_name)
