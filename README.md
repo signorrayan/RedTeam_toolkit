@@ -44,7 +44,7 @@ postgres=# ALTER DATABASE redteam_toolkit_db OWNER TO redteamuser;
 postgres=# \q
 ```
 
-- put your ``` SECRET_KEY ``` in a new file ```.env.py ``` (you can generate the key in the online sources, search: Django Secret Key Generator)
+- put your ``` SECRET_KEY ``` in a new file ```.env ``` (you can generate the key in the online sources, search: Django Secret Key Generator)
 . Here is where to create the file:
 ```
 RedTeam_toolkit/
@@ -52,11 +52,11 @@ RedTeam_toolkit/
 ├─ RedTeam_toolkit/
 ├─ toolkit/
 ├─ manage.py
-├─ .env.py
+├─ .env
 ```
 
 ```python
-# .env.py
+# .env
 
 SECRET_KEY = 'Your Secret Key'
 ```
