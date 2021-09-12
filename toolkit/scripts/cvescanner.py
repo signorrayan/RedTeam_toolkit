@@ -72,13 +72,6 @@ class CVESearch(object):
         data = self._http_get('cvefor', query=param)
         return data.json()
 
-
-#def cve_search(cve_name):
-#
-#
-#
-#    convert_to_pdf(output, user_name,full_name, ip, function_name)
-
 def cve_search(cve_id):
     cve = CVESearch()
     pre_result = cve.id(cve_id)

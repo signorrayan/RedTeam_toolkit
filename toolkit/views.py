@@ -11,6 +11,7 @@ from datetime import datetime
 from .scripts import nmap, rustscan, dirscanner, cvescanner, sshbrute, rdpbrute
 import os
 from .forms import IpscanForm, CvedesForm, SshbruteForm
+import multiprocessing
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -55,7 +56,10 @@ def fullscan(request):
             function_name = "fullscan"
             #validate_ipv46_address(ip) or RegexValidator("(?:http\w?://)?(?:www.)?[^\.]+.\w{2,8}")
             user_name = request.user
-            nmap.nmap_script(ip, user_name, function_name)
+            p_fullscan = multiprocessing.Process(target=nmap.nmap_script, args=(ip, user_name, function_name,))
+            p_fullscan.start()
+            p_fullscan.join()
+            #nmap.nmap_script(ip, user_name, function_name)
 
         except ValueError:
             return render(request, 'toolkit/dashboard.html', {'error':'Bad data passed in. Try again.'})
@@ -76,8 +80,11 @@ def livehost(request):
                 ip = form.cleaned_data.get('ip')
             function_name = livehost.__name__
             user_name = request.user
-            rustscan.rustscan_script(ip, user_name, function_name)
-            ip = str(ip).split(',')[0]
+            p_livehost = multiprocessing.Process(target=rustscan.rustscan_script, args=(ip, user_name, function_name,))
+            p_livehost.start()
+            p_livehost.join()
+            #rustscan.rustscan_script(ip, user_name, function_name)
+            ip = str(ip).split('/')[0]
 
         except ValueError:
             return render(request, 'toolkit/dashboard.html', {'form':IpscanForm()}, {'error':'Bad data passed in. Try again.'})
@@ -209,6 +216,7 @@ def nightmare(request):
 def download_file(request):
     filename = f"{function_name}-{ip}.pdf"
     # Define the full file path
+    user_name = request.user
     filepath = f"{BASE_DIR}/toolkit/media/toolkit/reports/{user_name}/{filename}"
     # Open the file for reading content
     if os.path.exists(filepath):
