@@ -1,8 +1,9 @@
 ![Logo](Demo/RedTeam_logo3.gif)
 
+\
+[![lint_python](https://github.com/signorrayan/RedTeam_toolkit/actions/workflows/lint_python.yml/badge.svg?branch=master)](https://github.com/signorrayan/RedTeam_toolkit/actions/workflows/lint_python.yml)
 # RedTeam Toolkit
-
-RedTeam Toolkit is an Open-Source project which tries to keep the useful offensive tools used in the red-teamming together in the simplest way to make the desired results to the security specialist to identify vulnerabilities.
+RedTeam Toolkit is an Open-Source project which I'm trying to keep the useful offensive tools used in the red-teamming together in a Web-App for the security specialist to identify vulnerabilities.
 
 This project has tried to use open-source projects such as nmap, rustscan, dirsearch, shreder, circl, crowbar, etc which will be a powerful toolkit together.
 
