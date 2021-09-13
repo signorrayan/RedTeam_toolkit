@@ -227,7 +227,7 @@ def download_file(request):
         return response
     # Return the response value
     else:
-        raise HTTP404
+        raise Http404
 
 
 

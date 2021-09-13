@@ -43,7 +43,7 @@ class Nmap:
             proc = subprocess.Popen([run_nmap], shell=True, stdout=subprocess.PIPE, )
             stdout_value = str(proc.communicate())
         else:
-            nm = nmap.PortScanner()
+            nm = Nmap.port_scan()
             nm.scan(hosts=ip_list,
                     arguments=nmap_scan_option)
 
