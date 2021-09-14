@@ -20,15 +20,15 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
       - name: Install PostgreSQL client
-        run: |
+      - run: |
           apt-get update
           apt-get install --yes postgresql-client
           
       - run: |
-        psql -h postgres -d postgres_db -U postgres_user -c "SELECT 'CREATE DATABASE redteam_toolkit_db' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'redteam_toolkit_db');"
-        psql -h postgres -d postgres_db -U postgres_user -c "CREATE ROLE redteamuser with SUPERUSER CREATEDB LOGIN ENCRYPTED PASSWORD '147r258r';"
-        psql -h postgres -d postgres_db -U postgres_user -c "GRANT ALL PRIVILEGES ON DATABASE redteam_toolkit_db TO redteamuser;"
-        psql -h postgres -d postgres_db -U postgres_user -c "ALTER DATABASE redteam_toolkit_db OWNER TO redteamuser;"
+        psql -h postgres -d postgres_db -U postgres_user -c 'CREATE DATABASE redteam_toolkit_db'
+        psql -h postgres -d postgres_db -U postgres_user -c "CREATE ROLE redteamuser with SUPERUSER CREATEDB LOGIN ENCRYPTED PASSWORD '147r258r'"
+        psql -h postgres -d postgres_db -U postgres_user -c "GRANT ALL PRIVILEGES ON DATABASE redteam_toolkit_db TO redteamuser"
+        psql -h postgres -d postgres_db -U postgres_user -c "ALTER DATABASE redteam_toolkit_db OWNER TO redteamuser"
         env:
           PGPASSWORD: postgres
           
