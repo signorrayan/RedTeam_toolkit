@@ -2,6 +2,9 @@
 
 \
 [![lint_python](https://github.com/signorrayan/RedTeam_toolkit/actions/workflows/lint_python.yml/badge.svg?branch=master)](https://github.com/signorrayan/RedTeam_toolkit/actions/workflows/lint_python.yml)
+[![autoblack](https://github.com/signorrayan/RedTeam_toolkit/actions/workflows/autoblack.yml/badge.svg)](https://github.com/signorrayan/RedTeam_toolkit/actions/workflows/autoblack.yml)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 # RedTeam Toolkit
 Red Team Toolkit is an Open-Source Django Offensive Web-App which is keeping the useful offensive tools used in the red-teamming together for the security specialist to identify vulnerabilities.
 
