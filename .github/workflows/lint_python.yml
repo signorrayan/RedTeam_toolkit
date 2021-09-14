@@ -7,9 +7,9 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
+          POSTGRES_USER: redteamuser
+          POSTGRES_PASSWORD: 147r258r
+          POSTGRES_DB: redteam_toolkit_db
           POSTGRES_PORT: 5432
         ports:
           - 5432:5432
@@ -23,14 +23,7 @@ jobs:
       - run: |
           apt-get update
           apt-get install --yes postgresql-client
-          
-      - run: |
-        psql -h postgres -d postgres_db -U postgres_user -c 'CREATE DATABASE redteam_toolkit_db'
-        psql -h postgres -d postgres_db -U postgres_user -c "CREATE ROLE redteamuser with SUPERUSER CREATEDB LOGIN ENCRYPTED PASSWORD '147r258r'"
-        psql -h postgres -d postgres_db -U postgres_user -c "GRANT ALL PRIVILEGES ON DATABASE redteam_toolkit_db TO redteamuser"
-        psql -h postgres -d postgres_db -U postgres_user -c "ALTER DATABASE redteam_toolkit_db OWNER TO redteamuser"
-        env:
-          PGPASSWORD: postgres
+        
           
       # https://www.hacksoft.io/blog/github-actions-in-action-setting-up-django-and-postgres#resources
       - run: sudo apt-get install libpq-dev
