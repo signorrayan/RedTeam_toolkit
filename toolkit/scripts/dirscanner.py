@@ -20,5 +20,3 @@ def dirscan_script(ip, user_name, function_name):
 
     if check():
         convert_to_pdf(output, user_name, ip, function_name)
-        #pdf_coutput = True
-        #return pdf_coutput

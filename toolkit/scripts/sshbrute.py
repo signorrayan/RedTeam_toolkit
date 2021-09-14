@@ -28,7 +28,3 @@ def ssh_bruteforce(target_username, target_ip):
     #    convert_to_pdf(output, user_name, n, ip, function_name)
     #else:
     #    exit(1)
-
-#user_name = "signor"
-#ip = "192.168.1.9"
-#ssh_bruteforce()

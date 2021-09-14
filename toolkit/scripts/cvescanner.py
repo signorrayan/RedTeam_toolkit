@@ -90,8 +90,7 @@ def cve_search(cve_id):
         return None
 
 
-#searching CVE from DB
-#f = open('/home/pytm/Downloads/cves.json', 'r')
+#searching CVE from Json
 #data = json.load(f)
 #
 #for i in range (len(data["CVE_Items"])):

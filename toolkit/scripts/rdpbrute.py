@@ -25,5 +25,3 @@ def rdpbrute_script(ip):
         'password' : password
     }
     return result
-
-#rdpbrute_script("192.168.1.12/32")

@@ -6,7 +6,6 @@ import re
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-
 class PDF(FPDF):
     def header(self):
         # Logo
@@ -95,7 +94,7 @@ def convert_to_pdf(output, user_name, ip, function_name):
         pdf.set_font('Times', '', 9)
     else:
         pdf.set_font('Times', '', 11)
-    #pdf.set_font('Times', '', 9)
+
     for line in output:
         pdf.cell(0, 7, line, 0, 1)
 
