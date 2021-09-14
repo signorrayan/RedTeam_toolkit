@@ -7,9 +7,9 @@ jobs:
       postgres:
         image: postgres:10.8
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: github_actions
+          POSTGRES_USER: redteamuser
+          POSTGRES_PASSWORD: 147r258r
+          POSTGRES_DB: redteam_toolkit_db
         ports:
           - 5432:5432
         # needed because the postgres container does not provide a healthcheck
@@ -34,6 +34,7 @@ jobs:
           pip install -r requirements.txt
           mkdir --parents --verbose .mypy_cache
       - run: mypy --ignore-missing-imports --install-types --non-interactive .
+      - run: python manage.py makemigrations
       - run: python manage.py migrate
         env:  # https://stackoverflow.com/questions/61670081
           SECRET_KEY: 96fc8cf096d12574a61caf5a93ac4c9e3abc37094144971a1a
