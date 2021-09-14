@@ -25,7 +25,7 @@ jobs:
       - name: If needed, commit black changes to the pull request
         if: ${{ failure() }}
         run: |
-          black .
+          python3 -m black .
           git config --global user.name 'autoblack'
           git config --global user.email 'signorrayan@users.noreply.github.com'
           git checkout $GITHUB_HEAD_REF
