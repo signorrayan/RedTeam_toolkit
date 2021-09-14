@@ -44,7 +44,7 @@ jobs:
       - run: mypy --ignore-missing-imports --install-types --non-interactive .
       - run: python manage.py migrate
         env:  # https://stackoverflow.com/questions/61670081
-          SECRET_KEY: 96fc8cf096d12574a61caf5a93ac4c9e3abc37094144971a1a
+          SECRET_KEY: l(z6d*z_#l@$%yt=)d_-r*0)cf4&9s)vj3bymt-r4s6en^gt-8
       - run: python manage.py test
         env:  # https://stackoverflow.com/questions/61670081
           SECRET_KEY: 96fc8cf096d12574a61caf5a93ac4c9e3abc37094144971a1a
