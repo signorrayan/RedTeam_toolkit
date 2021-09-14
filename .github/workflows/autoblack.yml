@@ -21,7 +21,7 @@ jobs:
         run: pip3 install git+git://github.com/psf/black
         
       - name: Run black --check .
-        run: black --check
+        run: black --check .
       - name: If needed, commit black changes to the pull request
         if: ${{ failure() }}
         run: |
