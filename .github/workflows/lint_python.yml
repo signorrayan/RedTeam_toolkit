@@ -5,11 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:10.8
+        image: postgres:latest
         env:
-          POSTGRES_USER: redteamuser
-          POSTGRES_PASSWORD: 147r258r
-          POSTGRES_DB: redteam_toolkit_db
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+          POSTGRES_PORT: 5432
         ports:
           - 5432:5432
         
@@ -18,12 +19,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
+      - name: Install PostgreSQL client
+        run: |
+          apt-get update
+          apt-get install --yes postgresql-client
       
-      - run: PGPASSWORD=postgres psql -U postgres -tc "SELECT 'CREATE DATABASE redteam_toolkit_db' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'redteam_toolkit_db')"
-      - run: PGPASSWORD=postgres psql -U postgres -tc "CREATE ROLE redteamuser with SUPERUSER CREATEDB LOGIN ENCRYPTED PASSWORD '147r258r'"
-      - run: PGPASSWORD=postgres psql -U postgres -tc "GRANT ALL PRIVILEGES ON DATABASE redteam_toolkit_db TO redteamuser"
-      - run: PGPASSWORD=postgres psql -U postgres -tc "ALTER DATABASE redteam_toolkit_db OWNER TO redteamuser"
-      
+      - name: Query database
+        run: psql -h postgres -d postgres_db -U postgres_user -c "SELECT 'CREATE DATABASE redteam_toolkit_db' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'redteam_toolkit_db');"
+        run: psql -h postgres -d postgres_db -U postgres_user -c "CREATE ROLE redteamuser with SUPERUSER CREATEDB LOGIN ENCRYPTED PASSWORD '147r258r';"
+        run: psql -h postgres -d postgres_db -U postgres_user -c "GRANT ALL PRIVILEGES ON DATABASE redteam_toolkit_db TO redteamuser;"
+        run: psql -h postgres -d postgres_db -U postgres_user -c "ALTER DATABASE redteam_toolkit_db OWNER TO redteamuser;"
+        env:
+          PGPASSWORD: postgres
+          
       # https://www.hacksoft.io/blog/github-actions-in-action-setting-up-django-and-postgres#resources
       - run: sudo apt-get install libpq-dev
       - run: pip install --upgrade pip wheel
