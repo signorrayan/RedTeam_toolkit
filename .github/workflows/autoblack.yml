@@ -12,7 +12,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        if: github.event_name == 'pull_request'
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - uses: actions/checkout@v2
+        if: github.event_name == 'push'
+        with:
+          fetch-depth: 0
+      - uses: actions/checkout@v2
       - name: Set up Python 3.9
         uses: actions/setup-python@v1
         with:
@@ -21,11 +31,8 @@ jobs:
         run: pip3 install git+git://github.com/psf/black
         
       - name: Run black --check .
-        run: black --check .
-      - name: If needed, commit black changes to the pull request
-        if: ${{ failure() }}
         run: |
-          black --fast .
+          black --check . || black --fast .
           git config --global user.name 'autoblack'
           git config --global user.email 'signorrayan@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
