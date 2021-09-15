@@ -1,6 +1,7 @@
-from django.forms import ModelForm
-from .models import Report
 from django import forms
+from django.forms import ModelForm
+
+from .models import Report
 
 
 class IpscanForm(ModelForm):

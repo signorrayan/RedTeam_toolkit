@@ -1,9 +1,10 @@
 try:
-    import re
     import os
+    import re
+    import subprocess
     import sys
     import tempfile
-    import subprocess
+
     from lib.core.exceptions import CrowbarExceptions
 except Exception as err:
     from lib.core.exceptions import CrowbarExceptions

@@ -1,9 +1,10 @@
 try:
     import re
-    import sys
     import socket
     import struct
+    import sys
     from functools import reduce
+
     from lib.core.exceptions import CrowbarExceptions
 except Exception as err:
     from lib.core.exceptions import CrowbarExceptions

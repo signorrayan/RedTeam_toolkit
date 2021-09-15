@@ -1,7 +1,8 @@
-import subprocess
-from .ctpdf import convert_to_pdf
-from .checksum import check
 import multiprocessing
+import subprocess
+
+from .checksum import check
+from .ctpdf import convert_to_pdf
 
 # import re
 

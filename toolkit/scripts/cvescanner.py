@@ -1,7 +1,7 @@
 import json
+from urllib.parse import urljoin
 
 import requests
-from urllib.parse import urljoin
 
 
 class CVESearch(object):

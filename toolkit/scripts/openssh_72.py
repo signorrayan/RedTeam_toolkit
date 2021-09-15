@@ -1,8 +1,9 @@
-import paramiko
-import time
-import numpy
 import argparse
 import sys
+import time
+
+import numpy
+import paramiko
 
 args = None
 

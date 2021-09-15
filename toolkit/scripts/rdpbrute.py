@@ -1,5 +1,6 @@
+import os
+import re
 import subprocess
-import os, re
 
 # from .ctpdf import convert_to_pdf
 # from .checksum import check

@@ -1,9 +1,12 @@
+import os
 import subprocess
+import sys
 import time
-from .ctpdf import convert_to_pdf
-from .checksum import check
-import os, sys
+
 import dirsearch
+
+from .checksum import check
+from .ctpdf import convert_to_pdf
 
 
 def dirscan_script(ip, user_name, function_name):

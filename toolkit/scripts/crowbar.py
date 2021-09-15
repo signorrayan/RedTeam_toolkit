@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 try:
-    from crowbar.lib.main import Main, main
     from crowbar.lib.core.exceptions import CrowbarExceptions
+    from crowbar.lib.main import Main, main
 except Exception as err:
     import sys
 

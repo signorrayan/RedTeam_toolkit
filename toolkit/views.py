@@ -1,23 +1,20 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User
-from django.db import IntegrityError
-from django.http.response import (
-    HttpResponse,
-    HttpResponseRedirect,
-    Http404,
-    StreamingHttpResponse,
-)
-from django.contrib.auth import login, logout, authenticate
-from django.utils import timezone
-from django.contrib.auth.decorators import login_required
-from django.core.validators import validate_ipv46_address, RegexValidator
-from datetime import datetime
-from .scripts import nmap, rustscan, dirscanner, cvescanner, sshbrute, rdpbrute
-import os
-from .forms import IpscanForm, CvedesForm, SshbruteForm
 import multiprocessing
+import os
+from datetime import datetime
 
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.models import User
+from django.core.validators import RegexValidator, validate_ipv46_address
+from django.db import IntegrityError
+from django.http.response import (Http404, HttpResponse, HttpResponseRedirect,
+                                  StreamingHttpResponse)
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
+
+from .forms import CvedesForm, IpscanForm, SshbruteForm
+from .scripts import cvescanner, dirscanner, nmap, rdpbrute, rustscan, sshbrute
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

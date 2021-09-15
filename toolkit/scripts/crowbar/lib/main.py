@@ -1,19 +1,20 @@
 try:
+    import argparse
     import os
     import re
-    import sys
     import shlex
     import signal
-    import paramiko
-    import argparse
-    import tempfile
     import subprocess
-    from lib.nmap import Nmap
+    import sys
+    import tempfile
+
+    import paramiko
     from lib.core.common import *
+    from lib.core.exceptions import CrowbarExceptions
+    from lib.core.iprange import InvalidIPAddress, IpRange
     from lib.core.logger import Logger
     from lib.core.threadpool import ThreadPool
-    from lib.core.exceptions import CrowbarExceptions
-    from lib.core.iprange import IpRange, InvalidIPAddress
+    from lib.nmap import Nmap
 except Exception as err:
     from lib.core.exceptions import CrowbarExceptions
 
