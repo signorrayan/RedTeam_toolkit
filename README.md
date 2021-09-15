@@ -2,7 +2,6 @@
 
 \
 [![lint_python](https://github.com/signorrayan/RedTeam_toolkit/actions/workflows/lint_python.yml/badge.svg?branch=master)](https://github.com/signorrayan/RedTeam_toolkit/actions/workflows/lint_python.yml)
-[![autoblack](https://github.com/signorrayan/RedTeam_toolkit/actions/workflows/autoblack.yml/badge.svg)](https://github.com/signorrayan/RedTeam_toolkit/actions/workflows/autoblack.yml)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 # RedTeam Toolkit
