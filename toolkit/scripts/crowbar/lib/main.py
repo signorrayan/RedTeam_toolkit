@@ -29,8 +29,6 @@ def main():
         crowbar = Main()
         crowbar.run(crowbar.args.brute)
     except Exception as err:
-        import sys
-
         print(err, file=sys.stderr)
         sys.exit(1)
 
