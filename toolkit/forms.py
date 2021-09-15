@@ -6,7 +6,8 @@ from django import forms
 class IpscanForm(ModelForm):
     class Meta:
         model = Report
-        fields = ['ip']
+        fields = ["ip"]
+
 
 class CvedesForm(forms.Form):
     cve_id = forms.CharField(max_length=15)

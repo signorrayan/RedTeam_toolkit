@@ -23,36 +23,45 @@ class IpRange:
     """
 
     def ipaddr_to_binary(self, ipaddr):
-        q = ipaddr.split('.')
+        q = ipaddr.split(".")
         return reduce(lambda a, b: int(a) * 256 + int(b), q)
 
     def binary_to_ipaddr(self, ipbinary):
-        return socket.inet_ntoa(struct.pack('!I', ipbinary))
+        return socket.inet_ntoa(struct.pack("!I", ipbinary))
 
     def iprange(self, ipaddr):
-        span_re = re.compile(r'''(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})   # The beginning IP address
+        span_re = re.compile(
+            r"""(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})   # The beginning IP address
                              \s*-\s*
                              (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})       # The end IP address
-                            ''', re.VERBOSE)
+                            """,
+            re.VERBOSE,
+        )
         res = span_re.match(ipaddr)
         if res:
             beginning = res.group(1)
             end = res.group(2)
             return self.span_iprange(beginning, end)
 
-        cidr_re = re.compile(r'''(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})   # The IP address
+        cidr_re = re.compile(
+            r"""(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})   # The IP address
                              /(\d{1,2})                                 # The mask
-                          ''', re.VERBOSE)
+                          """,
+            re.VERBOSE,
+        )
         res = cidr_re.match(ipaddr)
         if res:
             addr = res.group(1)
             cidrmask = res.group(2)
             return self.cidr_iprange(addr, cidrmask)
-        wild_re = re.compile(r'''(\d{1,3}|\*)\.
+        wild_re = re.compile(
+            r"""(\d{1,3}|\*)\.
                              (\d{1,3}|\*)\.
                              (\d{1,3}|\*)\.
                              (\d{1,3}|\*)   # The IP address
-                          ''', re.VERBOSE)
+                          """,
+            re.VERBOSE,
+        )
         res = wild_re.match(ipaddr)
         if res:
             return self.wildcard_iprange(ipaddr)
@@ -62,7 +71,7 @@ class IpRange:
     def span_iprange(self, beginning, end):
         b = self.ipaddr_to_binary(beginning)
         e = self.ipaddr_to_binary(end)
-        while (b <= e):
+        while b <= e:
             yield self.binary_to_ipaddr(b)
             b = b + 1
 
@@ -72,7 +81,7 @@ class IpRange:
         e = self.ipaddr_to_binary(ipaddr)
         b = int(b & ~mask)
         e = int(e | mask)
-        while (b <= e):
+        while b <= e:
             yield self.binary_to_ipaddr(b)
             b = b + 1
 
@@ -80,9 +89,9 @@ class IpRange:
         beginning = []
         end = []
 
-        tmp = ipaddr.split('.')
+        tmp = ipaddr.split(".")
         for i in tmp:
-            if i == '*':
+            if i == "*":
                 beginning.append("0")
                 end.append("255")
             else:
@@ -95,7 +104,7 @@ class IpRange:
             while int(b[1]) <= int(e[1]):
                 while int(b[2]) <= int(e[2]):
                     while int(b[3]) <= int(e[3]):
-                        yield b[0] + '.' + b[1] + '.' + b[2] + '.' + b[3]
+                        yield b[0] + "." + b[1] + "." + b[2] + "." + b[3]
                         b[3] = "%d" % (int(b[3]) + 1)
                     b[2] = "%d" % (int(b[2]) + 1)
                     b[3] = beginning[3]

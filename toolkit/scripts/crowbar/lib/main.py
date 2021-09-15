@@ -19,8 +19,9 @@ except Exception as err:
 
     raise CrowbarExceptions(str(err))
 
-__version__ = '0.4.3-dev'
-__banner__ = 'Crowbar v%s' % (__version__)
+__version__ = "0.4.3-dev"
+__banner__ = "Crowbar v%s" % (__version__)
+
 
 def main():
     try:
@@ -32,19 +33,25 @@ def main():
         print(err, file=sys.stderr)
         sys.exit(1)
 
+
 class AddressAction(argparse.Action):
     def __call__(self, parser, args, values, option=None):
 
         if args.username:
             if len(args.username) > 1:
-                args.username = "\"" + ' '.join([str(line) for line in args.username]) + "\""
+                args.username = (
+                    '"' + " ".join([str(line) for line in args.username]) + '"'
+                )
             else:
                 args.username = args.username[0]
 
             warning = {args.username: "-U", args.passwd: "-C", args.server: "-S"}
             for _ in warning.keys():
                 if _ and os.path.isfile(_):
-                    mess = "%s is not a valid option. Please use %s option" % (_, warning[_])
+                    mess = "%s is not a valid option. Please use %s option" % (
+                        _,
+                        warning[_],
+                    )
                     raise CrowbarExceptions(mess)
 
         if args.brute == "sshkey":
@@ -96,22 +103,35 @@ class Main:
     is_success = 0
 
     def __init__(self):
-        self.services = {"openvpn": self.openvpn, "rdp": self.rdp, "sshkey": self.sshkey, "vnckey": self.vnckey}
+        self.services = {
+            "openvpn": self.openvpn,
+            "rdp": self.rdp,
+            "sshkey": self.sshkey,
+            "vnckey": self.vnckey,
+        }
         self.crowbar_readme = "https://github.com/galkan/crowbar/blob/master/README.md"
 
         self.openvpn_path = "/usr/sbin/openvpn"
-        self.vpn_failure = re.compile("SIGTERM\[soft,auth-failure\] received, process exiting")
+        self.vpn_failure = re.compile(
+            "SIGTERM\[soft,auth-failure\] received, process exiting"
+        )
         self.vpn_success = re.compile("Initialization Sequence Completed")
-        self.vpn_remote_regex = re.compile("^\s+remote\s[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\s[0-9]{1,3}")
-        self.vpn_warning = "Warning! Both \"remote\" options were used at the same time. But command line \"remote\" options will be used!"
+        self.vpn_remote_regex = re.compile(
+            "^\s+remote\s[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\s[0-9]{1,3}"
+        )
+        self.vpn_warning = 'Warning! Both "remote" options were used at the same time. But command line "remote" options will be used!'
         self.vpn_error_in_use = "Address already in use (errno=98)"
 
         self.xfreerdp_path = "/usr/bin/xfreerdp"
         self.rdp_success = "Authentication only, exit status 0"
         self.rdp_success_ins_priv = "insufficient access privileges"
         self.rdp_success_account_locked = "alert internal error"
-        self.rdp_error_host_down = "ERRCONNECT_CONNECT_FAILED"  # [0x00020006] [0x00020014]
-        self.rdp_error_display = "Please check that the \$DISPLAY environment variable is properly set."
+        self.rdp_error_host_down = (
+            "ERRCONNECT_CONNECT_FAILED"  # [0x00020006] [0x00020014]
+        )
+        self.rdp_error_display = (
+            "Please check that the \$DISPLAY environment variable is properly set."
+        )
 
         self.vncviewer_path = "/usr/bin/vncviewer"
         self.vnc_success = "Authentication successful"
@@ -120,42 +140,145 @@ class Main:
         usage = "Usage: use --help for further information"
 
         parser = argparse.ArgumentParser(description=description, usage=usage)
-        parser.add_argument('-b', '--brute', dest='brute', help='Target service', choices=self.services.keys(),
-                            required=True)
-        parser.add_argument('-s', '--server', dest='server', action='store', help='Static target')
-        parser.add_argument('-S', '--serverfile', dest='server_file', action='store',
-                            help='Multiple targets stored in a file')
-        parser.add_argument('-u', '--username', dest='username', action='store', nargs='+',
-                            help='Static name to login with')
-        parser.add_argument('-U', '--usernamefile', dest='username_file', action='store',
-                            help='Multiple names to login with, stored in a file')
-        parser.add_argument('-n', '--number', dest='thread', action='store',
-                            help='Number of threads to be active at once', default=5, type=int)
-        parser.add_argument('-l', '--log', dest='log_file', action='store', help='Log file (only write attempts)',
-                            metavar='FILE',
-                            default="crowbar.log")
-        parser.add_argument('-o', '--output', dest='output', action='store', help='Output file (write everything else)',
-                            metavar='FILE',
-                            default="crowbar.out")
-        parser.add_argument('-c', '--passwd', dest='passwd', action='store', help='Static password to login with')
-        parser.add_argument('-C', '--passwdfile', dest='passwd_file', action='store',
-                            help='Multiple passwords to login with, stored in a file',
-                            metavar='FILE')
-        parser.add_argument('-t', '--timeout', dest='timeout', action='store',
-                            help='[SSH] How long to wait for each thread (seconds)', default=10, type=int)
-        parser.add_argument('-p', '--port', dest='port', action='store',
-                            help='Alter the port if the service is not using the default value', type=int)
-        parser.add_argument('-k', '--keyfile', dest='key_file', action='store',
-                            help='[SSH/VNC] (Private) Key file or folder containing multiple files')
-        parser.add_argument('-m', '--config', dest='config', action='store', help='[OpenVPN] Configuration file ')
-        parser.add_argument('-d', '--discover', dest='discover', action='store_true',
-                            help='Port scan before attacking open ports', default=False)
-        parser.add_argument('-v', '--verbose', dest='verbose', action="count",
-                            help='Enable verbose output (-vv for more)', default=False)
-        parser.add_argument('-D', '--debug', dest='debug', action='store_true', help='Enable debug mode', default=False)
-        parser.add_argument('-q', '--quiet', dest='quiet', action='store_true', help='Only display successful logins',
-                            default=False)
-        parser.add_argument('options', nargs='*', action=AddressAction)
+        parser.add_argument(
+            "-b",
+            "--brute",
+            dest="brute",
+            help="Target service",
+            choices=self.services.keys(),
+            required=True,
+        )
+        parser.add_argument(
+            "-s", "--server", dest="server", action="store", help="Static target"
+        )
+        parser.add_argument(
+            "-S",
+            "--serverfile",
+            dest="server_file",
+            action="store",
+            help="Multiple targets stored in a file",
+        )
+        parser.add_argument(
+            "-u",
+            "--username",
+            dest="username",
+            action="store",
+            nargs="+",
+            help="Static name to login with",
+        )
+        parser.add_argument(
+            "-U",
+            "--usernamefile",
+            dest="username_file",
+            action="store",
+            help="Multiple names to login with, stored in a file",
+        )
+        parser.add_argument(
+            "-n",
+            "--number",
+            dest="thread",
+            action="store",
+            help="Number of threads to be active at once",
+            default=5,
+            type=int,
+        )
+        parser.add_argument(
+            "-l",
+            "--log",
+            dest="log_file",
+            action="store",
+            help="Log file (only write attempts)",
+            metavar="FILE",
+            default="crowbar.log",
+        )
+        parser.add_argument(
+            "-o",
+            "--output",
+            dest="output",
+            action="store",
+            help="Output file (write everything else)",
+            metavar="FILE",
+            default="crowbar.out",
+        )
+        parser.add_argument(
+            "-c",
+            "--passwd",
+            dest="passwd",
+            action="store",
+            help="Static password to login with",
+        )
+        parser.add_argument(
+            "-C",
+            "--passwdfile",
+            dest="passwd_file",
+            action="store",
+            help="Multiple passwords to login with, stored in a file",
+            metavar="FILE",
+        )
+        parser.add_argument(
+            "-t",
+            "--timeout",
+            dest="timeout",
+            action="store",
+            help="[SSH] How long to wait for each thread (seconds)",
+            default=10,
+            type=int,
+        )
+        parser.add_argument(
+            "-p",
+            "--port",
+            dest="port",
+            action="store",
+            help="Alter the port if the service is not using the default value",
+            type=int,
+        )
+        parser.add_argument(
+            "-k",
+            "--keyfile",
+            dest="key_file",
+            action="store",
+            help="[SSH/VNC] (Private) Key file or folder containing multiple files",
+        )
+        parser.add_argument(
+            "-m",
+            "--config",
+            dest="config",
+            action="store",
+            help="[OpenVPN] Configuration file ",
+        )
+        parser.add_argument(
+            "-d",
+            "--discover",
+            dest="discover",
+            action="store_true",
+            help="Port scan before attacking open ports",
+            default=False,
+        )
+        parser.add_argument(
+            "-v",
+            "--verbose",
+            dest="verbose",
+            action="count",
+            help="Enable verbose output (-vv for more)",
+            default=False,
+        )
+        parser.add_argument(
+            "-D",
+            "--debug",
+            dest="debug",
+            action="store_true",
+            help="Enable debug mode",
+            default=False,
+        )
+        parser.add_argument(
+            "-q",
+            "--quiet",
+            dest="quiet",
+            action="store_true",
+            help="Only display successful logins",
+            default=False,
+        )
+        parser.add_argument("options", nargs="*", action=AddressAction)
 
         try:
             self.args = parser.parse_args()
@@ -180,7 +303,9 @@ class Main:
                             if not ip in self.ip_list:
                                 self.ip_list.append(ip)
             except IOError:
-                mess = "File: %s cannot be opened" % os.path.abspath(self.args.server_file)
+                mess = "File: %s cannot be opened" % os.path.abspath(
+                    self.args.server_file
+                )
                 raise CrowbarExceptions(mess)
             except:
                 mess = "Invalid IP Address! Please use IP/CIDR notation <192.168.37.37/32, 192.168.1.0/24>"
@@ -197,8 +322,12 @@ class Main:
 
         if self.args.verbose:
             self.logger.output_file("Brute Force Type: %s" % self.args.brute)
-            self.logger.output_file("     Output File: %s" % os.path.abspath(self.args.output))
-            self.logger.output_file("        Log File: %s" % os.path.abspath(self.args.log_file))
+            self.logger.output_file(
+                "     Output File: %s" % os.path.abspath(self.args.output)
+            )
+            self.logger.output_file(
+                "        Log File: %s" % os.path.abspath(self.args.log_file)
+            )
             self.logger.output_file("   Discover Mode: %s" % self.args.discover)
             self.logger.output_file("    Verbose Mode: %s" % self.args.verbose)
             self.logger.output_file("      Debug Mode: %s" % self.args.debug)
@@ -207,15 +336,33 @@ class Main:
         brute_file_name = brute_file.name
         brute_file.seek(0)
 
-        openvpn_cmd = "%s --remote %s %s --auth-user-pass %s --tls-exit --connect-retry-max 0 --config %s" % (
-            self.openvpn_path, ip, port, brute_file_name, self.args.config)
+        openvpn_cmd = (
+            "%s --remote %s %s --auth-user-pass %s --tls-exit --connect-retry-max 0 --config %s"
+            % (self.openvpn_path, ip, port, brute_file_name, self.args.config)
+        )
 
         if self.args.verbose == 2:
             self.logger.output_file("CMD: %s" % openvpn_cmd)
 
-        proc = subprocess.Popen(shlex.split(openvpn_cmd), shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        proc = subprocess.Popen(
+            shlex.split(openvpn_cmd),
+            shell=False,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+        )
 
-        brute = "LOG-OPENVPN: " + ip + ":" + str(port) + " - " + username + ":" + password + " - " + brute_file_name
+        brute = (
+            "LOG-OPENVPN: "
+            + ip
+            + ":"
+            + str(port)
+            + " - "
+            + username
+            + ":"
+            + password
+            + " - "
+            + brute_file_name
+        )
         self.logger.log_file(brute)
 
         # For every line out
@@ -226,8 +373,20 @@ class Main:
 
             # Success
             if re.search(self.vpn_success, str(line)):
-                result = bcolors.OKGREEN + "OPENVPN-SUCCESS: " + bcolors.ENDC + bcolors.OKBLUE + ip + ":" + str(
-                    port) + " - " + username + ":" + password + bcolors.ENDC
+                result = (
+                    bcolors.OKGREEN
+                    + "OPENVPN-SUCCESS: "
+                    + bcolors.ENDC
+                    + bcolors.OKBLUE
+                    + ip
+                    + ":"
+                    + str(port)
+                    + " - "
+                    + username
+                    + ":"
+                    + password
+                    + bcolors.ENDC
+                )
                 self.logger.output_file(result)
                 Main.is_success = 1
                 os.kill(proc.pid, signal.SIGQUIT)
@@ -240,12 +399,14 @@ class Main:
     def openvpn(self):
         port = 443  # TCP 443, TCP 943, UDP 1194
 
-        if not 'SUDO_UID' in os.environ.keys():
+        if not "SUDO_UID" in os.environ.keys():
             mess = "OpenVPN requires super user privileges"
             raise CrowbarExceptions(mess)
 
         if not os.path.exists(self.openvpn_path):
-            mess = "openvpn: %s path doesn't exists on the system" % os.path.abspath(self.openvpn_path)
+            mess = "openvpn: %s path doesn't exists on the system" % os.path.abspath(
+                self.openvpn_path
+            )
             raise CrowbarExceptions(mess)
 
         if self.args.port is not None:
@@ -253,7 +414,9 @@ class Main:
 
         if self.args.discover:
             if not self.args.quiet:
-                self.logger.output_file("Discovery mode - port scanning: %s" % self.args.server)
+                self.logger.output_file(
+                    "Discovery mode - port scanning: %s" % self.args.server
+                )
             self.ip_list = self.nmap.port_scan(self.args.server, port)
 
         try:
@@ -267,12 +430,16 @@ class Main:
 
         if self.args.username_file:
             if not os.path.exists(self.args.username_file):
-                mess = "File: %s doesn't exists ~ %s" % os.path.abspath(self.args.username_file)
+                mess = "File: %s doesn't exists ~ %s" % os.path.abspath(
+                    self.args.username_file
+                )
                 raise CrowbarExceptions(mess)
 
         if self.args.passwd_file:
             if not os.path.exists(self.args.passwd_file):
-                mess = "File: %s doesn't exists ~ %s" % os.path.abspath(self.args.passwd_file)
+                mess = "File: %s doesn't exists ~ %s" % os.path.abspath(
+                    self.args.passwd_file
+                )
                 raise CrowbarExceptions(mess)
 
         for ip in self.ip_list:
@@ -289,39 +456,66 @@ class Main:
                 for user in userfile:
                     if self.args.passwd_file:
                         try:
-                            passwdfile = open(self.args.passwd_file, "r").read().splitlines()
+                            passwdfile = (
+                                open(self.args.passwd_file, "r").read().splitlines()
+                            )
                         except Exception as err:
                             mess = "Error: %s" % err
                             raise CrowbarExceptions(mess)
 
                         for password in passwdfile:
-                            brute_file = tempfile.NamedTemporaryFile(mode='w+t')
+                            brute_file = tempfile.NamedTemporaryFile(mode="w+t")
                             brute_file.write(user + "\n")
                             brute_file.write(password + "\n")
-                            pool.add_task(self.openvpnlogin, ip, user, password, brute_file, port)
+                            pool.add_task(
+                                self.openvpnlogin, ip, user, password, brute_file, port
+                            )
                     else:
-                        brute_file = tempfile.NamedTemporaryFile(mode='w+t')
+                        brute_file = tempfile.NamedTemporaryFile(mode="w+t")
                         brute_file.write(user + "\n")
                         brute_file.write(self.args.passwd + "\n")
-                        pool.add_task(self.openvpnlogin, ip, user, self.args.passwd, brute_file, port)
+                        pool.add_task(
+                            self.openvpnlogin,
+                            ip,
+                            user,
+                            self.args.passwd,
+                            brute_file,
+                            port,
+                        )
             else:
                 if self.args.passwd_file:
                     try:
-                        passwdfile = open(self.args.passwd_file, "r").read().splitlines()
+                        passwdfile = (
+                            open(self.args.passwd_file, "r").read().splitlines()
+                        )
                     except Exception as err:
                         mess = "Error: %s" % err
                         raise CrowbarExceptions(mess)
 
                     for password in passwdfile:
-                        brute_file = tempfile.NamedTemporaryFile(mode='w+t')
+                        brute_file = tempfile.NamedTemporaryFile(mode="w+t")
                         brute_file.write(self.args.username + "\n")
                         brute_file.write(password + "\n")
-                        pool.add_task(self.openvpnlogin, ip, self.args.username, password, brute_file, port)
+                        pool.add_task(
+                            self.openvpnlogin,
+                            ip,
+                            self.args.username,
+                            password,
+                            brute_file,
+                            port,
+                        )
                 else:
-                    brute_file = tempfile.NamedTemporaryFile(mode='w+t')
+                    brute_file = tempfile.NamedTemporaryFile(mode="w+t")
                     brute_file.write(self.args.username + "\n")
                     brute_file.write(self.args.passwd + "\n")
-                    pool.add_task(self.openvpnlogin, ip, self.args.username, self.args.passwd, brute_file, port)
+                    pool.add_task(
+                        self.openvpnlogin,
+                        ip,
+                        self.args.username,
+                        self.args.passwd,
+                        brute_file,
+                        port,
+                    )
         pool.wait_completion()
 
     def vnclogin(self, ip, port, keyfile):
@@ -330,7 +524,12 @@ class Main:
         if self.args.verbose == 2:
             self.logger.output_file("CMD: %s" % vnc_cmd)
 
-        proc = subprocess.Popen(shlex.split(vnc_cmd), shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        proc = subprocess.Popen(
+            shlex.split(vnc_cmd),
+            shell=False,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+        )
 
         brute = "LOG-VNC: " + ip + ":" + str(port) + " - " + keyfile
         self.logger.log_file(brute)
@@ -343,8 +542,18 @@ class Main:
 
             if re.search(self.vnc_success, str(line)):
                 os.kill(proc.pid, signal.SIGQUIT)
-                result = bcolors.OKGREEN + "VNC-SUCCESS: " + bcolors.ENDC + bcolors.OKBLUE + ip + ":" + str(
-                    port) + " - " + keyfile + bcolors.ENDC
+                result = (
+                    bcolors.OKGREEN
+                    + "VNC-SUCCESS: "
+                    + bcolors.ENDC
+                    + bcolors.OKBLUE
+                    + ip
+                    + ":"
+                    + str(port)
+                    + " - "
+                    + keyfile
+                    + bcolors.ENDC
+                )
                 self.logger.output_file(result)
                 Main.is_success = 1
                 break
@@ -353,7 +562,9 @@ class Main:
         port = 5901
 
         if not os.path.exists(self.vncviewer_path):
-            mess = "vncviewer: %s path doesn't exists on the system" % os.path.abspath(self.vncviewer_path)
+            mess = "vncviewer: %s path doesn't exists on the system" % os.path.abspath(
+                self.vncviewer_path
+            )
             raise CrowbarExceptions(mess)
 
         if self.args.port is not None:
@@ -361,11 +572,15 @@ class Main:
 
         if self.args.discover:
             if not self.args.quiet:
-                self.logger.output_file("Discovery mode - port scanning: %s" % self.args.server)
+                self.logger.output_file(
+                    "Discovery mode - port scanning: %s" % self.args.server
+                )
             self.ip_list = self.nmap.port_scan(self.args.server, port)
 
         if not os.path.isfile(self.args.key_file):
-            mess = "Key file: \"%s\" doesn't exists" % os.path.abspath(self.args.key_file)
+            mess = 'Key file: "%s" doesn\'t exists' % os.path.abspath(
+                self.args.key_file
+            )
             raise CrowbarExceptions(mess)
 
         try:
@@ -381,14 +596,21 @@ class Main:
 
     def rdplogin(self, ip, user, password, port):
         # Could look into using: -grab-keyboard -mouse-motion -wallpaper -themes
-        rdp_cmd = "%s /v:%s /port:%s /u:%s /p:%s /cert-ignore -clipboard +auth-only " % (
-            self.xfreerdp_path, ip, port, user, password)
+        rdp_cmd = (
+            "%s /v:%s /port:%s /u:%s /p:%s /cert-ignore -clipboard +auth-only "
+            % (self.xfreerdp_path, ip, port, user, password)
+        )
 
         if self.args.verbose == 2:
             self.logger.output_file("CMD: %s" % rdp_cmd)
 
         # stderr to stdout
-        proc = subprocess.Popen(shlex.split(rdp_cmd), shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        proc = subprocess.Popen(
+            shlex.split(rdp_cmd),
+            shell=False,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+        )
 
         brute = "LOG-RDP: " + ip + ":" + str(port) + " - " + user + ":" + password
         self.logger.log_file(brute)
@@ -401,26 +623,65 @@ class Main:
 
             # Success
             if re.search(self.rdp_success, str(line)):
-                result = bcolors.OKGREEN + "RDP-SUCCESS : " + bcolors.ENDC + bcolors.OKBLUE + ip + ":" + str(
-                    port) + " - " + user + ":" + password + bcolors.ENDC
+                result = (
+                    bcolors.OKGREEN
+                    + "RDP-SUCCESS : "
+                    + bcolors.ENDC
+                    + bcolors.OKBLUE
+                    + ip
+                    + ":"
+                    + str(port)
+                    + " - "
+                    + user
+                    + ":"
+                    + password
+                    + bcolors.ENDC
+                )
                 self.logger.output_file(result)
                 Main.is_success = 1
                 break
             elif re.search(self.rdp_success_ins_priv, str(line)):
-                result = bcolors.OKGREEN + "RDP-SUCCESS (INSUFFICIENT PRIVILEGES) : " + bcolors.ENDC + bcolors.OKBLUE + ip + ":" + str(
-                    port) + " - " + user + ":" + password + bcolors.ENDC
+                result = (
+                    bcolors.OKGREEN
+                    + "RDP-SUCCESS (INSUFFICIENT PRIVILEGES) : "
+                    + bcolors.ENDC
+                    + bcolors.OKBLUE
+                    + ip
+                    + ":"
+                    + str(port)
+                    + " - "
+                    + user
+                    + ":"
+                    + password
+                    + bcolors.ENDC
+                )
                 self.logger.output_file(result)
                 Main.is_success = 1
                 break
             elif re.search(self.rdp_success_account_locked, str(line)):
-                result = bcolors.OKGREEN + "RDP-SUCCESS (ACCOUNT_LOCKED_OR_PASSWORD_EXPIRED) : " + bcolors.ENDC + bcolors.OKBLUE + ip + ":" + str(
-                    port) + " - " + user + ":" + password + bcolors.ENDC
+                result = (
+                    bcolors.OKGREEN
+                    + "RDP-SUCCESS (ACCOUNT_LOCKED_OR_PASSWORD_EXPIRED) : "
+                    + bcolors.ENDC
+                    + bcolors.OKBLUE
+                    + ip
+                    + ":"
+                    + str(port)
+                    + " - "
+                    + user
+                    + ":"
+                    + password
+                    + bcolors.ENDC
+                )
                 self.logger.output_file(result)
                 Main.is_success = 1
                 break
             # Errors
             elif re.search(self.rdp_error_display, str(line)):
-                mess = "Please check \$DISPLAY is properly set. See README.md %s" % self.crowbar_readme
+                mess = (
+                    "Please check \$DISPLAY is properly set. See README.md %s"
+                    % self.crowbar_readme
+                )
                 raise CrowbarExceptions(mess)
             elif re.search(self.rdp_error_host_down, str(line)):
                 mess = "Host isn't up"
@@ -430,7 +691,9 @@ class Main:
         port = 3389
 
         if not os.path.exists(self.xfreerdp_path):
-            mess = "xfreerdp: %s path doesn't exists on the system" % os.path.abspath(self.xfreerdp_path)
+            mess = "xfreerdp: %s path doesn't exists on the system" % os.path.abspath(
+                self.xfreerdp_path
+            )
             raise CrowbarExceptions(mess)
 
         if self.args.port is not None:
@@ -438,7 +701,9 @@ class Main:
 
         if self.args.discover:
             if not self.args.quiet:
-                self.logger.output_file("Discovery mode - port scanning: %s" % self.args.server)
+                self.logger.output_file(
+                    "Discovery mode - port scanning: %s" % self.args.server
+                )
             self.ip_list = self.nmap.port_scan(self.args.server, port)
 
         try:
@@ -448,12 +713,16 @@ class Main:
 
         if self.args.username_file:
             if not os.path.exists(self.args.username_file):
-                mess = "File: %s doesn't exists ~ %s" % os.path.abspath(self.args.username_file)
+                mess = "File: %s doesn't exists ~ %s" % os.path.abspath(
+                    self.args.username_file
+                )
                 raise CrowbarExceptions(mess)
 
         if self.args.passwd_file:
             if not os.path.exists(self.args.passwd_file):
-                mess = "File: %s doesn't exists ~ %s" % os.path.abspath(self.args.passwd_file)
+                mess = "File: %s doesn't exists ~ %s" % os.path.abspath(
+                    self.args.passwd_file
+                )
                 raise CrowbarExceptions(mess)
 
         for ip in self.ip_list:
@@ -468,12 +737,14 @@ class Main:
                     raise CrowbarExceptions(mess)
 
                 for user in userfile:
-                    if ' ' in user:
+                    if " " in user:
                         user = '"' + user + '"'
 
                     if self.args.passwd_file:
                         try:
-                            passwdfile = open(self.args.passwd_file, "r").read().splitlines()
+                            passwdfile = (
+                                open(self.args.passwd_file, "r").read().splitlines()
+                            )
                         except Exception as err:
                             mess = "Error: %s" % err
                             raise CrowbarExceptions(mess)
@@ -485,15 +756,21 @@ class Main:
             else:
                 if self.args.passwd_file:
                     try:
-                        passwdfile = open(self.args.passwd_file, "r").read().splitlines()
+                        passwdfile = (
+                            open(self.args.passwd_file, "r").read().splitlines()
+                        )
                     except Exception as err:
                         mess = "Error: %s" % err
                         raise CrowbarExceptions(mess)
 
                     for password in passwdfile:
-                        pool.add_task(self.rdplogin, ip, self.args.username, password, port)
+                        pool.add_task(
+                            self.rdplogin, ip, self.args.username, password, port
+                        )
                 else:
-                    pool.add_task(self.rdplogin, ip, self.args.username, self.args.passwd, port)
+                    pool.add_task(
+                        self.rdplogin, ip, self.args.username, self.args.passwd, port
+                    )
         pool.wait_completion()
 
     def sshlogin(self, ip, port, user, keyfile, timeout):
@@ -504,14 +781,46 @@ class Main:
         except:
             pass
         else:
-            brute = "LOG-SSH: " + ip + ":" + str(port) + " - " + user + ":" + keyfile + ":" + str(timeout)
+            brute = (
+                "LOG-SSH: "
+                + ip
+                + ":"
+                + str(port)
+                + " - "
+                + user
+                + ":"
+                + keyfile
+                + ":"
+                + str(timeout)
+            )
             self.logger.log_file(brute)
 
             try:
-                ssh.connect(ip, port, username=user, password=None, pkey=None, key_filename=keyfile, timeout=timeout,
-                            allow_agent=False, look_for_keys=False)
-                result = bcolors.OKGREEN + "SSH-SUCCESS: " + bcolors.ENDC + bcolors.OKBLUE + ip + ":" + str(
-                    port) + " - " + user + ":" + keyfile + bcolors.ENDC
+                ssh.connect(
+                    ip,
+                    port,
+                    username=user,
+                    password=None,
+                    pkey=None,
+                    key_filename=keyfile,
+                    timeout=timeout,
+                    allow_agent=False,
+                    look_for_keys=False,
+                )
+                result = (
+                    bcolors.OKGREEN
+                    + "SSH-SUCCESS: "
+                    + bcolors.ENDC
+                    + bcolors.OKBLUE
+                    + ip
+                    + ":"
+                    + str(port)
+                    + " - "
+                    + user
+                    + ":"
+                    + keyfile
+                    + bcolors.ENDC
+                )
                 self.logger.output_file(result)
                 Main.is_success = 1
             except:
@@ -525,7 +834,9 @@ class Main:
 
         if self.args.discover:
             if not self.args.quiet:
-                self.logger.output_file("Discovery mode - port scanning: %s" % self.args.server)
+                self.logger.output_file(
+                    "Discovery mode - port scanning: %s" % self.args.server
+                )
             self.ip_list = self.nmap.port_scan(self.args.server, port)
 
         try:
@@ -535,11 +846,15 @@ class Main:
 
         if self.args.username_file:
             if not os.path.exists(self.args.username_file):
-                mess = "File: %s doesn't exists ~ %s" % os.path.abspath(self.args.username_file)
+                mess = "File: %s doesn't exists ~ %s" % os.path.abspath(
+                    self.args.username_file
+                )
                 raise CrowbarExceptions(mess)
 
         if not os.path.exists(self.args.key_file):
-            mess = "Key file/folder: \"%s\" doesn't exists" % os.path.abspath(self.args.key_file)
+            mess = 'Key file/folder: "%s" doesn\'t exists' % os.path.abspath(
+                self.args.key_file
+            )
             raise CrowbarExceptions(mess)
 
         for ip in self.ip_list:
@@ -558,30 +873,66 @@ class Main:
                         for dirname, dirnames, filenames in os.walk(self.args.key_file):
                             for keyfile in filenames:
                                 keyfile_path = self.args.key_file + "/" + keyfile
-                                if keyfile.endswith('.pub', 4):
-                                    self.logger.output_file("LOG-SSH: Skipping Public Key - %s" % keyfile_path)
+                                if keyfile.endswith(".pub", 4):
+                                    self.logger.output_file(
+                                        "LOG-SSH: Skipping Public Key - %s"
+                                        % keyfile_path
+                                    )
                                     continue
-                                pool.add_task(self.sshlogin, ip, port, user, keyfile_path, self.args.timeout)
+                                pool.add_task(
+                                    self.sshlogin,
+                                    ip,
+                                    port,
+                                    user,
+                                    keyfile_path,
+                                    self.args.timeout,
+                                )
                     else:
-                        pool.add_task(self.sshlogin, ip, port, user, self.args.key_file, self.args.timeout)
+                        pool.add_task(
+                            self.sshlogin,
+                            ip,
+                            port,
+                            user,
+                            self.args.key_file,
+                            self.args.timeout,
+                        )
             else:
                 if os.path.isdir(self.args.key_file):
                     for dirname, dirnames, filenames in os.walk(self.args.key_file):
                         for keyfile in filenames:
                             keyfile_path = dirname + "/" + keyfile
-                            if keyfile.endswith('.pub', 4):
-                                self.logger.output_file("LOG-SSH: Skipping Public Key - %s" % keyfile_path)
+                            if keyfile.endswith(".pub", 4):
+                                self.logger.output_file(
+                                    "LOG-SSH: Skipping Public Key - %s" % keyfile_path
+                                )
                                 continue
-                            pool.add_task(self.sshlogin, ip, port, self.args.username, keyfile_path, self.args.timeout)
+                            pool.add_task(
+                                self.sshlogin,
+                                ip,
+                                port,
+                                self.args.username,
+                                keyfile_path,
+                                self.args.timeout,
+                            )
                 else:
-                    pool.add_task(self.sshlogin, ip, port, self.args.username, self.args.key_file, self.args.timeout)
+                    pool.add_task(
+                        self.sshlogin,
+                        ip,
+                        port,
+                        self.args.username,
+                        self.args.key_file,
+                        self.args.timeout,
+                    )
         pool.wait_completion()
 
     def run(self, brute_type):
         signal.signal(signal.SIGINT, self.signal_handler)
 
         if not brute_type in self.services.keys():
-            mess = "%s is not a valid service. Please select: %s" % (brute_type, self.services.keys())
+            mess = "%s is not a valid service. Please select: %s" % (
+                brute_type,
+                self.services.keys(),
+            )
             raise CrowbarExceptions(mess)
         else:
             self.services[brute_type]()
