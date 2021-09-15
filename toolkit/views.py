@@ -8,8 +8,12 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator, validate_ipv46_address
 from django.db import IntegrityError
-from django.http.response import (Http404, HttpResponse, HttpResponseRedirect,
-                                  StreamingHttpResponse)
+from django.http.response import (
+    Http404,
+    HttpResponse,
+    HttpResponseRedirect,
+    StreamingHttpResponse,
+)
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
