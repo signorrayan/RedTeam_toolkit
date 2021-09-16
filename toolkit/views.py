@@ -9,7 +9,7 @@ from django.http.response import (
     HttpResponse,
     StreamingHttpResponse,
 )
-from django.shortcuts import, redirect, render
+from django.shortcuts import redirect, render
 
 from .forms import CvedesForm, IpscanForm, SshbruteForm
 from .scripts import cvescanner, dirscanner, nmap, rdpbrute, rustscan, sshbrute
