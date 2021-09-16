@@ -398,7 +398,7 @@ class Main:
     def openvpn(self):
         port = 443  # TCP 443, TCP 943, UDP 1194
 
-        if "SUDO_UID" not in os.environ.keys():
+        if "SUDO_UID" not in os.environ:
             mess = "OpenVPN requires super user privileges"
             raise CrowbarExceptions(mess)
 
