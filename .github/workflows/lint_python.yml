@@ -33,9 +33,8 @@ jobs:
       - run: bandit --recursive  --skip B106,B110,B404,B602,B603,B607 .
       - run: black --check .
       - run: codespell
-      - run: flake8 . --count --ignore=B,E722,W605 --max-complexity=28
+      - run: flake8 . --count --ignore=B,E722,W503,W605 --max-complexity=28
                       --max-line-length=220 --show-source --statistics
-      - run: flake8 --select=F401 --show-source                
       - run: isort --check-only --profile black .
       - run: |
           pip install -r requirements.txt
