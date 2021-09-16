@@ -30,5 +30,5 @@ shreder @ git+https://github.com/EntySec/Shreder
 six==1.16.0
 soupsieve==2.2.1
 SQLAlchemy==1.4.22
-sqlparse==0.4.1
+sqlparse==0.4.2
 urllib3==1.26.6
