@@ -4,11 +4,7 @@ import os
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.http.response import (
-    Http404,
-    HttpResponse,
-    StreamingHttpResponse,
-)
+from django.http.response import Http404, HttpResponse, StreamingHttpResponse
 from django.shortcuts import redirect, render
 
 from .forms import CvedesForm, IpscanForm, SshbruteForm

@@ -2,6 +2,7 @@
 
 try:
     import sys
+
     from crowbar.lib.main import main
 
 except Exception as err:
