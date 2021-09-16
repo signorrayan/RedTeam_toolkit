@@ -31,11 +31,7 @@ class Nmap:
         tmpfile = tempfile.NamedTemporaryFile(mode="w+t")
         tmpfile_name = tmpfile.name
 
-        if os.geteuid() != 0:
-            nmap_scan_type = "-sT"
-        else:
-            nmap_scan_type = "-sS"
-
+        nmap_scan_type = "-sS" if os.geteuid() == 0 else "-sT"
         nmap_scan_option = (
             "-n -Pn -T4 %s --open -p %s --host-timeout=10m --max-rtt-timeout=600ms --initial-rtt-timeout=300ms --min-rtt-timeout=300ms --max-retries=2 --min-rate=150 -oG %s"
             % (nmap_scan_type, port, tmpfile_name)
@@ -49,7 +45,7 @@ class Nmap:
                 shell=True,
                 stdout=subprocess.PIPE,
             )
-            stdout_value = str(proc.communicate())
+            _ = str(proc.communicate())
         else:
             nm = Nmap.port_scan()
             nm.scan(hosts=ip_list, arguments=nmap_scan_option)
