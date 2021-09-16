@@ -9,7 +9,7 @@ import tempfile
 
 try:
     import paramiko
-    from lib.core.common import *
+    from lib.core.common import bcolors
     from lib.core.exceptions import CrowbarExceptions
     from lib.core.iprange import IpRange
     from lib.core.logger import Logger
