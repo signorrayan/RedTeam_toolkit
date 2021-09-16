@@ -5,9 +5,9 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 # RedTeam Toolkit
-Red Team Toolkit is an Open-Source Django Offensive Web-App which is keeping the useful offensive tools used in the red-teamming together for the security specialist to identify vulnerabilities.
+Red Team Toolkit is an Open-Source Django Offensive Web-App containing useful useful offensive tools used in the red-teamming together for the security specialist to identify vulnerabilities.
 
-This project has tried to use open-source projects such as nmap, rustscan, dirsearch, shreder, circl, crowbar, etc which will be a powerful toolkit together.
+The open-source projects such as nmap, rustscan, dirsearch, shreder, circl, crowbar, etc are used what will be a powerful toolkit together.
 
 \
 **Currently it supports the following options:**
