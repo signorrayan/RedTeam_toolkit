@@ -1,13 +1,13 @@
-try:
-    import argparse
-    import os
-    import re
-    import shlex
-    import signal
-    import subprocess
-    import sys
-    import tempfile
+import argparse
+import os
+import re
+import shlex
+import signal
+import subprocess
+import sys
+import tempfile
 
+try:
     import paramiko
     from lib.core.common import *
     from lib.core.exceptions import CrowbarExceptions
@@ -45,11 +45,11 @@ class AddressAction(argparse.Action):
                 args.username = args.username[0]
 
             warning = {args.username: "-U", args.passwd: "-C", args.server: "-S"}
-            for _ in warning.keys():
-                if _ and os.path.isfile(_):
+            for key, value in warning.items():
+                if key and os.path.isfile(key):
                     mess = "%s is not a valid option. Please use %s option" % (
-                        _,
-                        warning[_],
+                        key,
+                        value,
                     )
                     raise CrowbarExceptions(mess)
 
@@ -299,7 +299,7 @@ class Main:
                 else:
                     for _ in open(self.args.server_file, "r"):
                         for ip in iprange.iprange(_):
-                            if not ip in self.ip_list:
+                            if ip not in self.ip_list:
                                 self.ip_list.append(ip)
             except IOError:
                 mess = "File: %s cannot be opened" % os.path.abspath(
@@ -398,7 +398,7 @@ class Main:
     def openvpn(self):
         port = 443  # TCP 443, TCP 943, UDP 1194
 
-        if not "SUDO_UID" in os.environ.keys():
+        if "SUDO_UID" not in os.environ.keys():
             mess = "OpenVPN requires super user privileges"
             raise CrowbarExceptions(mess)
 
@@ -678,7 +678,7 @@ class Main:
             # Errors
             elif re.search(self.rdp_error_display, str(line)):
                 mess = (
-                    "Please check \$DISPLAY is properly set. See README.md %s"
+                    r"Please check $DISPLAY is properly set. See README.md %s"
                     % self.crowbar_readme
                 )
                 raise CrowbarExceptions(mess)
@@ -897,7 +897,7 @@ class Main:
                         )
             else:
                 if os.path.isdir(self.args.key_file):
-                    for dirname, dirnames, filenames in os.walk(self.args.key_file):
+                    for dirname, _dirnames, filenames in os.walk(self.args.key_file):
                         for keyfile in filenames:
                             keyfile_path = dirname + "/" + keyfile
                             if keyfile.endswith(".pub", 4):
@@ -927,7 +927,7 @@ class Main:
     def run(self, brute_type):
         signal.signal(signal.SIGINT, self.signal_handler)
 
-        if not brute_type in self.services.keys():
+        if brute_type not in self.services:
             mess = "%s is not a valid service. Please select: %s" % (
                 brute_type,
                 self.services.keys(),
