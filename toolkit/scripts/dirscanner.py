@@ -1,9 +1,5 @@
-import os
 import subprocess
-import sys
 import time
-
-import dirsearch
 
 from .checksum import check
 from .ctpdf import convert_to_pdf

@@ -1,10 +1,7 @@
-import multiprocessing
 import subprocess
 
 from .checksum import check
 from .ctpdf import convert_to_pdf
-
-# import re
 
 
 def rustscan_script(ip, user_name, function_name):
@@ -41,9 +38,3 @@ def rustscan_script(ip, user_name, function_name):
 
     else:
         exit(1)
-
-
-# user_name = "sarayloo"
-# ip = "192.168.1.0/28"
-# function_name = "livehost"
-# rustscan_script(ip, user_name, function_name)

@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.core.validators import RegexValidator, validate_ipv46_address
+#from django.core.validators import RegexValidator, validate_ipv46_address
 from django.db import models
 
 # validate_hostname = RegexValidator(regex=r'[a-zA-Z0-9-_]*\.[a-zA-Z]{2,6}')

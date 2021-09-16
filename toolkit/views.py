@@ -1,21 +1,15 @@
 import multiprocessing
 import os
-from datetime import datetime
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth.models import User
-from django.core.validators import RegexValidator, validate_ipv46_address
-from django.db import IntegrityError
+from django.contrib.auth.forms import AuthenticationForm
 from django.http.response import (
     Http404,
     HttpResponse,
-    HttpResponseRedirect,
     StreamingHttpResponse,
 )
-from django.shortcuts import get_object_or_404, redirect, render
-from django.utils import timezone
+from django.shortcuts import, redirect, render
 
 from .forms import CvedesForm, IpscanForm, SshbruteForm
 from .scripts import cvescanner, dirscanner, nmap, rdpbrute, rustscan, sshbrute

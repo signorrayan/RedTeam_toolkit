@@ -11,7 +11,7 @@ try:
     import paramiko
     from lib.core.common import *
     from lib.core.exceptions import CrowbarExceptions
-    from lib.core.iprange import InvalidIPAddress, IpRange
+    from lib.core.iprange import IpRange
     from lib.core.logger import Logger
     from lib.core.threadpool import ThreadPool
     from lib.nmap import Nmap

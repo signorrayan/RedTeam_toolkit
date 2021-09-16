@@ -1,10 +1,7 @@
-import multiprocessing
 import subprocess
 
 from .checksum import check
 from .ctpdf import convert_to_pdf
-
-# import re
 
 
 def nmap_script(ip, user_name, function_name):

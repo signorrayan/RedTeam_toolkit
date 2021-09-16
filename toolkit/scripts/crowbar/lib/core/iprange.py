@@ -2,7 +2,6 @@ try:
     import re
     import socket
     import struct
-    import sys
     from functools import reduce
 
     from lib.core.exceptions import CrowbarExceptions
