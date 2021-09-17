@@ -17,3 +17,7 @@ class CvedesForm(forms.Form):
 class SshbruteForm(forms.Form):
     username = forms.CharField(max_length=20)
     ip = forms.GenericIPAddressField()
+
+
+class VerbtamperForm(forms.Form):
+    target_url = forms.CharField()
