@@ -76,14 +76,14 @@
 </div>
 </div>
 <div class="side-block w3-center" >
-    <a href="{% url 'fullscan' %}"><p class="w3-medium scans" style="position:relative;left:77px; top:-40px;"><span class="w3-hide-small ">Full</span> Scan</p></a>
-    <a href="{% url 'livehost' %}"><p class="w3-medium scans" style="position:relative;left:65px; top:-40px;"><span class="w3-hide-small ">Live Hosts</span> Scan</p></a>
-    <a href="{% url 'dirscan' %}"><p class="w3-medium scans" style="position:relative;left:50px; top:-40px;"><span class="w3-hide-small ">Dir</span> Scan</p></a>
-    <a href="{% url 'cvedes' %}"><p class="w3-medium scans" style="position:relative;left:60px; top:-40px;"><span class="w3-hide-small ">CVE</span> Description</p></a>
+    <a href="{% url 'fullscan' %}" target="_blank"><p class="w3-medium scans" style="position:relative;left:77px; top:-40px;"><span class="w3-hide-small ">Full</span> Scan</p></a>
+    <a href="{% url 'livehost' %}" target="_blank"><p class="w3-medium scans" style="position:relative;left:65px; top:-40px;"><span class="w3-hide-small ">Live Hosts</span> Scan</p></a>
+    <a href="{% url 'dirscan' %}" target="_blank"><p class="w3-medium scans" style="position:relative;left:50px; top:-40px;"><span class="w3-hide-small ">Dir</span> Scan</p></a>
+    <a href="{% url 'cvedes' %}" target="_blank"><p class="w3-medium scans" style="position:relative;left:60px; top:-40px;"><span class="w3-hide-small ">CVE</span> Description</p></a>
 </div><br><br><br><br>
 <div class="side-block w3-center">
     <a href="{% url 'sshbruteforce' %}">
-        <img src="{% static 'toolkit/images/ssh-brute.png' %}"  class="scans" style="position: relative;left:40px;" width="85" height="85">
+        <img src="{% static 'toolkit/images/ssh-brute.png' %}" class="scans" style="position: relative;left:40px;" width="85" height="85">
     </a>
      <a href="{% url 'rdpbruteforce' %}">
         <img src="{% static 'toolkit/images/rdp-brute.png' %}"  class="scans" style="position: relative;left:40px;" width="85" height="85">
@@ -96,10 +96,10 @@
     </a>
 </div>
 <div class="side-block w3-center" >
-    <a href="{% url 'sshbruteforce' %}"><p class="w3-medium scans" style="position:relative;left:100px; top:10px;"><span class="w3-hide-small ">SSH</span> Dictionary Attack</p></a>
-    <a href="{% url 'rdpbruteforce' %}"><p class="w3-medium scans" style="position:relative;left:35px; top:10px;"><span class="w3-hide-small ">RDP</span> Bruteforce</p></a>
-    <a href="{% url 'linux' %}"><p class="w3-medium scans" style="position:relative;left:5px; top:10px;"><span class="w3-hide-small ">Linux</span> Section</p></a>
-    <a href="{% url 'nightmare' %}"><p class="w3-medium scans" style="position:relative;left:-30px; top:10px;"><span class="w3-hide-small ">Windows</span> Section</p></a>
+    <a href="{% url 'sshbruteforce' %}" target="_blank"><p class="w3-medium scans" style="position:relative;left:100px; top:10px;"><span class="w3-hide-small ">SSH</span> Dictionary Attack</p></a>
+    <a href="{% url 'rdpbruteforce' %}" target="_blank"><p class="w3-medium scans" style="position:relative;left:35px; top:10px;"><span class="w3-hide-small ">RDP</span> Bruteforce</p></a>
+    <a href="{% url 'linux' %}" target="_blank"><p class="w3-medium scans" style="position:relative;left:5px; top:10px;"><span class="w3-hide-small ">Linux</span> Section</p></a>
+    <a href="{% url 'nightmare' %}" target="_blank"><p class="w3-medium scans" style="position:relative;left:-30px; top:10px;"><span class="w3-hide-small ">Windows</span> Section</p></a>
 </div><br><br><br><br><br>
 <div class="side-block w3-center">
     <a href="{% url 'webapp' %}">
@@ -107,7 +107,7 @@
     </a>
 </div>
 <div class="side-block w3-center" >
-    <a href="{% url 'webapp' %}"><p class="w3-medium scans" style="position:relative;top:15px; right: 310px"><span class="w3-hide-small ">WEB</span> Application</p></a>
+    <a href="{% url 'webapp' %}" target="_blank"><p class="w3-medium scans" style="position:relative;top:15px; right: 310px"><span class="w3-hide-small ">WEB</span> Application</p></a>
 </div>
 </header>
 
