@@ -7,8 +7,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.http.response import Http404, HttpResponse, StreamingHttpResponse
 from django.shortcuts import redirect, render
 
-from .forms import CvedesForm, IpscanForm, SshbruteForm
-from .scripts import cvescanner, dirscanner, nmap, rdpbrute, rustscan, sshbrute
+from .forms import CvedesForm, IpscanForm, SshbruteForm, VerbtamperForm
+from .scripts import cvescanner, dirscanner, nmap, rdpbrute, rustscan, sshbrute, verbtampering
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -256,6 +256,40 @@ def rdpbruteforce(request):
 @login_required(login_url="/login/")
 def nightmare(request):
     return render(request, "toolkit/fullscan.html")
+
+
+# Web Application Section
+@login_required(login_url="/login/")
+def webapp(request):
+    if request.method == "GET":
+        return render(request, "toolkit/webapp/index.html")
+
+
+@login_required(login_url="/login/")
+def verbtamper(request):
+    if request.method == "GET":
+        return render(request, "toolkit/webapp/verbtampering.html", {"form": VerbtamperForm()})
+
+    else:
+        try:
+            global target_url, user_name
+            form = VerbtamperForm(request.POST)
+            if form.is_valid():
+                target_url = form.cleaned_data.get("target_url")
+                user_name = request.user
+                result = verbtampering.start(target_url, user_name)
+                context = {"result": result.items(), "target_url" : target_url}
+                return render(request, "toolkit/webapp/verbtampering.html", context)
+
+        except ValueError:
+            return render(
+                request,
+                "toolkit/webapp/verbtampering.html",
+                {"error": "Bad data passed in. Try again."},
+            )
+
+
+# End Web Application Section
 
 
 @login_required(login_url="/login/")
