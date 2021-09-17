@@ -1,13 +1,11 @@
-#!/usr/bin/env python3
-
-from concurrent.futures import ThreadPoolExecutor
-import requests
-import os
-
 # from rich.console import Console
 # from rich import box
 # from rich.table import Table
 import json
+import os
+from concurrent.futures import ThreadPoolExecutor
+
+import requests
 
 # from http.cookies import SimpleCookie
 
@@ -165,7 +163,7 @@ methods = [
 #        logger.error(f"Had some kind of error loading the wordlist ¯\_(ツ)_/¯: {e}")
 
 
-def methods_from_http_options(console, options, proxies, cookies):
+def methods_from_http_options(console,target_url, options, proxies, cookies):
     options_methods = []
     # logger.verbose("Pulling available methods from server with an OPTIONS request")
     try:
@@ -278,7 +276,7 @@ def start(target_url, user_name):
 
     # Sort uniq
     methods = [m.upper() for m in methods]
-    methods = sorted(list(set(methods)))
+    methods = sorted(set(methods))
 
     # Filtering for ous methods
     # filtered_methods = []
