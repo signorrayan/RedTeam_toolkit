@@ -163,7 +163,7 @@ methods = [
 #        logger.error(f"Had some kind of error loading the wordlist ¯\_(ツ)_/¯: {e}")
 
 
-def methods_from_http_options(console,target_url, options, proxies, cookies):
+def methods_from_http_options(console, target_url, options, proxies, cookies):
     options_methods = []
     # logger.verbose("Pulling available methods from server with an OPTIONS request")
     try:
