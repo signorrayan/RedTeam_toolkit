@@ -18,5 +18,7 @@ urlpatterns = [
     path("windows/rdpbruteforce/", views.rdpbruteforce, name="rdpbruteforce"),
     path("download/", views.download_file, name="download_file"),
     path("stream/", views.stream, name="stream"),
+    path("webapp/", views.webapp, name="webapp"),
+    path("webapp/verbtampering", views.verbtamper, name="verbtamper"),
     # <str:filepath>/
 ]
