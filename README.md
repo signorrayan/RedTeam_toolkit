@@ -17,6 +17,8 @@ The open-source projects such as nmap, rustscan, dirsearch, shreder, circl, crow
 - CVE Description (search a CVE-ID and get information, vendors will be added soon) - UNDER MAINTENANCE
 - SSH Dictionary Attack
 - RDP BruteForce
+- HTTP Verb Tampering
+- WebApps Section
 - Linux Section to exploit major Linux CVEs (UNDER MAINTENANCE)
 - Windows Section to exploit major windows CVEs (UNDER MAINTENANCE)\
 \
