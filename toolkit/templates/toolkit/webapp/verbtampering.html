@@ -1,0 +1,68 @@
+{% extends "toolkit/base.html" %}
+
+{% block content %}
+{% load static %}
+<head>
+<title>
+    {% block title %}
+        HTTP-VerbTampering - RedTeam Tools
+    {% endblock %}
+</title>
+<link rel="stylesheet" type="text/css" href="{% static "toolkit/css/searchbar.css" %}" media="all"/>
+<link rel="stylesheet" type="text/css" href="{% static "toolkit/css/verbtampertable.css" %}" media="all" />
+</head>
+<body>
+
+<br><br><br><br>
+<h1>HTTP Verb-tampering</h1>
+<form autocomplete='off' class='form webdesigntuts-workshop' method="POST">
+ {% csrf_token %}
+    	<input name="target_url" type="text" placeholder="ENTER URL: https://example.com">
+    	<button type='submit'>Search</button>
+</form>
+<br><br><br><br><br><br><br><br><br>
+{% if result %}
+<section>
+  <!--for demo wrap-->
+  <h5>{{ target_url }}</h5>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Status Code</th>
+          <th>Length</th>
+          <th>Reason</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+<div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        <tr>
+{% for method, values in result %}
+          <td>{{method}}</td>
+          <td>{{values.status_code}}</td>
+          <td>{{values.length}}</td>
+          <td>{{values.reason}}</td>
+            </tr>
+      </tbody>
+{% endfor %}
+    </table>
+  </div>
+</section>
+{% endif %}
+</body>
+ {% if error %}
+     <div class="alert alert-danger" role="alert">
+         {{ error }}
+     </div>
+<!-- <div class="made-with-love">
+  Made By
+  <i>♥</i> by
+  <a target="_blank" href="https://github.com/signorrayan">Signor</a>
+</div> -->
+ {% endif %}
+</html>
+{% endblock %}
