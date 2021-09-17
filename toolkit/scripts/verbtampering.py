@@ -3,24 +3,48 @@
 from concurrent.futures import ThreadPoolExecutor
 import requests
 import os
+
 # from rich.console import Console
 # from rich import box
 # from rich.table import Table
 import json
+
 # from http.cookies import SimpleCookie
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 methods = [
-    'CHECKIN', 'CHECKOUT', 'CONNECT',  'GET', 'HEAD', 'INDEX',
-    'LINK', 'LOCK', 'MKCOL', 'MOVE', 'NOEXISTE',  'ORDERPATCH',
-    'OPTIONS', 'POST', 'PROPFIND', 'PROPPATCH',  'REPORT', 'SEARCH',
-    'SHOWMETHOD', 'SPACEJUMP', 'TEXTSEARCH', 'TRACE', 'TRACK',
-    'UNLINK', 'UNLOCK', 'VERSION-CONTROL', 'BAMBOOZLE'
+    "CHECKIN",
+    "CHECKOUT",
+    "CONNECT",
+    "GET",
+    "HEAD",
+    "INDEX",
+    "LINK",
+    "LOCK",
+    "MKCOL",
+    "MOVE",
+    "NOEXISTE",
+    "ORDERPATCH",
+    "OPTIONS",
+    "POST",
+    "PROPFIND",
+    "PROPPATCH",
+    "REPORT",
+    "SEARCH",
+    "SHOWMETHOD",
+    "SPACEJUMP",
+    "TEXTSEARCH",
+    "TRACE",
+    "TRACK",
+    "UNLINK",
+    "UNLOCK",
+    "VERSION-CONTROL",
+    "BAMBOOZLE",
 ]
 # Dangerious Methods: 'COPY', 'DELETE', 'PUT',  'PATCH', 'UNCHECKOUT',
 
 
-#class Logger(object):
+# class Logger(object):
 #    def __init__(self, verbosity=0, quiet=False):
 #        self.verbosity = verbosity
 #        self.quiet = quiet
@@ -50,7 +74,7 @@ methods = [
 #            console.print("{}[!]{} {}".format("[bold red]", "[/bold red]", message), highlight=False)
 
 
-#def get_options():
+# def get_options():
 #    parser = argparse.ArgumentParser(
 #        formatter_class=argparse.RawTextHelpFormatter,
 #    )
@@ -131,7 +155,7 @@ methods = [
 #    return options
 
 
-#def methods_from_wordlist(wordlist):
+# def methods_from_wordlist(wordlist):
 #    logger.verbose(f"Retrieving methods from wordlist {wordlist}")
 #    try:
 #        with open(options.wordlist, "r") as infile:
@@ -146,10 +170,7 @@ def methods_from_http_options(console, options, proxies, cookies):
     # logger.verbose("Pulling available methods from server with an OPTIONS request")
     try:
         r = requests.options(
-            url=target_url,
-            proxies=proxies,
-            cookies=cookies,
-            verify=options.verify
+            url=target_url, proxies=proxies, cookies=cookies, verify=options.verify
         )
     except requests.exceptions.ProxyError:
         # logger.error("Invalid proxy specified ")
@@ -160,7 +181,8 @@ def methods_from_http_options(console, options, proxies, cookies):
         if "Allow" in r.headers:
             # logger.info("URL answers with a list of options: {}".format(r.headers["Allow"]))
             include_options_methods = console.input(
-                "[bold orange3][?][/bold orange3] Do you want to add these methods to the test (be careful, some methods can be dangerous)? [Y/n] ")
+                "[bold orange3][?][/bold orange3] Do you want to add these methods to the test (be careful, some methods can be dangerous)? [Y/n] "
+            )
             if not include_options_methods.lower() == "n":
                 for method in r.headers["Allow"].replace(" ", "").split(","):
                     if method not in options_methods:
@@ -181,7 +203,7 @@ def methods_from_http_options(console, options, proxies, cookies):
     return options_methods
 
 
-def test_method(method,target_url, proxies, cookies, result):
+def test_method(method, target_url, proxies, cookies, result):
     try:
         r = requests.request(
             method=method,
@@ -196,10 +218,14 @@ def test_method(method,target_url, proxies, cookies, result):
         # logger.error("Invalid proxy specified ")
         raise SystemExit
     # logger.debug(f"Obtained result: {method}, {str(r.status_code)}, {str(len(r.text))}, {r.reason}")
-    result[method] = {"status_code": r.status_code, "length": len(r.text), "reason": r.reason[:100]}
+    result[method] = {
+        "status_code": r.status_code,
+        "length": len(r.text),
+        "reason": r.reason[:100],
+    }
 
 
-#def print_result(console, result):
+# def print_result(console, result):
 #    logger.verbose("Parsing & printing result")
 #    table = Table(show_header=True, header_style="bold blue", border_style="blue", box=box.SIMPLE)
 #    table.add_column("Method")
@@ -223,6 +249,7 @@ def test_method(method,target_url, proxies, cookies, result):
 #        table.add_row(result[0], str(result[1]["length"]), str(result[1]["status_code"]), result[1]["reason"], style=style)
 #    console.print(table)
 
+
 def json_export(result, tg, user_name):
     directory = f"{BASE_DIR}/media/toolkit/verbtampering/{user_name}"
     os.makedirs(directory, exist_ok=True)
@@ -237,25 +264,25 @@ def start(target_url, user_name):
     proxies = None
 
     # Parsing cookie option
-    #if options.cookies:
+    # if options.cookies:
     #    cookie = SimpleCookie()
     #    cookie.load(options.cookies)
     #    cookies = {key: value.value for key, value in cookie.items()}
-    #else:
+    # else:
     #    cookies = {}
     cookies = {}
-#
-    #if options.wordlist is not None:
+    #
+    # if options.wordlist is not None:
     #    methods += methods_from_wordlist(options.wordlist)
-    #methods += methods_from_http_options(console, options, proxies, cookies)
+    # methods += methods_from_http_options(console, options, proxies, cookies)
 
     # Sort uniq
     methods = [m.upper() for m in methods]
     methods = sorted(list(set(methods)))
 
     # Filtering for ous methods
-    #filtered_methods = []
-    #for method in methods:
+    # filtered_methods = []
+    # for method in methods:
     #    if method in ["DELETE", "COPY", "PUT", "PATCH", "UNCHECKOUT"]:
     #        test_dangerous_method = console.input(
     #            f"[bold orange3][?][/bold orange3] Do you really want to test method {method} (can be dangerous)? \[y/N] ")
@@ -266,13 +293,13 @@ def start(target_url, user_name):
     #            filtered_methods.append(method)
     #    else:
     #        filtered_methods.append(method)
-    #methods = filtered_methods[:]
-    #del filtered_methods
+    # methods = filtered_methods[:]
+    # del filtered_methods
 
     # Waits for all the threads to be completed
     with ThreadPoolExecutor(max_workers=min(8, len(methods))) as tp:
         for method in methods:
-            tp.submit(test_method, method,target_url, proxies, cookies, result)
+            tp.submit(test_method, method, target_url, proxies, cookies, result)
 
     # Sorting the result by method name
     result = {key: result[key] for key in sorted(result)}
@@ -281,7 +308,7 @@ def start(target_url, user_name):
     # print_result(console, result)
 
     # Export to JSON
-    tg = target_url.split('/')[2]
+    tg = target_url.split("/")[2]
     json_export(result, tg, user_name)
     return result
 
