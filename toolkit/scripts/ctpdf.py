@@ -97,12 +97,12 @@ def convert_to_pdf(output, user_name, ip, function_name):
     pdf.add_page()
     pdf.set_text_color(1, 1, 3)
 
-    if function_name == "fullscan":
-        pdf.set_font("Times", "", 9)
-    else:
-        pdf.set_font("Times", "", 11)
-
     for line in output:
+        if function_name =='fullscan':
+            pdf.set_font("Times", "B", 11) if '/tcp' in line else pdf.set_font("Times", "", 10)
+        else:
+            pdf.set_font("Times", "B", 11) if 'scan report for' in line else pdf.set_font("Times", "", 10)
+
         pdf.cell(0, 7, line, 0, 1)
 
     if re.match(r"[\d\.]+\/\d+", str(ip)):
