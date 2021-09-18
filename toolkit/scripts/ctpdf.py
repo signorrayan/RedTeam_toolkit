@@ -98,10 +98,14 @@ def convert_to_pdf(output, user_name, ip, function_name):
     pdf.set_text_color(1, 1, 3)
 
     for line in output:
-        if function_name =='fullscan':
-            pdf.set_font("Times", "B", 11) if '/tcp' in line else pdf.set_font("Times", "", 10)
+        if function_name == "fullscan":
+            pdf.set_font("Times", "B", 11) if "/tcp" in line else pdf.set_font(
+                "Times", "", 10
+            )
         else:
-            pdf.set_font("Times", "B", 11) if 'scan report for' in line else pdf.set_font("Times", "", 10)
+            pdf.set_font(
+                "Times", "B", 11
+            ) if "scan report for" in line else pdf.set_font("Times", "", 10)
 
         pdf.cell(0, 7, line, 0, 1)
 

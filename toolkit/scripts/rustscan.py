@@ -8,11 +8,7 @@ def rustscan_script(ip, user_name, function_name):
     # "--range", "1-10000"
     # p = subprocess.run(["rustscan", "-a", f"{ip}", "--accessible", "--ulimit", "15000"],
     #                   capture_output=True, encoding="utf-8")
-    command = [
-        "nmap",
-        "-PS",
-        f"{ip}"
-    ]
+    command = ["nmap", "-PS", f"{ip}"]
     p = subprocess.run(command, capture_output=True, encoding="utf-8")
     output = p.stdout.split("\n")[1:]
 
