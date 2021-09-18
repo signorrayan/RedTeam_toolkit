@@ -210,7 +210,7 @@ def test_method(method, target_url, proxies, cookies, result):
             proxies=proxies,
             cookies=cookies,
             # allow_redirects=options.redirect,
-            stream=False,  # this is to prevent the download of huge files, focus on the request, not on the data
+            stream=False,  # If True, this is to prevent the download of huge files, focus on the request, not on the data
         )
     except requests.exceptions.ProxyError:
         # logger.error("Invalid proxy specified ")

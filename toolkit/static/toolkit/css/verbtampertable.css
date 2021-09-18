@@ -46,7 +46,7 @@ td{
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
 body{
   background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-  background: linear-gradient(to right, #262626, #9b0101);
+  background: linear-gradient(to right, #9b0101, #0c0c0c);
   font-family: 'Roboto', sans-serif;
 }
 section{
