@@ -1,3 +1,4 @@
+
 h1{
   font-size: 30px;
   color: #fff;
@@ -5,14 +6,6 @@ h1{
   font-weight: 300;
   text-align: center;
   margin-bottom: 15px;
-  margin-left: 80px;
-}
-h4{
-  font-size: 6px;
-  color: #fff;
-  font-weight: 20;
-  text-align: center;
-  margin-left: 80px;
 }
 table{
   width:100%;
@@ -26,7 +19,7 @@ table{
 .tbl-content{
   height:400px;
   overflow-x:auto;
-  margin-top: 0px;
+  margin-top: 10px;
   border: 1px solid rgba(255,255,255,0.3);
 }
 th{
@@ -46,12 +39,14 @@ td{
   color: #fff;
   border-bottom: solid 1px rgba(255,255,255,0.1);
 }
+
+
 /* demo styles */
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
 body{
-  background: -webkit-linear-gradient(left, #474d4b, #380000);
-  background: linear-gradient(to right, #0c0c0c, rgba(192, 7, 7, 0.47));
+  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+  background: linear-gradient(to right, #262626, #9b0101);
   font-family: 'Roboto', sans-serif;
 }
 section{
@@ -59,9 +54,10 @@ section{
   margin-right: 200px;
 }
 
+
 /* follow me template */
 .made-with-love {
-  margin-top: 60px;
+  margin-top: 40px;
   padding: 10px;
   clear: left;
   text-align: center;

@@ -1,11 +1,11 @@
 body {
+	margin-left: -15px;
 	color: #2c3e50;
 	background: #ecf0f1;
 	padding: 0 1em 1em;
 }
 
 h1 {
-	margin: 0;
 	line-height: 2;
 	text-align: center;
 }
