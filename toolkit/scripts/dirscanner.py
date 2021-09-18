@@ -18,7 +18,7 @@ def dirscan_script(ip, user_name, function_name):
         "-q",
         "--exclude-status=500",
         "-u",
-        f"{ip}",
+        f"{ip}"
     ]
     process = subprocess.Popen(
         command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
