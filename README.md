@@ -130,6 +130,7 @@ If
 
 
 Please consider contributing to this project .\
+All Python scripts are placed in `/toolkit/scripts/` .\
 If you want to help us, don't be afraid to contribute! We have many things you can do to help out.\
 To contributing you can create an issue or (better) you can **fork & create a pull request**.
 
