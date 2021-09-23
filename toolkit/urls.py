@@ -6,6 +6,7 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("login/", views.loginuser, name="loginuser"),
     path("logout/", views.logoutuser, name="logoutuser"),
+    path("forbidden/", views.forbidden, name="forbidden"),
     path("dashboard/", views.dashboard, name="dashboard"),
     path("fullscan/", views.fullscan, name="fullscan"),
     path("livehost/", views.livehost, name="livehost"),
