@@ -12,5 +12,6 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "RedTeam_toolkit.settings")
+os.environ.setdefault("HTTPS", "ON")
 
 application = get_wsgi_application()
