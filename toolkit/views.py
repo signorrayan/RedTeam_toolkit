@@ -49,13 +49,13 @@ def loginuser(request):
             return redirect("dashboard")
 
 
-@login_required(login_url="/login/")
+@login_required(login_url="/forbidden/")
 def dashboard(request):
     if request.method == "GET":
         return render(request, "toolkit/dashboard.html")
 
 
-@login_required(login_url="/login/")
+@login_required(login_url="/forbidden/")
 def fullscan(request):
     if request.method == "GET":
         return render(request, "toolkit/fullscan.html", {"form": IpscanForm()})
@@ -91,7 +91,7 @@ def fullscan(request):
     return render(request, "toolkit/download.html")
 
 
-@login_required(login_url="/login/")
+@login_required(login_url="/forbidden/")
 def livehost(request):
     if request.method == "GET":
         return render(request, "toolkit/livehost.html", {"form": IpscanForm()})
@@ -128,7 +128,7 @@ def livehost(request):
     return render(request, "toolkit/download.html")
 
 
-@login_required(login_url="/login/")
+@login_required(login_url="/forbidden/")
 def dirscan(request):
     if request.method == "GET":
         return render(request, "toolkit/dirscan.html", {"form": IpscanForm()})
@@ -158,13 +158,14 @@ def dirscan(request):
     return render(request, "toolkit/download.html")
 
 
+@login_required(login_url="/forbidden/")
 def stream(request):
     response = StreamingHttpResponse()  # Accept generator/yield
     response["Content-Type"] = "text/event-stream"
     return response
 
 
-@login_required(login_url="/login/")
+@login_required(login_url="/forbidden/")
 def cvedes(request):
     if request.method == "GET":
         return render(request, "toolkit/cvedes.html", {"form": CvedesForm()})
@@ -194,17 +195,17 @@ def cvedes(request):
 #   return render(request, 'yourhtmlfile.html', {'user_reports':user_reports})
 
 
-@login_required(login_url="/login/")
+@login_required(login_url="/forbidden/")
 def linux(request):
     return render(request, "toolkit/linux/home.html")
 
 
-@login_required(login_url="/login/")
+@login_required(login_url="/forbidden/")
 def windows(request):
     return render(request, "toolkit/linux/home.html")
 
 
-@login_required(login_url="/login/")
+@login_required(login_url="/forbidden/")
 def sshbruteforce(request):
     if request.method == "GET":
         return render(request, "toolkit/sshbruteforce.html", {"form": SshbruteForm()})
@@ -231,7 +232,7 @@ def sshbruteforce(request):
         )
 
 
-@login_required(login_url="/login/")
+@login_required(login_url="/forbidden/")
 def rdpbruteforce(request):
     if request.method == "GET":
         return render(
@@ -261,19 +262,19 @@ def rdpbruteforce(request):
         )
 
 
-@login_required(login_url="/login/")
+@login_required(login_url="/forbidden/")
 def nightmare(request):
     return render(request, "toolkit/fullscan.html")
 
 
 # Web Application Section
-@login_required(login_url="/login/")
+@login_required(login_url="/forbidden/")
 def webapp(request):
     if request.method == "GET":
         return render(request, "toolkit/webapp/index.html")
 
 
-@login_required(login_url="/login/")
+@login_required(login_url="/forbidden/")
 def verbtamper(request):
     if request.method == "GET":
         return render(
@@ -302,7 +303,7 @@ def verbtamper(request):
 # End Web Application Section
 
 
-@login_required(login_url="/login/")
+@login_required(login_url="/forbidden/")
 def download_file(request):
     filename = f"{function_name}-{ip}.pdf"
     # Define the full file path
@@ -320,8 +321,12 @@ def download_file(request):
         raise Http404
 
 
-@login_required(login_url="/login/")
+@login_required(login_url="/forbidden/")
 def logoutuser(request):
     if request.method == "POST":
         logout(request)
         return redirect("home")
+
+def forbidden(request):
+    if request.method == "GET":
+        return render(request, "toolkit/403.html")
