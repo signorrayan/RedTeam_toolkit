@@ -24,7 +24,7 @@ The open-source projects such as nmap, rustscan, dirsearch, shreder, circl, crow
 - Linux Section to exploit major Linux CVEs (UNDER MAINTENANCE)
 - Windows Section to exploit major windows CVEs (UNDER MAINTENANCE)\
 \
-![Demo](Demo/Dashboard.png)
+![Demo](Demo/dashboard.png)
 
 ## :blue_book: Installation Guide
 You can find the installation guide in the [wiki page](https://github.com/signorrayan/RedTeam_toolkit/wiki/Installation-Guide)
