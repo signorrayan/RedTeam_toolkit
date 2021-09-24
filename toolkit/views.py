@@ -327,6 +327,9 @@ def logoutuser(request):
         logout(request)
         return redirect("home")
 
+    else:
+        return render(request, "toolkit/home.html")
+
 
 def forbidden(request):
     if request.method == "GET":

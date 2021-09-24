@@ -50,11 +50,11 @@ class PDF(FPDF):
         self.cell(15, 20, report_type, "C", 1)
 
         # Time
-        _ = self.get_string_width(cdate) + 6
+        #_ = self.get_string_width(cdate) + 6
         self.set_text_color(1, 1, 3)
         self.set_x(8)
         self.set_font("Arial", "B", 13)
-        self.cell(8, 10, cdate, "C", 1)
+        self.cell(8, 10, datetime.now().strftime("%Y-%m-%d %H:%M"), "C", 1)
         # Line break
         # self.ln(15)
 
@@ -115,6 +115,3 @@ def convert_to_pdf(output, user_name, ip, function_name):
         ip = str(ip).split("/")[2]
 
     pdf.output(f"{directory}/{function_name}-{str(ip)}.pdf", "F")
-
-
-cdate = datetime.now().strftime("%Y-%m-%d %H:%M")
