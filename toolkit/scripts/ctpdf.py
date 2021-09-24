@@ -50,7 +50,7 @@ class PDF(FPDF):
         self.cell(15, 20, report_type, "C", 1)
 
         # Time
-        #_ = self.get_string_width(cdate) + 6
+        # _ = self.get_string_width(cdate) + 6
         self.set_text_color(1, 1, 3)
         self.set_x(8)
         self.set_font("Arial", "B", 13)
