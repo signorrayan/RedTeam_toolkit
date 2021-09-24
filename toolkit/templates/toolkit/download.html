@@ -6,65 +6,15 @@
     {% endblock %}
     </title>
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<style>
-.button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 12px 28px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-
-.button1 {
-  background-color: white;
-  color: black;
-  border: 2px solid #4CAF50;
-}
-
-.button1:hover {
-  background-color: #4CAF50;
-  color: white;
-}
-.button3:hover {
-  background-color: #f44336;
-  color: white;
-}
-
-.button2 {
-  background-color: darkred;
-  color: white;
-  border: 2px solid #000000;
-   border-radius: 12px;
-}
-
-.button2:hover {
-  background-color: #008CBA;
-  color: white;
-}
-
-</style>
   <head>
     <title>Download Report</title>
-
     <!-- Additional CSS Files -->
-
     <link rel="stylesheet" type="text/css" href="{% static 'toolkit/css/font-awesome.css'%}">
-
     <link rel="stylesheet" href="{% static 'toolkit/css/templatemo-training-studio.css'%}">
-
+    <link rel="stylesheet" type="text/css" href="{% static "toolkit/css/download_page.css" %}" media="all">
     </head>
 
     <body>
-
     <!-- ***** Preloader Start ***** -->
     <div id="js-preloader" class="js-preloader">
       <div class="preloader-inner">
@@ -95,23 +45,14 @@
         </div>
     </div>
     <!-- ***** Main Banner Area End ***** -->
-
-
-
-
     <!-- jQuery -->
     <script src="{% static 'toolkit/js/jquery-2.1.0.min.js'%}"></script>
-
-
     <!-- Plugins -->
     <script src="{% static 'toolkit/js/scrollreveal.min.js'%}"></script>
-
-
     <!-- Global Init -->
     <script src="{% static 'toolkit/js/custom.js' %}"></script>
 
   </body>
 </html>
-
 
 {% endblock %}
