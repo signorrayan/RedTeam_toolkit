@@ -4,7 +4,7 @@
 {% load static %}
 <title>
     {% block title %}
-        WebApplications - RedTeam Tools
+        WebApplications - RedTeam Toolkit
     {% endblock %}
 </title>
 <link rel="stylesheet" type="text/css" href="{% static "toolkit/css/webapp_menu.css" %}" media="all"/>
@@ -20,7 +20,7 @@
         <input type="checkbox" id="chck1">
         <label class="tab-label" for="chck1">HTTP Verb Tampering</label>
         <div class="tab-content">
-            <a href="{% url 'verbtamper' %}" target="_blank"><p class="w3-medium scans" style="position:relative;">
+            <a href="{% url 'verbtamper' %}"><p class="w3-medium scans" style="position:relative;">
                 <span class="w3-hide-small ">
                     <b>HTTP Verb Tampering</b> tests the web application's response to different HTTP methods accessing system objects.
                 </span></p></a>

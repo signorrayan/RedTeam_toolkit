@@ -1,6 +1,11 @@
 {% extends "toolkit/base.html" %}
 
 {% block content %}
+    <title>
+    {% block title %}
+        Login to RedTeam Toolkit [DEMO]
+    {% endblock %}
+    </title>
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static "toolkit/css/dashboard.css" %}" media="all" />
 
