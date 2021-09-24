@@ -2,7 +2,7 @@
 
 {% block content %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static "toolkit/css/dashboard.css" %}" media="all" />
+<link rel="stylesheet" type="text/css" href="{% static "toolkit/css/dashboard.css" %}" media="all">
 <title>
     {% block title %}
         Dashboard - RedTeam Toolkit
@@ -89,7 +89,7 @@
         <img src="{% static 'toolkit/images/rdp-brute.png' %}"  class="scans" style="position: relative;left:40px;" width="85" height="85">
     </a>
      <a href="{% url 'linux' %}">
-        <img src="{% static 'toolkit/images/linux.png' %}"  class="scans" style="position: relative;left:40px;" width="85" height="100">
+        <img src="{% static 'toolkit/images/linux.png' %}"  class="scans" style="position: relative;left:40px;" width="100" height="100">
     </a>
      <a href="{% url 'windows' %}">
         <img src="{% static 'toolkit/images/microsoft.png' %}"  class="scans" style="position: relative;left:50px;" width="85" height="85">

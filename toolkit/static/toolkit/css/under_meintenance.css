@@ -1,0 +1,121 @@
+.button {
+  display: block;
+  margin-bottom: 1em;
+  padding: 1em 2em;
+  max-width: 280px;
+  text-decoration: none;
+  position: relative;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: #820016;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  border-radius: 100px;
+  -webkit-box-shadow: 5px 5px 15px rgba(0,0,0,0.8);
+          box-shadow: 5px 5px 15px rgba(0,0,0,0.8);
+  -webkit-transition: .3s ease;
+  -o-transition: .3s ease;
+  transition: .3s ease;
+}
+.button:hover{
+  -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
+          box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
+  -webkit-transform: translate(2px,2px);
+      -ms-transform: translate(2px,2px);
+          transform: translate(2px,2px);
+  transform: translate(2px,2px);
+  -webkit-transition: .3s ease;
+  -o-transition: .3s ease;
+  transition: .3s ease;
+  border: none;
+}
+.button span {
+  position: relative;
+  pointer-events: none;
+}
+.button:before {
+  --size: 0;
+  content: "";
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  height: var(--size);
+  background: -webkit-radial-gradient(circle closest-side, #4405f7, transparent);
+  background: -o-radial-gradient(circle closest-side, #4405f7, transparent);
+  background: radial-gradient(circle closest-side, #4405f7, transparent);
+  border-radius: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transition: width .3s, height .5s ease;
+  -o-transition: width .3s, height .5s ease;
+  transition: width .3s, height .5s ease;
+}
+.button:hover:before {
+  --size: 400px;
+  width: var(--size);
+  height: var(--size);
+}
+
+_:-ms-lang(x)::-ms-backdrop, .button:hover {
+  background: #4405f7;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+
+#light1, #light2{
+  animation: flickering 1s ease infinite;
+}
+
+@keyframes flickering {
+  0%{
+    fill: #FF9813;
+  }
+  10%{
+    fill: rgba(#FFC83B,.60);
+  }
+  20%{
+    fill: #FFC83B;
+  }
+  30%{
+    fill: orange;
+  }
+  50%{
+   fill: rgba(#FFC83B,.60);
+  }
+  100%{
+     fill: #FFC83B;
+  }
+
+}
+
+
+
+body{
+  background: #141414;
+  padding: 2rem;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+  flex-direction: column;
+}
+
+h1{
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  font-size: 3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 3px rgba(0,0,0,.3);
+
+
+}
