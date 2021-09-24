@@ -3,12 +3,12 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static "toolkit/css/dashboard.css" %}" media="all">
+
 <title>
     {% block title %}
         Dashboard - RedTeam Toolkit
     {% endblock %}
 </title>
-
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center ">
   <!-- Avatar image in top left corner --><br><br>
   <img src="{% static 'toolkit/images/sidebar_logo.png' %}" style="width:90% "><br><br><br>
@@ -54,12 +54,14 @@
   </a>
 {% endif %}
 </nav>
+
 <div class="w3-padding-large" id="main">
   <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center" id="home">
     <h1 class="w3-jumbo"><span class="w3-hide-small">[ RED-TEAM TOOLKIT ]</span></h1>
     <p></p>
 <br><br><br><br><br><br>
+
 <div class="side-block w3-center">
     <a href="{% url 'fullscan' %}">
         <img src="{% static 'toolkit/images/ip_scan.png' %}"  class="scans" width="85" height="60">
@@ -76,8 +78,8 @@
 </div>
 </div>
 <div class="side-block w3-center" >
-    <a href="{% url 'fullscan' %}" target="_blank"><p class="w3-medium scans" style="position:relative;left:77px; top:-40px;"><span class="w3-hide-small ">Full</span> Scan</p></a>
-    <a href="{% url 'livehost' %}" target="_blank"><p class="w3-medium scans" style="position:relative;left:65px; top:-40px;"><span class="w3-hide-small ">Live Hosts</span> Scan</p></a>
+    <a href="{% url 'fullscan' %}" target="_blank"><p class="w3-medium scans" style="position:relative;left:77px; top:-40px;"><span class="w3-hide-small">Full</span> Scan</p></a>
+    <a href="{% url 'livehost' %}" target="_blank"><p class="w3-medium scans" style="position:relative;left:65px; top:-40px;"><span class="w3-hide-small">Live Hosts</span> Scan</p></a>
     <a href="{% url 'dirscan' %}" target="_blank"><p class="w3-medium scans" style="position:relative;left:50px; top:-40px;"><span class="w3-hide-small ">Dir</span> Scan</p></a>
     <a href="{% url 'cvedes' %}" target="_blank"><p class="w3-medium scans" style="position:relative;left:60px; top:-40px;"><span class="w3-hide-small ">CVE</span> Description</p></a>
 </div><br><br><br><br>
@@ -117,4 +119,5 @@
 <script src="{% static 'toolkit/js/scrollreveal.min.js'%}"></script>
 <!-- Global Init -->
 <script src="{% static 'toolkit/js/custom.js' %}"></script>
+
 {% endblock %}
