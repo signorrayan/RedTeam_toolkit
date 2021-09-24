@@ -108,9 +108,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Secure sessions
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+### Secure sessions
+# uncomment next two lines if you're using https on your apache server
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Internationalization
