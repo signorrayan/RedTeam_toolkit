@@ -27,23 +27,11 @@ The open-source projects such as nmap, rustscan, dirsearch, shreder, circl, crow
 ![Demo](Demo/dashboard.png)
 
 ## :blue_book: Installation Guide
-You can find the installation guide in the [wiki page](https://github.com/signorrayan/RedTeam_toolkit/wiki/Installation-Guide)
+You can find the installation guide in the [Installation wiki page](https://github.com/signorrayan/RedTeam_toolkit/wiki/Installation-Guide)
 
 
 ## :computer: Demo
-- #### Fullscan
-All pdf reports will be placed in ```toolkit/media/toolkit/reports/``` . 
-
-![Logo](Demo/fullscan.gif)
-
-- #### RDP BruteForce
-
-![Logo](Demo/rdp-bruteforce.gif)
-
-
-- #### CVE Description
-
-![Logo](Demo/cve_description.gif)
+You can find the Demo gifs in the [Demo wiki page](https://github.com/signorrayan/RedTeam_toolkit/wiki/Demo)
 
 
 ## :trident: Contributing
