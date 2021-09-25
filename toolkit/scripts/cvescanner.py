@@ -78,7 +78,7 @@ class CVESearch(object):
 def cve_search(cve_id):
     cve = CVESearch()
     pre_result = cve.id(cve_id)
-    if len(pre_result)>2:
+    if len(pre_result) > 2:
         result = {
             "cve_id": pre_result["id"],
             "cvss": pre_result["cvss"],
