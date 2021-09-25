@@ -21,9 +21,6 @@
 <div class="container webdesigntuts-workshop">
 		<section class="pattern-description">
         {% if result %}
-            {% if result.message %}
-                <td style="text-align:center">{{result.message}}</td>
-            {% else %}
             <table id="t01">
             <tr>
                 <th style="text-align:center">CVE ID</th>
@@ -53,15 +50,11 @@
                 {% for l in result.capec %}
                     <h4>{{ l }}</h4>
                 {% endfor %}-->
-            {% endif %}
         {% endif %}
-
-
+            {% if error %}
+                <td style="text-align:center">{{ error }}</td>
+            {% endif %}
 	</div>
- {% if error %}
-     <div class="alert alert-danger" role="alert">
-         {{ error }}
-     </div>
- {% endif %}
+
 
 {% endblock %}

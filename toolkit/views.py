@@ -178,8 +178,15 @@ def cvedes(request):
                 cve_id = form.cleaned_data.get("cve_id")
                 user_name = request.user
                 result = cvescanner.cve_search(cve_id)
-                context = {"result": result}
-                return render(request, "toolkit/cvedes.html", context)
+                if result is None:
+                    return render(
+                        request,
+                        "toolkit/cvedes.html",
+                        {"error": "The requested CVE is not found."},
+                    )
+                else:
+                    context = {"result": result}
+                    return render(request, "toolkit/cvedes.html", context)
 
         except ValueError:
             return render(
