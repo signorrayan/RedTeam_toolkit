@@ -21,7 +21,10 @@
 <div class="container webdesigntuts-workshop">
 		<section class="pattern-description">
         {% if result %}
-        <table id="t01">
+            {% if result.message %}
+                <td style="text-align:center">{{result.message}}</td>
+            {% else %}
+            <table id="t01">
             <tr>
                 <th style="text-align:center">CVE ID</th>
                 <th style="text-align:center">Published</th>
@@ -36,24 +39,21 @@
                 <td style="text-align:center">{{ result.cvss}}</td>
                 <td style="text-align:center">{{ result.complexity}}</td>
             </tr>
-        </table>
-        <br>
-        <table id="t02">
+            </table>
+            <br>
+            <table id="t02">
             <tr>
                 <th style="text-align:center">Summary</th>
             </tr>
             <tr>
                 <td style="text-align:center">{{ result.summary }}</td>
             </tr>
-        </table>
-
+            </table>
 <!--                <h4>Capec:</h4>
                 {% for l in result.capec %}
                     <h4>{{ l }}</h4>
                 {% endfor %}-->
-        {% else %}
-            <br><div class="pattern-description" role="alert">
-            <h5>{{ error }}</h5></div>
+            {% endif %}
         {% endif %}
 
 

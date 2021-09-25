@@ -78,7 +78,9 @@ class CVESearch(object):
 def cve_search(cve_id):
     cve = CVESearch()
     pre_result = cve.id(cve_id)
-    if pre_result:
+
+    if len(pre_result)>1:
+        print(pre_result["id"])
         result = {
             "cve_id": pre_result["id"],
             "cvss": pre_result["cvss"],
@@ -90,6 +92,10 @@ def cve_search(cve_id):
                 pre_result["capec"][i]["name"] for i in range(len(pre_result["capec"]))
             ],
         }
+        return result
+    elif pre_result["message"]:
+        result = {"message" : pre_result["message"]}
+        print(result["message"])
         return result
     else:
         return None
