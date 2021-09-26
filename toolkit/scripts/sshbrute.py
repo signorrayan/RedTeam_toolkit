@@ -14,8 +14,7 @@ def ssh_bruteforce(target_username, target_ip):
         target_ip,
         22,
         target_username,
-        f"{BASE_DIR}/scripts/wordlist/password.txt",
-        delay=2,
+        f"{BASE_DIR}/scripts/wordlist/password.txt"
     )
     if password is not None:
         result = {
