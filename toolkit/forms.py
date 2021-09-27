@@ -19,5 +19,5 @@ class SshbruteForm(forms.Form):
     ip = forms.GenericIPAddressField()
 
 
-class VerbtamperForm(forms.Form):
+class URLForm(forms.Form):
     target_url = forms.CharField()

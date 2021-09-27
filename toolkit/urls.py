@@ -21,5 +21,6 @@ urlpatterns = [
     path("stream/", views.stream, name="stream"),
     path("webapp/", views.webapp, name="webapp"),
     path("webapp/verbtampering", views.verbtamper, name="verbtamper"),
+    path("webapp/webcrawler", views.webcrawler, name="webcrawler"),
     # <str:filepath>/
 ]

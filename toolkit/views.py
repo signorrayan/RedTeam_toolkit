@@ -7,7 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.http.response import Http404, HttpResponse, StreamingHttpResponse
 from django.shortcuts import redirect, render
 
-from .forms import CvedesForm, IpscanForm, SshbruteForm, VerbtamperForm
+from .forms import CvedesForm, IpscanForm, SshbruteForm, URLForm
 from .scripts import (
     cvescanner,
     dirscanner,
@@ -16,6 +16,7 @@ from .scripts import (
     rustscan,
     sshbrute,
     verbtampering,
+    gather_url
 )
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -285,13 +286,13 @@ def webapp(request):
 def verbtamper(request):
     if request.method == "GET":
         return render(
-            request, "toolkit/webapp/verbtampering.html", {"form": VerbtamperForm()}
+            request, "toolkit/webapp/verbtampering.html", {"form": URLForm()}
         )
 
     else:
         try:
             global target_url, user_name
-            form = VerbtamperForm(request.POST)
+            form = URLForm(request.POST)
             if form.is_valid():
                 target_url = form.cleaned_data.get("target_url")
                 user_name = request.user
@@ -303,6 +304,39 @@ def verbtamper(request):
             return render(
                 request,
                 "toolkit/webapp/verbtampering.html",
+                {"error": "Bad data passed in. Try again."},
+            )
+
+
+@login_required(login_url="/forbidden/")
+def webcrawler(request):
+    if request.method == "GET":
+        return render(
+            request, "toolkit/webapp/webcrawler.html", {"form": URLForm()}
+        )
+
+    else:
+        try:
+            global target_url
+            form = URLForm(request.POST)
+            if form.is_valid():
+                target_url = form.cleaned_data.get("target_url")
+                result = gather_url.get(target_url)
+                if result is None:
+                    return render(
+                        request,
+                        "toolkit/webapp/webcrawler.html",
+                        {"error": "Bad URL Passed in, Try again..."},
+                    )
+
+                else:
+                    context = {"result": result, "target_url": target_url}
+                    return render(request, "toolkit/webapp/webcrawler.html", context)
+
+        except ValueError:
+            return render(
+                request,
+                "toolkit/webapp/webcrawler.html",
                 {"error": "Bad data passed in. Try again."},
             )
 

@@ -46,3 +46,4 @@ ipython_config.py
 secrets.json
 
 /venv
+/toolkit/scripts/hakrawler

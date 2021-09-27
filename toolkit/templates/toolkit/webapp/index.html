@@ -17,15 +17,36 @@
     <h2>Web Application Section <sup>1.0</sup></h2>
     <div class="tabs">
       <div class="tab">
-        <input type="checkbox" id="chck1">
-        <label class="tab-label" for="chck1">HTTP Verb Tampering</label>
-        <div class="tab-content">
+        <input  id="chck1">
+        <label class="tab-label" for="chck1">
+            <a href="{% url 'verbtamper' %}"><p class="w3-medium scans" style="position:relative;">
+                HTTP Verb Tampering
+            </p></a></label>
+      </div>
+    </div>
+<!--        <div class="tab-content">
             <a href="{% url 'verbtamper' %}"><p class="w3-medium scans" style="position:relative;">
                 <span class="w3-hide-small ">
                     <b>HTTP Verb Tampering</b> tests the web application's response to different HTTP methods accessing system objects.
-                </span></p></a>
-        </div>
+                </span></p></a>-->
+    <div class="tabs">
+      <div class="tab">
+        <input  id="chck1">
+        <label class="tab-label" for="chck1">
+            <a href="{% url 'webcrawler' %}"><p class="w3-medium scans" style="position:relative;">
+                Web Crawler for gathering URLs
+            </p></a></label>
       </div>
+    </div>
+    <div class="tabs">
+      <div class="tab">
+        <input  id="chck1">
+        <label class="tab-label" for="chck1">
+            <a href="{% url 'verbtamper' %}"><p class="w3-medium scans" style="position:relative;">
+                Enumerate Subdomains
+            </p></a></label>
+      </div>
+    </div>
       <div class="tab">
         <input type="checkbox" id="chck2">
         <label class="tab-label" for="chck2">Other</label>
