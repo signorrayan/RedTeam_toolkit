@@ -16,7 +16,7 @@ from .scripts import (
     rustscan,
     sshbrute,
     verbtampering,
-    gather_url
+    gather_url,
 )
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -285,9 +285,7 @@ def webapp(request):
 @login_required(login_url="/forbidden/")
 def verbtamper(request):
     if request.method == "GET":
-        return render(
-            request, "toolkit/webapp/verbtampering.html", {"form": URLForm()}
-        )
+        return render(request, "toolkit/webapp/verbtampering.html", {"form": URLForm()})
 
     else:
         try:
@@ -311,9 +309,7 @@ def verbtamper(request):
 @login_required(login_url="/forbidden/")
 def webcrawler(request):
     if request.method == "GET":
-        return render(
-            request, "toolkit/webapp/webcrawler.html", {"form": URLForm()}
-        )
+        return render(request, "toolkit/webapp/webcrawler.html", {"form": URLForm()})
 
     else:
         try:
