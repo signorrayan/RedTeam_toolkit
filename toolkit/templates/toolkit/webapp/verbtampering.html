@@ -11,6 +11,17 @@
 <link rel="stylesheet" type="text/css" href="{% static "toolkit/css/searchbar.css" %}" media="all"/>
 <link rel="stylesheet" type="text/css" href="{% static "toolkit/css/verbtampertable.css" %}" media="all" />
 </head>
+<style>
+h2{
+  font-size: 15px;
+  color: #fa2c2c;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 10px;
+  margin-left: auto;
+  text-align: center;
+}
+</style>
 <body>
 
 <br><br><br><br>
@@ -21,6 +32,9 @@
     	<button type='submit'>Search</button>
 </form>
 <br><br><br><br><br><br><br><br><br>
+{% if error %}
+    <h2 style="text-align:center">{{ error }}</h2>
+{% endif %}
 {% if result %}
 <section>
   <!--for demo wrap-->
@@ -54,11 +68,7 @@
 </section>
 {% endif %}
 </body>
- {% if error %}
-     <div class="alert alert-danger" role="alert">
-         {{ error }}
-     </div>
- {% endif %}
+
 <!-- <div class="made-with-love">
   Made By
   <i>♥</i> by

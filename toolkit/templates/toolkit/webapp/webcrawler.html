@@ -12,6 +12,16 @@
 <link rel="stylesheet" type="text/css" href="{% static "toolkit/css/webcrawlertable.css" %}" media="all" />
 </head>
 <style>
+h2{
+  font-size: 15px;
+  color: #fa2c2c;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 10px;
+  margin-left: auto;
+  text-align: center;
+}
+
 .webdesigntuts-workshop button:hover,
 .webdesigntuts-workshop button:focus {
 	background: #292929;
@@ -48,6 +58,9 @@
     	<button type='submit'>Search</button>
 </form>
 <br><br><br><br><br><br><br>
+{% if error %}
+    <h2>{{ error }}</h2>
+{% endif %}
 {% if result %}
 <section>
   <div class="tbl-header">
@@ -73,11 +86,7 @@
 </section>
 {% endif %}
 </body>
- {% if error %}
-     <div class="alert alert-danger" role="alert">
-         {{ error }}
-     </div>
- {% endif %}
+
 <!-- <div class="made-with-love">
   Made By
   <i>♥</i> by
