@@ -1,13 +1,14 @@
 {% extends "toolkit/base.html" %}
 
 {% block content %}
+<head>
     <title>
     {% block title %}
         DirScan stream - RedTeam Toolkit
     {% endblock %}
     </title>
 {% load static %}
-
+</head>
 <script>
     var eventsource = new EventSource("{% url 'stream'%}")
     eventsource.onopen = function(){
@@ -20,6 +21,5 @@
         console.log('error:')
     }
 </script>
-
 
 {% endblock %}

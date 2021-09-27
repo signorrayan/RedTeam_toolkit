@@ -22,5 +22,6 @@ urlpatterns = [
     path("webapp/", views.webapp, name="webapp"),
     path("webapp/verbtampering", views.verbtamper, name="verbtamper"),
     path("webapp/webcrawler", views.webcrawler, name="webcrawler"),
+    path("webapp/subdomain", views.subdomain, name="subdomain"),
     # <str:filepath>/
 ]

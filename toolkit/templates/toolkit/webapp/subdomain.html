@@ -1,0 +1,112 @@
+{% extends "toolkit/base.html" %}
+
+{% block content %}
+{% load static %}
+<head>
+<title>
+    {% block title %}
+        Sub Domain Finder - RedTeam Toolkit
+    {% endblock %}
+</title>
+<link rel="stylesheet" type="text/css" href="{% static "toolkit/css/searchbar.css" %}" media="all"/>
+<link rel="stylesheet" type="text/css" href="{% static "toolkit/css/webcrawlertable.css" %}" media="all" />
+<link rel="stylesheet" type="text/css" href="{% static "toolkit/css/subdomain_checkbox.css" %}" media="all" />
+
+</head>
+<style>
+h1{
+  font-size: 30px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 15px;
+  margin-left: 750px;
+}
+
+.webdesigntuts-workshop button:hover,
+.webdesigntuts-workshop button:focus {
+	background: #292929;
+	background: linear-gradient(#393939, #292929);
+	color: #96e052;
+	outline: none;
+}
+
+.webdesigntuts-workshop button:active {
+	background: #292929;
+	background: linear-gradient(#393939, #292929);
+	box-shadow: 0 1px 0 #000, inset 1px 0 1px #222;
+	top: 1px;
+}
+
+@keyframes glow {
+    0% {
+		border-color: #2d9b01;
+		box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+    }
+    100% {
+		border-color: #66ff00;
+		box-shadow: 0 0 20px rgb(150, 224, 82), inset 0 0 10px rgb(22, 80, 5), 0 2px 0 #000;
+    }
+}
+</style>
+<body>
+
+<br><br><br><br>
+<h1>Enumerate Subdomains</h1>
+<form autocomplete='off' class='form' method="POST">
+ {% csrf_token %}
+    <div class="webdesigntuts-workshop">
+    	<input name="target_url" type="text" placeholder="ENTER URL: https://example.com"></input>
+    	<button type='submit'>Search</button>
+    </div>
+    <br><br><br><br><br><br><br><br>
+    <div class="checkbox">
+        <label class="checkbox__container">
+            <input class="checkbox__toggle" name="fast_scan" type="checkbox"></input>
+            <span class="checkbox__checker"></span>
+            <span class="checkbox__cross"></span>
+            <span class="checkbox__ok"></span>
+            <svg class="checkbox__bg" space="preserve" style="enable-background:new 0 0 110 43.76;" version="1.1" viewbox="0 0 110 43.76">
+            <path class="shape" d="M88.256,43.76c12.188,0,21.88-9.796,21.88-21.88S100.247,0,88.256,0c-15.745,0-20.67,12.281-33.257,12.281,S38.16,0,21.731,0C9.622,0-0.149,9.796-0.149,21.88s9.672,21.88,21.88,21.88c17.519,0,20.67-13.384,33.263-13.384,S72.784,43.76,88.256,43.76z"></path>
+            </svg>
+        </label>
+        <h5>"Fast Scan"</h5>
+    </div>
+</form>
+{% if result %}
+<section>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>URLs</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+<div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        <tr>
+            {% for url in result %}
+          <td>{{url}}</td>
+        </tr>
+      </tbody>
+            {% endfor %}
+    </table>
+</div>
+</section>
+{% endif %}
+</body>
+ {% if error %}
+     <div class="alert alert-danger" role="alert">
+         {{ error }}
+     </div>
+ {% endif %}
+<!-- <div class="made-with-love">
+  Made By
+  <i>♥</i> by
+  <a target="_blank" href="https://github.com/signorrayan">Signor</a>
+</div> -->
+</html>
+{% endblock %}

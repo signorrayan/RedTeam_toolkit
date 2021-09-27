@@ -1,5 +1,4 @@
 {% extends "toolkit/base.html" %}
-
 {% block content %}
 {% load static %}
 <head>
@@ -11,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="{% static "toolkit/css/dashboard.css" %}" media="all" />
 </head>
 <br><br><br><br><br><br><br><br><br><br>
-
+<body>
 <form autocomplete='off' class='form' method="POST">
  {% csrf_token %}
   <div class='control'>
@@ -56,7 +55,7 @@
       www.signor.com
     </h6>
 </form>
-
+{{ response }}
 <script>
     var eventsource = new EventSource("{% url 'dirscan'%}")
     eventsource.onopen = function(){
@@ -75,5 +74,5 @@
          {{ error }}
      </div>
  {% endif %}
-
+</body>
 {% endblock %}

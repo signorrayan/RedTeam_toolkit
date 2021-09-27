@@ -7,7 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.http.response import Http404, HttpResponse, StreamingHttpResponse
 from django.shortcuts import redirect, render
 
-from .forms import CvedesForm, IpscanForm, SshbruteForm, URLForm
+from .forms import CvedesForm, IpscanForm, SshbruteForm, SubDomainForm, URLForm
 from .scripts import (
     cvescanner,
     dirscanner,
@@ -16,6 +16,7 @@ from .scripts import (
     rdpbrute,
     rustscan,
     sshbrute,
+    subdomain_finder,
     verbtampering,
 )
 
@@ -333,6 +334,48 @@ def webcrawler(request):
             return render(
                 request,
                 "toolkit/webapp/webcrawler.html",
+                {"error": "Bad data passed in. Try again."},
+            )
+
+
+@login_required(login_url="/forbidden/")
+def subdomain(request):
+    if request.method == "GET":
+        return render(
+            request, "toolkit/webapp/subdomain.html", {"form": SubDomainForm()}
+        )
+
+    else:
+        try:
+            global target_url
+            form = SubDomainForm(request.POST)
+            if form.is_valid():
+                target_url = form.cleaned_data.get("target_url")
+                fast_scan = form.cleaned_data.get("fast_scan")
+                if fast_scan:
+                    result = subdomain_finder.sublister(target_url)
+                    if result is None:
+                        return render(
+                            request,
+                            "toolkit/webapp/subdomain.html",
+                            {"error": "Bad URL Passed in, Try again..."},
+                        )
+
+                    else:
+                        context = {"result": result, "target_url": target_url}
+                        return render(request, "toolkit/webapp/subdomain.html", context)
+
+                else:
+                    response = StreamingHttpResponse(
+                        subdomain_finder.knockpy(target_url)
+                    )  # Accept generator/yield
+                    response["Content-Type"] = "text/event-stream"
+                    return response
+
+        except ValueError:
+            return render(
+                request,
+                "toolkit/webapp/subdomain.html",
                 {"error": "Bad data passed in. Try again."},
             )
 

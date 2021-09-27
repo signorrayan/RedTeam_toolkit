@@ -47,3 +47,5 @@ secrets.json
 
 /venv
 /toolkit/scripts/hakrawler
+
+/knockpy_report/

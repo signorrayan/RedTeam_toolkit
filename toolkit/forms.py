@@ -21,3 +21,8 @@ class SshbruteForm(forms.Form):
 
 class URLForm(forms.Form):
     target_url = forms.CharField()
+
+
+class SubDomainForm(forms.Form):
+    target_url = forms.CharField()
+    fast_scan = forms.BooleanField(required=False)
