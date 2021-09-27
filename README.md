@@ -20,6 +20,8 @@ The open-source projects such as nmap, rustscan, dirsearch, shreder, circl, crow
 - SSH Dictionary Attack
 - RDP BruteForce
 - HTTP Verb Tampering
+- Web Crawler for gathering URLs
+- SubDomain Enumeration
 - WebApps Section
 - Linux Section to exploit major Linux CVEs (UNDER MAINTENANCE)
 - Windows Section to exploit major windows CVEs (UNDER MAINTENANCE)\
