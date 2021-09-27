@@ -11,12 +11,12 @@ from .forms import CvedesForm, IpscanForm, SshbruteForm, URLForm
 from .scripts import (
     cvescanner,
     dirscanner,
+    gather_url,
     nmap,
     rdpbrute,
     rustscan,
     sshbrute,
     verbtampering,
-    gather_url,
 )
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

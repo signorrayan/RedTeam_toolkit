@@ -1,7 +1,6 @@
 # web crawler for gathering URLs
-import subprocess
 import os
-
+import subprocess
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
