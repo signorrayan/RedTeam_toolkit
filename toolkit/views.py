@@ -296,8 +296,15 @@ def verbtamper(request):
                 target_url = form.cleaned_data.get("target_url")
                 user_name = request.user
                 result = verbtampering.start(target_url, user_name)
-                context = {"result": result.items(), "target_url": target_url}
-                return render(request, "toolkit/webapp/verbtampering.html", context)
+                if result is None:
+                    return render(
+                        request,
+                        "toolkit/webapp/verbtampering.html",
+                        {"error": "Bad URL Passed in, Try again..."},
+                    )
+                else:
+                    context = {"result": result.items(), "target_url": target_url}
+                    return render(request, "toolkit/webapp/verbtampering.html", context)
 
         except ValueError:
             return render(

@@ -3,6 +3,7 @@
 # from rich.table import Table
 import json
 import os
+import re
 from concurrent.futures import ThreadPoolExecutor
 
 import requests
@@ -304,11 +305,14 @@ def start(target_url, user_name):
 
     # Parsing and print result
     # print_result(console, result)
-
     # Export to JSON
-    tg = target_url.split("/")[2]
-    json_export(result, tg, user_name)
-    return result
+    if len(result) == 0:
+        return None
+    else:
+        if re.match("http\w?://\w+\.\w+", target_url):
+            tg = target_url.split("/")[2]
+            json_export(result, tg, user_name)
+        return result
 
 
 # options = get_options()
