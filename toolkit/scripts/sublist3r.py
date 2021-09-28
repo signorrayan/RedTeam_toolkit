@@ -379,9 +379,7 @@ class GoogleEnum(enumratorBaseThreaded):
         return links_list
 
     def check_response_errors(self, resp):
-        if (
-            type(resp) is str
-        ) and "Our systems have detected unusual traffic" in resp:
+        if (type(resp) is str) and "Our systems have detected unusual traffic" in resp:
             self.print_(
                 R + "[!] Error: Google probably now is blocking our requests" + W
             )
@@ -684,7 +682,7 @@ class NetcraftEnum(enumratorBaseThreaded):
 
     def create_cookies(self, cookie):
         cookies = dict()
-        cookies_list = cookie[0:cookie.find(";")].split("=")
+        cookies_list = cookie[0 : cookie.find(";")].split("=")
         cookies[cookies_list[0]] = cookies_list[1]
         # hashlib.sha1 requires utf-8 encoded str
         cookies["netcraft_js_verification_response"] = hashlib.sha512(
@@ -994,7 +992,7 @@ class CrtSearch(enumratorBaseThreaded):
                         continue
 
                     if "@" in subdomain:
-                        subdomain = subdomain[subdomain.find("@") + 1:]
+                        subdomain = subdomain[subdomain.find("@") + 1 :]
 
                     if subdomain not in self.subdomains and subdomain != self.domain:
                         if self.verbose:
