@@ -28,10 +28,9 @@ from subbrute import subbrute
 if sys.version > "3":
     import urllib.parse as urlparse
     import urllib.parse as urllib
-else:
-    import urllib
-
-    import urlparse
+# else:
+#     import urllib
+#     import urlparse
 
 # In case you cannot install some of the required development packages
 # there's also an option to disable the SSL warning:

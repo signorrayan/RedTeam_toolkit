@@ -24,7 +24,7 @@ import dns.resolver
 try:
     import queue as Queue
 except:
-    import Queue
+    import queue
 
 # The 'multiprocessing' library does not rely upon a Global Interpreter Lock (GIL)
 import multiprocessing
@@ -698,29 +698,34 @@ if __name__ == "__main__":
     else:
         targets = args  # multiple arguments on the cli: ./subbrute.py google.com gmail.com yahoo.com    if (len(resolver_list) / 16) < options.process_count:
 
-    output = False
+
     if options.output:
         try:
             output = open(options.output, "w")
         except:
             error("Failed writing to file:", options.output)
+    # else:
+    #     output = False
 
-    json_output = False
     if options.json:
         try:
             json_output = open(options.json, "w")
         except:
             error("Failed writing to file:", options.json)
+    # else:
+    #     json_output = False
 
-    record_type = False
     if options.ipv4:
         record_type = "A"
+    # else:
+    #     record_type = False
+
     if options.type:
         record_type = str(options.type).upper()
 
-    threads = []
+    # threads = []
     for target in targets:
-        target = target.strip()
+        target = str(target).strip()
         if target:
 
             # target => domain

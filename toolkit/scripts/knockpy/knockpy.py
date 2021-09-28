@@ -474,7 +474,7 @@ class Report:
 class Start:
     __version__ = "5.1.0"
 
-    def msg_rnd():
+    def msg_rnd(x=None):
         return [
             "happy hacking ;)",
             "good luck!",
@@ -545,7 +545,7 @@ class Start:
 
                 sys.exit("use: knockpy --set apikey-virustotal=APIKEY")
 
-    def arguments():
+    def arguments(x=None):
         Start.parse_and_exit(sys.argv)
 
         description = "-" * 80 + "\n"
