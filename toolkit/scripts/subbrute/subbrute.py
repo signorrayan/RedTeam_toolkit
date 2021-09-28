@@ -19,7 +19,7 @@ import uuid
 import dns.rdatatype
 import dns.resolver
 
-# Python 2.x and 3.x compatiablity
+# Python 2.x and 3.x compatibility
 # We need the Queue library for exception handling
 try:
     import queue as Queue
@@ -29,7 +29,7 @@ except:
 # The 'multiprocessing' library does not rely upon a Global Interpreter Lock (GIL)
 import multiprocessing
 
-# Microsoft compatiablity
+# Microsoft compatibility
 if sys.platform.startswith("win"):
     # Drop-in replacement,  subbrute + multiprocessing throws exceptions on windows.
     import threading
@@ -138,7 +138,7 @@ class verify_nameservers(multiprocessing.Process):
     # Only add the nameserver to the queue if we can detect wildcards.
     # Returns False on error.
     def find_wildcards(self, host):
-        # We want sovle the following three problems:
+        # We want solve the following three problems:
         # 1)The target might have a wildcard DNS record.
         # 2)The target maybe using geolocaiton-aware DNS.
         # 3)The DNS server we are testing may respond to non-exsistant 'A' records with advertizements.
@@ -167,7 +167,7 @@ class verify_nameservers(multiprocessing.Process):
                         if w not in self.wildcards:
                             # wildcards were detected.
                             self.wildcards[w] = None
-                            # We found atleast one wildcard, look for more.
+                            # We found at least one wildcard, look for more.
                             looking_for_wildcards = True
             except Exception as e:
                 if type(e) == dns.resolver.NXDOMAIN or type(e) == dns.name.EmptyLabel:
@@ -223,7 +223,7 @@ class lookup(multiprocessing.Process):
         cname_record = []
         retries = 0
         if len(self.resolver.nameservers) <= self.required_nameservers:
-            # This process needs more nameservers,  lets see if we have one avaible
+            # This process needs more nameservers,  lets see if we have one available
             self.resolver.nameservers += self.get_ns()
         # Ok we should be good to go.
         while True:
@@ -279,10 +279,10 @@ class lookup(multiprocessing.Process):
                     if retries >= 3:
                         if retries > 3:
                             # Sometimes 'internal use' subdomains will timeout for every request.
-                            # As far as I'm concerned, the authorative name server has told us this domain exists,
+                            # As far as I'm concerned, the authoritative name server has told us this domain exists,
                             # we just can't know the address value using this method.
                             return [
-                                "Mutiple Query Timeout - External address resolution was restricted"
+                                "Multiple Query Timeout - External address resolution was restricted"
                             ]
                         else:
                             # Maybe another process can take a crack at it.
@@ -471,7 +471,7 @@ def run(
     # have a buffer of at most two new nameservers that lookup processes can draw from.
     resolve_q = multiprocessing.Queue(maxsize=2)
 
-    # Make a source of fast nameservers avaiable for other processes.
+    # Make a source of fast nameservers available for other processes.
     verify_nameservers_proc = verify_nameservers(
         target, record_type, resolve_q, resolve_list, wildcards
     )
@@ -526,7 +526,7 @@ def run(
     try:
         killproc(pid=verify_nameservers_proc.pid)
     except:
-        # Windows threading.tread
+        # Windows threading.thread
         verify_nameservers_proc.end()
     trace("End")
 
@@ -654,7 +654,7 @@ if __name__ == "__main__":
         dest="type",
         default=False,
         type="string",
-        help="(optional) Print all reponses for an arbitrary DNS record type (CNAME, AAAA, TXT, SOA, MX...)",
+        help="(optional) Print all responses for an arbitrary DNS record type (CNAME, AAAA, TXT, SOA, MX...)",
     )
     parser.add_option(
         "-c",
@@ -685,7 +685,7 @@ if __name__ == "__main__":
     verbose = options.verbose
 
     if len(args) < 1 and options.filter == "" and options.targets == "":
-        parser.error("You must provie a target. Use -h for help.")
+        parser.error("You must provide a target. Use -h for help.")
 
     if options.filter != "":
         # cleanup this file and print it out

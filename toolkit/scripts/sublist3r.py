@@ -24,7 +24,7 @@ import requests
 # external modules
 from subbrute import subbrute
 
-# Python 2.x and 3.x compatiablity
+# Python 2.x and 3.x compatibility
 if sys.version > "3":
     import urllib.parse as urlparse
     import urllib.parse as urllib
@@ -286,7 +286,7 @@ class enumratorBase(object):
                 return self.subdomains
             resp = self.send_req(query, page_no)
 
-            # check if there is any error occured
+            # check if there is any error occurred
             if not self.check_response_errors(resp):
                 return self.subdomains
             links = self.extract_domains(resp)
@@ -357,7 +357,7 @@ class GoogleEnum(enumratorBaseThreaded):
         return
 
     def extract_domains(self, resp):
-        links_list = list()
+        # links_list = list()
         link_regx = re.compile("<cite.*?>(.*?)<\/cite>")
         try:
             links_list = link_regx.findall(resp)
@@ -489,7 +489,7 @@ class AskEnum(enumratorBaseThreaded):
         return
 
     def extract_domains(self, resp):
-        links_list = list()
+        # links_list = list()
         link_regx = re.compile('<p class="web-result-url">(.*?)</p>')
         try:
             links_list = link_regx.findall(resp)
@@ -535,7 +535,7 @@ class BingEnum(enumratorBaseThreaded):
         return
 
     def extract_domains(self, resp):
-        links_list = list()
+        # links_list = list()
         link_regx = re.compile('<li class="b_algo"><h2><a href="(.*?)"')
         link_regx2 = re.compile('<div class="b_title"><h2><a href="(.*?)"')
         try:
@@ -589,7 +589,7 @@ class BaiduEnum(enumratorBaseThreaded):
         return
 
     def extract_domains(self, resp):
-        links = list()
+        # links = list()
         found_newdomain = False
         subdomain_list = []
         link_regx = re.compile('<a.*?class="c-showurl".*?>(.*?)</a>')
@@ -681,7 +681,7 @@ class NetcraftEnum(enumratorBaseThreaded):
         return url
 
     def create_cookies(self, cookie):
-        cookies = dict()
+        # cookies = dict()
         cookies_list = cookie[0 : cookie.find(";")].split("=")
         cookies[cookies_list[0]] = cookies_list[1]
         # hashlib.sha1 requires utf-8 encoded str
@@ -712,7 +712,7 @@ class NetcraftEnum(enumratorBaseThreaded):
             self.should_sleep()
 
     def extract_domains(self, resp):
-        links_list = list()
+        # links_list = list()
         link_regx = re.compile('<a class="results-table__host" href="(.*?)"')
         try:
             links_list = link_regx.findall(resp)
