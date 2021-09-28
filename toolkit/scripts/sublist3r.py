@@ -357,7 +357,7 @@ class GoogleEnum(enumratorBaseThreaded):
         return
 
     def extract_domains(self, resp):
-        # links_list = list()
+        links_list = []
         link_regx = re.compile("<cite.*?>(.*?)<\/cite>")
         try:
             links_list = link_regx.findall(resp)
@@ -489,7 +489,7 @@ class AskEnum(enumratorBaseThreaded):
         return
 
     def extract_domains(self, resp):
-        # links_list = list()
+        links_list = []
         link_regx = re.compile('<p class="web-result-url">(.*?)</p>')
         try:
             links_list = link_regx.findall(resp)
@@ -535,7 +535,7 @@ class BingEnum(enumratorBaseThreaded):
         return
 
     def extract_domains(self, resp):
-        # links_list = list()
+        links_list = []
         link_regx = re.compile('<li class="b_algo"><h2><a href="(.*?)"')
         link_regx2 = re.compile('<div class="b_title"><h2><a href="(.*?)"')
         try:
@@ -589,7 +589,7 @@ class BaiduEnum(enumratorBaseThreaded):
         return
 
     def extract_domains(self, resp):
-        # links = list()
+        links = []
         found_newdomain = False
         subdomain_list = []
         link_regx = re.compile('<a.*?class="c-showurl".*?>(.*?)</a>')
@@ -681,8 +681,8 @@ class NetcraftEnum(enumratorBaseThreaded):
         return url
 
     def create_cookies(self, cookie):
-        # cookies = dict()
-        cookies_list = cookie[0 : cookie.find(";")].split("=")
+        cookies = {}
+        cookies_list = cookie[0:cookie.find(";")].split("=")
         cookies[cookies_list[0]] = cookies_list[1]
         # hashlib.sha1 requires utf-8 encoded str
         cookies["netcraft_js_verification_response"] = hashlib.sha512(
@@ -712,7 +712,7 @@ class NetcraftEnum(enumratorBaseThreaded):
             self.should_sleep()
 
     def extract_domains(self, resp):
-        # links_list = list()
+        links_list = []
         link_regx = re.compile('<a class="results-table__host" href="(.*?)"')
         try:
             links_list = link_regx.findall(resp)
@@ -992,7 +992,7 @@ class CrtSearch(enumratorBaseThreaded):
                         continue
 
                     if "@" in subdomain:
-                        subdomain = subdomain[subdomain.find("@") + 1 :]
+                        subdomain = subdomain[subdomain.find("@") + 1:]
 
                     if subdomain not in self.subdomains and subdomain != self.domain:
                         if self.verbose:
@@ -1089,7 +1089,7 @@ def main(domain, threads, savefile, ports, silent, verbose, enable_bruteforce, e
     search_list = set()
 
     if is_windows:
-        subdomains_queue = list()
+        subdomains_queue = []
     else:
         subdomains_queue = multiprocessing.Manager().list()
 
