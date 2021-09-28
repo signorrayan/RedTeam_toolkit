@@ -1,5 +1,4 @@
 import os
-import re
 import subprocess
 import time
 
@@ -49,7 +48,7 @@ def sublister(target_url):
     pre_output = process.stdout.split("\n")
     result = []
     for line in pre_output:
-        if target_url in str(line) and not "subdomains" in str(line):
+        if target_url in str(line) and "subdomains" not in str(line):
             result.append(str(line))
 
     return result

@@ -8,7 +8,6 @@
 # JordanMilne, KxCode, rc0r, memoryprint, ppaulojr
 #
 import ctypes
-import json
 import optparse
 import os
 import random
@@ -202,7 +201,7 @@ class lookup(multiprocessing.Process):
         ret = []
         try:
             ret = [self.resolver_q.get_nowait()]
-            if ret == False:
+            if ret is False:
                 # Queue is empty,  inform the rest.
                 self.resolver_q.put(False)
                 ret = []
@@ -211,9 +210,8 @@ class lookup(multiprocessing.Process):
         return ret
 
     def get_ns_blocking(self):
-        ret = []
         ret = [self.resolver_q.get()]
-        if ret == False:
+        if ret is False:
             trace("get_ns_blocking - Resolver list is empty.")
             # Queue is empty,  inform the rest.
             self.resolver_q.put(False)
@@ -433,7 +431,7 @@ def print_target(
     verbose=False,
 ):
     subdomains_list = []
-    results_temp = []
+    # results_temp = []
     run(target, record_type, subdomains, resolve_list, process_count)
     for result in run(target, record_type, subdomains, resolve_list, process_count):
         (hostname, record_type, response) = result

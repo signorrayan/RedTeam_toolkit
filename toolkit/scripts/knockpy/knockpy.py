@@ -12,7 +12,6 @@ from argparse import RawTextHelpFormatter
 from os import path
 
 import bs4
-import colorama
 import matplotlib.pyplot as plt
 import networkx as nx
 import requests
@@ -37,7 +36,7 @@ class Request:
             return []
 
     def https(url):
-        headers = {"user-agent": random.choice(config["user_agent"])}
+        headers = {"user-agent": random.SystemRandom().choice(config["user_agent"])}
         try:
             resp = requests.get(
                 "https://" + url, headers=headers, timeout=config["timeout"]
@@ -50,7 +49,7 @@ class Request:
             return []
 
     def http(url):
-        headers = {"user-agent": random.choice(config["user_agent"])}
+        headers = {"user-agent": random.SystemRandom().choice(config["user_agent"])}
         try:
             resp = requests.get(
                 "http://" + url, headers=headers, timeout=config["timeout"]
@@ -93,23 +92,23 @@ class Wordlist:
         return filter(None, wlist)
 
     def google(domain):
-        headers = {"user-agent": random.choice(config["user_agent"])}
+        headers = {"user-agent": random.SystemRandom().choice(config["user_agent"])}
         dork = "site:%s -site:www.%s" % (domain, domain)
         url = "https://google.com/search?q=%s&start=%s" % (dork, str(5))
         params = [domain, url, headers]
         try:
             return Request.bs4scrape(params)
-        except Exception as e:
+        except Exception:
             return []
 
     def duckduckgo(domain):
-        headers = {"user-agent": random.choice(config["user_agent"])}
+        headers = {"user-agent": random.SystemRandom().choice(config["user_agent"])}
         dork = "site:%s -site:www.%s" % (domain, domain)
         url = "https://duckduckgo.com/html/?q=%s" % dork
         params = [domain, url, headers]
         try:
             return Request.bs4scrape(params)
-        except Exception as e:
+        except Exception:
             return []
 
     def virustotal(domain, apikey):
@@ -130,7 +129,7 @@ class Wordlist:
         config_wordlist = config["wordlist"]
 
         config_api = config["api"]
-        user_agent = random.choice(config["user_agent"])
+        # user_agent = random.SystemRandom().choice(config["user_agent"])
 
         local, google, duckduckgo, virustotal = [], [], [], []
 
@@ -231,7 +230,7 @@ class Output:
         spaceSub = " " * ((max_len + 1) - len("Subdomain"))
 
         # dns only
-        if not "http" in config["attack"]:
+        if "http" not in config["attack"]:
             line += (
                 "Ip address" + spaceIp + "Subdomain" + spaceSub + "Real hostname" + "\n"
             )
@@ -570,7 +569,7 @@ class Start:
             else "\n\n"
         )
         epilog += "once you get knockpy results, don't forget to use 'nmap' and 'dirsearch'\n\n"
-        epilog += random.choice(Start.msg_rnd())
+        epilog += random.SystemRandom().choice(Start.msg_rnd())
 
         parser = argparse.ArgumentParser(
             prog="knockpy",
@@ -715,7 +714,7 @@ def main():
             continue
 
         # dns only
-        if not "http" in config["attack"]:
+        if "http" not in config["attack"]:
             # print line and update report
             data = Output.jsonzeRequestData(req, target)
             # print (data, max_len)
@@ -751,12 +750,13 @@ def main():
         results.update({target: data})
 
     # footer
-    time_end = time.time()
-    print(Output.footerPrint(time_end, time_start, results))
+    # time_end = time.time()
+    # print(Output.footerPrint(time_end, time_start, results))
+    print("Done!")
 
     # save report
-    if config["report"]["save"]:
-        Report.save(results, domain, time_start, time_end, len_wordlist)
+    # if config["report"]["save"]:
+    #    Report.save(results, domain, time_start, time_end, len_wordlist)
 
 
 if __name__ == "__main__":

@@ -380,7 +380,7 @@ class GoogleEnum(enumratorBaseThreaded):
 
     def check_response_errors(self, resp):
         if (
-            type(resp) is str or type(resp) is unicode
+            type(resp) is str
         ) and "Our systems have detected unusual traffic" in resp:
             self.print_(
                 R + "[!] Error: Google probably now is blocking our requests" + W
@@ -684,7 +684,7 @@ class NetcraftEnum(enumratorBaseThreaded):
 
     def create_cookies(self, cookie):
         cookies = dict()
-        cookies_list = cookie[0 : cookie.find(";")].split("=")
+        cookies_list = cookie[0:cookie.find(";")].split("=")
         cookies[cookies_list[0]] = cookies_list[1]
         # hashlib.sha1 requires utf-8 encoded str
         cookies["netcraft_js_verification_response"] = hashlib.sha1(
@@ -941,7 +941,7 @@ class ThreatCrowd(enumratorBaseThreaded):
                     if self.verbose:
                         self.print_("%s%s: %s%s" % (R, self.engine_name, W, subdomain))
                     self.subdomains.append(subdomain.strip())
-        except Exception as e:
+        except Exception:
             pass
 
 
@@ -994,7 +994,7 @@ class CrtSearch(enumratorBaseThreaded):
                         continue
 
                     if "@" in subdomain:
-                        subdomain = subdomain[subdomain.find("@") + 1 :]
+                        subdomain = subdomain[subdomain.find("@") + 1:]
 
                     if subdomain not in self.subdomains and subdomain != self.domain:
                         if self.verbose:
@@ -1027,7 +1027,7 @@ class PassiveDNS(enumratorBaseThreaded):
     def req(self, url):
         try:
             resp = self.session.get(url, headers=self.headers, timeout=self.timeout)
-        except Exception as e:
+        except Exception:
             resp = None
 
         return self.get_response(resp)
@@ -1049,7 +1049,7 @@ class PassiveDNS(enumratorBaseThreaded):
                     if self.verbose:
                         self.print_("%s%s: %s%s" % (R, self.engine_name, W, subdomain))
                     self.subdomains.append(subdomain.strip())
-        except Exception as e:
+        except Exception:
             pass
 
 
@@ -1226,28 +1226,29 @@ def main(domain, threads, savefile, ports, silent, verbose, enable_bruteforce, e
 
 def interactive():
     args = parse_args()
-    domain = args.domain
-    threads = args.threads
-    savefile = args.output
-    ports = args.ports
-    enable_bruteforce = args.bruteforce
+    # domain = args.domain
+    # threads = args.threads
+    # savefile = args.output
+    # ports = args.ports
+    # enable_bruteforce = args.bruteforce
     verbose = args.verbose
-    engines = args.engines
+    # engines = args.engines
     if verbose or verbose is None:
-        verbose = True
+        # verbose = True
+        pass
     if args.no_color:
         no_color()
     banner()
-    res = main(
-        domain,
-        threads,
-        savefile,
-        ports,
-        silent=False,
-        verbose=verbose,
-        enable_bruteforce=enable_bruteforce,
-        engines=engines,
-    )
+    # res = main(
+    #    domain,
+    #    threads,
+    #    savefile,
+    #    ports,
+    #    silent=False,
+    #    verbose=verbose,
+    #    enable_bruteforce=enable_bruteforce,
+    #    engines=engines,
+    # )
 
 
 if __name__ == "__main__":
