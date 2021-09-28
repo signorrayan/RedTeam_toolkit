@@ -698,7 +698,6 @@ if __name__ == "__main__":
     else:
         targets = args  # multiple arguments on the cli: ./subbrute.py google.com gmail.com yahoo.com    if (len(resolver_list) / 16) < options.process_count:
 
-
     if options.output:
         try:
             output = open(options.output, "w")
