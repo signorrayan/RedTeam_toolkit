@@ -682,7 +682,7 @@ class NetcraftEnum(enumratorBaseThreaded):
 
     def create_cookies(self, cookie):
         cookies = {}
-        cookies_list = cookie[0:cookie.find(";")].split("=")
+        cookies_list = cookie[0 : cookie.find(";")].split("=")
         cookies[cookies_list[0]] = cookies_list[1]
         # hashlib.sha1 requires utf-8 encoded str
         cookies["netcraft_js_verification_response"] = hashlib.sha512(
@@ -992,7 +992,7 @@ class CrtSearch(enumratorBaseThreaded):
                         continue
 
                     if "@" in subdomain:
-                        subdomain = subdomain[subdomain.find("@") + 1:]
+                        subdomain = subdomain[subdomain.find("@") + 1 :]
 
                     if subdomain not in self.subdomains and subdomain != self.domain:
                         if self.verbose:
