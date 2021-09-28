@@ -28,11 +28,10 @@ jobs:
       # https://www.hacksoft.io/blog/github-actions-in-action-setting-up-django-and-postgres#resources
       - run: sudo apt-get install libpq-dev
       - run: pip install --upgrade pip wheel
-      - run: pip install bandit black codespell flake8 flake8-bugbear
+      - run: pip install bandit black flake8 flake8-bugbear
                          flake8-comprehensions isort mypy pyupgrade safety
       - run: bandit --recursive  --skip B106,B110,B404,B602,B603,B607 .
       - run: black --check .
-      - run: codespell
       - run: flake8 . --count --ignore=B,E722,W503,W605 --max-complexity=28
                       --max-line-length=220 --show-source --statistics
       - run: isort --check-only --profile black .
