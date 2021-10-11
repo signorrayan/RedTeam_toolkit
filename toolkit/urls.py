@@ -14,6 +14,7 @@ urlpatterns = [
     path("cvedes/", views.cvedes, name="cvedes"),
     path("linux/", views.linux, name="linux"),
     path("windows/", views.windows, name="windows"),
+    path("windows/proxyshell", views.win_proxyshell, name="win_proxyshell"),
     path("sshbruteforce/", views.sshbruteforce, name="sshbruteforce"),
     path("windows/nightmare/", views.nightmare, name="nightmare"),
     path("windows/rdpbruteforce/", views.rdpbruteforce, name="rdpbruteforce"),
@@ -23,5 +24,6 @@ urlpatterns = [
     path("webapp/verbtampering", views.verbtamper, name="verbtamper"),
     path("webapp/webcrawler", views.webcrawler, name="webcrawler"),
     path("webapp/subdomain", views.subdomain, name="subdomain"),
+    path("webapp/apache-cve-41773", views.apache_cve_41773, name="apache_cve_41773"),
     # <str:filepath>/
 ]

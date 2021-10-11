@@ -11,14 +11,12 @@ from .forms import CvedesForm, IpscanForm, SshbruteForm, SubDomainForm, URLForm
 from .scripts import (
     cvescanner,
     dirscanner,
-    gather_url,
     nmap,
-    rdpbrute,
     rustscan,
     sshbrute,
-    subdomain_finder,
-    verbtampering,
 )
+from .scripts.windows import rdpbrute, proxyshell
+from .scripts.webapp import gather_url, verbtampering, subdomain_finder, cve_2021_41773
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -68,19 +66,19 @@ def fullscan(request):
             form = IpscanForm(request.POST)
             if form.is_valid():
                 ip = form.cleaned_data.get("ip")
-            function_name = "fullscan"
-            # validate_ipv46_address(ip) or RegexValidator("(?:http\w?://)?(?:www.)?[^\.]+.\w{2,8}")
-            user_name = request.user
-            p_fullscan = multiprocessing.Process(
-                target=nmap.nmap_script,
-                args=(
-                    ip,
-                    user_name,
-                    function_name,
-                ),
-            )
-            p_fullscan.start()
-            p_fullscan.join()
+                function_name = "fullscan"
+                # validate_ipv46_address(ip) or RegexValidator("(?:http\w?://)?(?:www.)?[^\.]+.\w{2,8}")
+                user_name = request.user
+                p_fullscan = multiprocessing.Process(
+                    target=nmap.nmap_script,
+                    args=(
+                        ip,
+                        user_name,
+                        function_name,
+                    ),
+                )
+                p_fullscan.start()
+                p_fullscan.join()
             # nmap.nmap_script(ip, user_name, function_name)
 
         except ValueError:
@@ -209,36 +207,11 @@ def linux(request):
     return render(request, "toolkit/linux/home.html")
 
 
+# Windows Section
+
 @login_required(login_url="/forbidden/")
 def windows(request):
-    return render(request, "toolkit/linux/home.html")
-
-
-@login_required(login_url="/forbidden/")
-def sshbruteforce(request):
-    if request.method == "GET":
-        return render(request, "toolkit/sshbruteforce.html", {"form": SshbruteForm()})
-
-    else:
-        form = SshbruteForm(request.POST)
-        if form.is_valid():
-            target_username = form.cleaned_data.get("username")
-            target_ip = form.cleaned_data.get("ip")
-            result = sshbrute.ssh_bruteforce(target_username, target_ip)
-            if result is not None:
-                context = {"result": result}
-                return render(request, "toolkit/sshbruteforce.html", context)
-
-            else:
-                return render(
-                    request, "toolkit/sshbruteforce.html", {"error": "Not Found!"}
-                )
-
-        return render(
-            request,
-            "toolkit/sshbruteforce.html",
-            {"error": "Bad data passed in. Try again."},
-        )
+    return render(request, "toolkit/windows/index.html")
 
 
 @login_required(login_url="/forbidden/")
@@ -272,11 +245,70 @@ def rdpbruteforce(request):
 
 
 @login_required(login_url="/forbidden/")
+def win_proxyshell(request):
+    if request.method == "GET":
+        return render(
+            request, "toolkit/windows/proxyshell.html", {"form": IpscanForm()}
+        )
+
+    else:
+        form = IpscanForm(request.POST)
+        if form.is_valid():
+            ip = form.cleaned_data.get("ip")
+            result = proxyshell.scanner(ip)
+            if result is not None:
+                context = {"result": result}
+                return render(request, "toolkit/windows/proxyshell.html", context)
+
+            else:
+                return render(
+                    request,
+                    "toolkit/windows/proxyshell.html",
+                    {"error": "Something went wrong... Maybe there is not route to the target!"},
+                )
+
+        return render(
+            request,
+            "toolkit/windows/proxyshell.html",
+            {"error": "Bad data passed in. Try again."},
+        )
+
+
+@login_required(login_url="/forbidden/")
 def nightmare(request):
     return render(request, "toolkit/fullscan.html")
 
+# End Windows Section
+
+@login_required(login_url="/forbidden/")
+def sshbruteforce(request):
+    if request.method == "GET":
+        return render(request, "toolkit/sshbruteforce.html", {"form": SshbruteForm()})
+
+    else:
+        form = SshbruteForm(request.POST)
+        if form.is_valid():
+            target_username = form.cleaned_data.get("username")
+            target_ip = form.cleaned_data.get("ip")
+            result = sshbrute.ssh_bruteforce(target_username, target_ip)
+            if result is not None:
+                context = {"result": result}
+                return render(request, "toolkit/sshbruteforce.html", context)
+
+            else:
+                return render(
+                    request, "toolkit/sshbruteforce.html", {"error": "Not Found!"}
+                )
+
+        return render(
+            request,
+            "toolkit/sshbruteforce.html",
+            {"error": "Bad data passed in. Try again."},
+        )
+
 
 # Web Application Section
+
 @login_required(login_url="/forbidden/")
 def webapp(request):
     if request.method == "GET":
@@ -373,6 +405,7 @@ def subdomain(request):
                         return render(request, "toolkit/webapp/subdomain.html", context)
 
                 else:
+                    target_url = str(target_url).replace('https://', '').replace('http://', '')
                     response = StreamingHttpResponse(
                         subdomain_finder.knockpy(target_url)
                     )  # Accept generator/yield
@@ -387,7 +420,35 @@ def subdomain(request):
             )
 
 
-# End Web Application Section
+@login_required(login_url="/forbidden/")
+def apache_cve_41773(request):
+    if request.method == "GET":
+        return render(request, "toolkit/webapp/cve_2021_41773.html", {"form": IpscanForm()})
+
+    else:
+        form = IpscanForm(request.POST)
+        if form.is_valid():
+            ip = form.cleaned_data.get("ip")
+            result = cve_2021_41773.start(ip)
+            if result is not None:
+                context = {"result": result}
+                return render(request, "toolkit/webapp/cve_2021_41773.html", context)
+
+            else:
+                return render(
+                    request,
+                    "toolkit/webapp/cve_2021_41773.html",
+                    {"error": "Something went wrong..."},
+                )
+
+        return render(
+            request,
+            "toolkit/webapp/cve_2021_41773.html",
+            {"error": "Bad data passed in. Try again."},
+        )
+
+
+# End WebApplication Section
 
 
 @login_required(login_url="/forbidden/")
