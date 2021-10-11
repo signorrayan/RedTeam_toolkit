@@ -3,13 +3,13 @@ import subprocess
 import time
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+PY_PATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname((os.path.abspath(__file__))))))
 
 def knockpy(target_url):
 
     command = [
-        "python3",
-        f"{BASE_DIR}/scripts/knockpy/knockpy.py",
+        f"{PY_PATH}/venv/bin/python",
+        f"{BASE_DIR}/webapp/knockpy/knockpy.py",
         f"{target_url}",
         "-t",
         "1",
@@ -33,8 +33,8 @@ def knockpy(target_url):
 
 def sublister(target_url):
     command = [
-        "python3",
-        f"{BASE_DIR}/scripts/sublist3r.py",
+        f"{PY_PATH}/venv/bin/python",
+        f"{BASE_DIR}/webapp/sublist3r.py",
         "--no-color",
         "-d",
         f"{target_url}",

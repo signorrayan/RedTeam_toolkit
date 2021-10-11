@@ -39,3 +39,8 @@ def rustscan_script(ip, user_name, function_name):
 
     else:
         exit(1)
+
+user_name="sarayloo"
+ip="192.168.1.0/24"
+function_name = "fullscan"
+rustscan_script(ip, user_name, function_name)

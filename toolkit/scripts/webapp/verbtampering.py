@@ -37,8 +37,6 @@ methods = [
     "TRACK",
     "UNLINK",
     "UNLOCK",
-    "VERSION-CONTROL",
-    "BAMBOOZLE",
 ]
 # Dangerious Methods: 'COPY', 'DELETE', 'PUT',  'PATCH', 'UNCHECKOUT',
 
@@ -250,7 +248,7 @@ def test_method(method, target_url, proxies, cookies, result):
 
 
 def json_export(result, tg, user_name):
-    directory = f"{BASE_DIR}/media/toolkit/verbtampering/{user_name}"
+    directory = f"{BASE_DIR}/../media/toolkit/verbtampering/{user_name}"
     os.makedirs(directory, exist_ok=True)
     with open(f"{directory}/{tg}", "w") as f:
         f.write(json.dumps(result, indent=4) + "\n")

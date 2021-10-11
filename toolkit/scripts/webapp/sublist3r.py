@@ -24,13 +24,14 @@ import requests
 # external modules
 from subbrute import subbrute
 
-# Python 2.x and 3.x compatibility
+# Python 2.x and 3.x compatiablity
 if sys.version > "3":
     import urllib.parse as urlparse
     import urllib.parse as urllib
-# else:
-#     import urllib
-#     import urlparse
+else:
+    import urllib
+
+    import urlparse
 
 # In case you cannot install some of the required development packages
 # there's also an option to disable the SSL warning:
@@ -285,7 +286,7 @@ class enumratorBase(object):
                 return self.subdomains
             resp = self.send_req(query, page_no)
 
-            # check if there is any error occurred
+            # check if there is any error occured
             if not self.check_response_errors(resp):
                 return self.subdomains
             links = self.extract_domains(resp)
@@ -356,7 +357,7 @@ class GoogleEnum(enumratorBaseThreaded):
         return
 
     def extract_domains(self, resp):
-        links_list = []
+        links_list = list()
         link_regx = re.compile("<cite.*?>(.*?)<\/cite>")
         try:
             links_list = link_regx.findall(resp)
@@ -378,7 +379,9 @@ class GoogleEnum(enumratorBaseThreaded):
         return links_list
 
     def check_response_errors(self, resp):
-        if (type(resp) is str) and "Our systems have detected unusual traffic" in resp:
+        if (
+            type(resp) is str or type(resp) is unicode
+        ) and "Our systems have detected unusual traffic" in resp:
             self.print_(
                 R + "[!] Error: Google probably now is blocking our requests" + W
             )
@@ -488,7 +491,7 @@ class AskEnum(enumratorBaseThreaded):
         return
 
     def extract_domains(self, resp):
-        links_list = []
+        links_list = list()
         link_regx = re.compile('<p class="web-result-url">(.*?)</p>')
         try:
             links_list = link_regx.findall(resp)
@@ -534,7 +537,7 @@ class BingEnum(enumratorBaseThreaded):
         return
 
     def extract_domains(self, resp):
-        links_list = []
+        links_list = list()
         link_regx = re.compile('<li class="b_algo"><h2><a href="(.*?)"')
         link_regx2 = re.compile('<div class="b_title"><h2><a href="(.*?)"')
         try:
@@ -588,7 +591,7 @@ class BaiduEnum(enumratorBaseThreaded):
         return
 
     def extract_domains(self, resp):
-        links = []
+        links = list()
         found_newdomain = False
         subdomain_list = []
         link_regx = re.compile('<a.*?class="c-showurl".*?>(.*?)</a>')
@@ -625,7 +628,7 @@ class BaiduEnum(enumratorBaseThreaded):
         return True
 
     def should_sleep(self):
-        time.sleep(random.SystemRandom().randint(2, 5))
+        time.sleep(random.randint(2, 5))
         return
 
     def generate_query(self):
@@ -670,7 +673,7 @@ class NetcraftEnum(enumratorBaseThreaded):
         return resp
 
     def should_sleep(self):
-        time.sleep(random.SystemRandom().randint(1, 2))
+        time.sleep(random.randint(1, 2))
         return
 
     def get_next(self, resp):
@@ -680,11 +683,11 @@ class NetcraftEnum(enumratorBaseThreaded):
         return url
 
     def create_cookies(self, cookie):
-        cookies = {}
+        cookies = dict()
         cookies_list = cookie[0 : cookie.find(";")].split("=")
         cookies[cookies_list[0]] = cookies_list[1]
         # hashlib.sha1 requires utf-8 encoded str
-        cookies["netcraft_js_verification_response"] = hashlib.sha512(
+        cookies["netcraft_js_verification_response"] = hashlib.sha1(
             urllib.unquote(cookies_list[1]).encode("utf-8")
         ).hexdigest()
         return cookies
@@ -711,7 +714,7 @@ class NetcraftEnum(enumratorBaseThreaded):
             self.should_sleep()
 
     def extract_domains(self, resp):
-        links_list = []
+        links_list = list()
         link_regx = re.compile('<a class="results-table__host" href="(.*?)"')
         try:
             links_list = link_regx.findall(resp)
@@ -938,7 +941,7 @@ class ThreatCrowd(enumratorBaseThreaded):
                     if self.verbose:
                         self.print_("%s%s: %s%s" % (R, self.engine_name, W, subdomain))
                     self.subdomains.append(subdomain.strip())
-        except Exception:
+        except Exception as e:
             pass
 
 
@@ -1024,7 +1027,7 @@ class PassiveDNS(enumratorBaseThreaded):
     def req(self, url):
         try:
             resp = self.session.get(url, headers=self.headers, timeout=self.timeout)
-        except Exception:
+        except Exception as e:
             resp = None
 
         return self.get_response(resp)
@@ -1046,7 +1049,7 @@ class PassiveDNS(enumratorBaseThreaded):
                     if self.verbose:
                         self.print_("%s%s: %s%s" % (R, self.engine_name, W, subdomain))
                     self.subdomains.append(subdomain.strip())
-        except Exception:
+        except Exception as e:
             pass
 
 
@@ -1088,7 +1091,7 @@ def main(domain, threads, savefile, ports, silent, verbose, enable_bruteforce, e
     search_list = set()
 
     if is_windows:
-        subdomains_queue = []
+        subdomains_queue = list()
     else:
         subdomains_queue = multiprocessing.Manager().list()
 
@@ -1223,29 +1226,28 @@ def main(domain, threads, savefile, ports, silent, verbose, enable_bruteforce, e
 
 def interactive():
     args = parse_args()
-    # domain = args.domain
-    # threads = args.threads
-    # savefile = args.output
-    # ports = args.ports
-    # enable_bruteforce = args.bruteforce
+    domain = args.domain
+    threads = args.threads
+    savefile = args.output
+    ports = args.ports
+    enable_bruteforce = args.bruteforce
     verbose = args.verbose
-    # engines = args.engines
+    engines = args.engines
     if verbose or verbose is None:
-        # verbose = True
-        pass
+        verbose = True
     if args.no_color:
         no_color()
     banner()
-    # res = main(
-    #    domain,
-    #    threads,
-    #    savefile,
-    #    ports,
-    #    silent=False,
-    #    verbose=verbose,
-    #    enable_bruteforce=enable_bruteforce,
-    #    engines=engines,
-    # )
+    res = main(
+        domain,
+        threads,
+        savefile,
+        ports,
+        silent=False,
+        verbose=verbose,
+        enable_bruteforce=enable_bruteforce,
+        engines=engines,
+    )
 
 
 if __name__ == "__main__":

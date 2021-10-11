@@ -6,12 +6,12 @@ import subprocess
 # from .checksum import check
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+PY_PATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname((os.path.abspath(__file__))))))
 
 def rdpbrute_script(ip):
     p = subprocess.run(
         [
-            "python3",
+            f"{PY_PATH}/venv/bin/python",
             f"{BASE_DIR}/scripts/crowbar.py",
             "-q",
             "-b",
