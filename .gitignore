@@ -44,8 +44,9 @@ ipython_config.py
 
 # Secrets
 secrets.json
-
+mypy_cache
 /venv
-/toolkit/scripts/hakrawler
+/toolkit/scripts/webapp/hakrawler
 
 /knockpy_report/
+/toolkit/.mypy_cache/
