@@ -122,6 +122,8 @@
 	 top: 100%;
 }
 
+.scans {display: inline-block; margin: 0 70px}
+
 @display-height: 70vh;
 @blink-time: 500ms;
 @keyframes blink {

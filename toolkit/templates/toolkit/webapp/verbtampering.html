@@ -18,8 +18,10 @@ h2{
   text-transform: uppercase;
   font-weight: 300;
   margin-bottom: 10px;
-  margin-left: auto;
   text-align: center;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 </style>
 <body>
@@ -31,7 +33,6 @@ h2{
     	<input name="target_url" type="text" placeholder="ENTER URL: https://example.com">
     	<button type='submit'>Search</button>
 </form>
-<br><br><br><br><br><br><br><br><br>
 {% if error %}
     <h2 style="text-align:center">{{ error }}</h2>
 {% endif %}

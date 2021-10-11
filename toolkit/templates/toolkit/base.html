@@ -68,7 +68,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   </a>
 
 
-  <form method="POST" action="{% url 'logoutuser' %}" >
+    <form method="POST" action="{% url 'logoutuser' %}" >
    {% csrf_token %}
       <button type='submit' class="form w3-bar-item w3-button w3-padding-large w3-hover-black">
       <i class="fa fa-solid fa-lock w3-xxlarge"></i>

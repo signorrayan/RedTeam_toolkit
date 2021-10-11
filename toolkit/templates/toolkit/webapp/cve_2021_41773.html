@@ -1,0 +1,60 @@
+{% extends "toolkit/base.html" %}
+
+{% block content %}
+{% load static %}
+<html>
+<title>
+    {% block title %}
+        Apache Path Traversal - RedTeam Toolkit
+    {% endblock %}
+</title>
+<link rel="stylesheet" type="text/css" href="{% static "toolkit/css/single_input.css" %}" media="all" />
+
+<body>
+<div class="wrapper">
+	<div class="container">
+		<h1>Apache Path Traversal</h1>
+        <h5>[ CVE-2021-41773 ]</h5>
+		<form class="form" method="POST">
+            {% csrf_token %}
+			<input type="text" name="ip" placeholder="Target IP">
+			<button type="submit" id="login-button">Start</button>
+		</form>
+        {% if result %}
+            {% if result.content %}
+                <h2> {{ result.message }} </h2>
+                <h2>{{ result.content }}</h2>
+            {% else %}
+                <h3> {{ result.message }} </h3>
+            {% endif %}
+        {% else %}
+            <h3> {{ error }} </h3>
+        {% endif %}
+	</div>
+
+	<ul class="bg-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>
+
+
+<script>
+     $("#login-button").click(function(event){
+		 event.preventDefault();
+
+	 $('small').fadeOut(500);
+	 $('.wrapper').addClass('form-success');
+});
+</script>
+</body>
+</html>
+{% endblock %}

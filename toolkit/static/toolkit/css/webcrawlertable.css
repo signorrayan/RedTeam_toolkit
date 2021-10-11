@@ -1,11 +1,13 @@
 
 h1{
-  font-size: 30px;
+  font-size: 25px;
   color: #fff;
   text-transform: uppercase;
   font-weight: 300;
-  margin-bottom: 15px;
-  margin-left: 700px;
+  text-align: center;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 table{
   width:100%;

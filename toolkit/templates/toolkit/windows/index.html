@@ -1,0 +1,39 @@
+{% extends "toolkit/base.html" %}
+
+{% block content %}
+{% load static %}
+<title>
+    {% block title %}
+        WebApplications - RedTeam Toolkit
+    {% endblock %}
+</title>
+<link rel="stylesheet" type="text/css" href="{% static "toolkit/css/webapp_menu.css" %}" media="all"/>
+<link rel="stylesheet" type="text/css" href="{% static "toolkit/css/dashboard.css" %}" media="all" />
+<body>
+<br><br><br>
+<br><br><br>
+<div class="row">
+  <div class="col">
+    <h2>Windows Section <sup>1.0</sup></h2>
+    <div class="tabs">
+      <div class="tab">
+        <input  id="chck1">
+        <label class="tab-label" for="chck1">
+            <a href="{% url 'win_proxyshell' %}"><p class="w3-medium scans" style="position:relative;">
+                Microsoft Exchange Server [ ProxyShell ]
+            </p></a></label>
+      </div>
+    </div>
+
+      <div class="tab">
+        <input type="checkbox" id="chck2">
+        <label class="tab-label" for="chck2">Other</label>
+        <div class="tab-content"><p class="w3-medium scans" style="position:relative;">
+          Under Maintenance</p></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</html>
+{% endblock %}

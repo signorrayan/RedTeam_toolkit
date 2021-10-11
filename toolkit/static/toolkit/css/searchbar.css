@@ -2,9 +2,11 @@
 
 .webdesigntuts-workshop {
 	height: 80%;
-	position: absolute;
+	position: relative;
 	text-align: center;
-	width: 100%;
+	width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 .webdesigntuts-workshop:before,
@@ -12,10 +14,10 @@
 	content: '';
 	display: block;
 	height: 1px;
-	left: 50%;
-	margin: 0 0 0 -450px;
-	position: absolute;
-	width: 0;
+	width: 50%;
+    margin-left: 20%;
+    margin-right: 25%;
+	position: relative;
 }
 
 .webdesigntuts-workshop:before {
@@ -38,7 +40,9 @@
 	box-shadow: inset 0 0 0 1px #272727;
 	display: inline-block;
 	font-size: 0px;
-	margin: 150px auto 0;
+	width: 50%;
+    margin-left: 20%;
+    margin-right: 25%;
 	padding: 20px;
 	position: relative;
 	z-index: 1;
@@ -57,11 +61,11 @@
 	font-size: 13px;
 	font-weight: 400;
 	height: 40px;
-	margin-left: 450px;
-    margin-top: 100px;
+	width: 50%;
+    margin-left: 20%;
+    margin-right: 25%;
 	padding: 0 10px;
 	text-shadow: 0 -1px 0 #000;
-	width: 1000px;
 }
 
 .ie .webdesigntuts-workshop input {
@@ -110,11 +114,12 @@
 	font-weight: 400;
 	height: 40px;
 	line-height: 40px;
-	margin-top: 100px;
+    margin-left: 70%;
+	margin-top: -40px;
 	padding: 0;
 	position: relative;
 	text-shadow: 0 -1px 0 #000;
-	width: 80px;
+	width: 10%;
 }
 
 .webdesigntuts-workshop button:hover,
