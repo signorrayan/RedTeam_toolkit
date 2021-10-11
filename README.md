@@ -16,15 +16,18 @@ The open-source projects such as nmap, rustscan, dirsearch, shreder, circl, crow
 - FullScan (scan ports and vulnerabilities/CVEs on the target - PDF output)
 - Livehosts (scan all live hosts in the network scale - PDF output)
 - DirScan (scan all directories on a target - PDF output)
-- CVE Description (search a CVE-ID and get information, vendors will be added soon) - UNDER MAINTENANCE
+- CVE Description ( CveID Search)
 - SSH Dictionary Attack
 - RDP BruteForce
-- HTTP Verb Tampering
-- Web Crawler for gathering URLs
-- SubDomain Enumeration
 - WebApps Section
-- Linux Section to exploit major Linux CVEs (UNDER MAINTENANCE)
-- Windows Section to exploit major windows CVEs (UNDER MAINTENANCE)\
+  - Apache Path Traversal PoC ( CVE-2021-41773 )
+  - Web Crawler for gathering URLs
+  - SubDomain Enumeration
+  - HTTP Verb Tampering
+  - (SQLi will be added soon)
+- Windows Section (Being updated, other major CVEs will be added)
+  - Microsoft Exchange ProxyShell PoC ( CVE-2021-34523, CVE-2021-34473, CVE-2021-31207 )
+- Linux Section to implement major Linux CVEs (UNDER MAINTENANCE)\
 \
 ![Demo](Demo/dashboard.png)
 
