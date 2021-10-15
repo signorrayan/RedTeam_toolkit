@@ -628,7 +628,7 @@ class BaiduEnum(enumratorBaseThreaded):
         return True
 
     def should_sleep(self):
-        time.sleep(random.randint(2, 5))
+        time.sleep(random.SystemRandom().randint(2, 5))
         return
 
     def generate_query(self):
@@ -673,7 +673,7 @@ class NetcraftEnum(enumratorBaseThreaded):
         return resp
 
     def should_sleep(self):
-        time.sleep(random.randint(1, 2))
+        time.sleep(random.SystemRandom().randint(1, 2))
         return
 
     def get_next(self, resp):
@@ -687,7 +687,7 @@ class NetcraftEnum(enumratorBaseThreaded):
         cookies_list = cookie[0 : cookie.find(";")].split("=")
         cookies[cookies_list[0]] = cookies_list[1]
         # hashlib.sha1 requires utf-8 encoded str
-        cookies["netcraft_js_verification_response"] = hashlib.sha1(
+        cookies["netcraft_js_verification_response"] = hashlib.sha256(
             urllib.unquote(cookies_list[1]).encode("utf-8")
         ).hexdigest()
         return cookies
