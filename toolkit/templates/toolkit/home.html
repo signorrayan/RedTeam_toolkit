@@ -7,7 +7,7 @@
     {% endblock %}
 </title>
 {% load static %}
-
+<link rel="stylesheet" type="text/css" href="{% static "toolkit/css/base.css" %}" media="all" />
 <!-- Navbar on small screens (Hidden on medium and large screens) -->
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center ">
   <!-- Avatar image in top left corner --><br><br>
@@ -58,7 +58,18 @@
     <h1 class="w3-jumbo"><span class="w3-hide-small">[ RED-TEAM TOOLKIT ]</span></h1>
     <p></p>
     <img src="{% static 'toolkit/images/background_hand.jpg' %}" alt="boy" class="w3-image" width="992" height="1108">
+    <div class="side-block w3-hide-small w3-xxlarge w3-center">
+                <a
+                  href="https://github.com/signorrayan/"
+                  target="_blank"
+                  ><i class="fab fa-github"></i
+                ></a>
+                <a href="mailto:m.sarayloo@protonmail.com" target="_blank"
+                  ><i class="far fa-envelope"></i
+                ></a>
+</div>
   </header>
 </div>
+
 
 {% endblock %}
