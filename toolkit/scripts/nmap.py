@@ -25,6 +25,3 @@ def nmap_script(ip, user_name, function_name):
         convert_to_pdf(output, user_name, ip, function_name)
     else:
         exit(1)
-
-
-ip = "192."
