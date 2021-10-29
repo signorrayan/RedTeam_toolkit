@@ -31,6 +31,7 @@ The open-source projects such as nmap, rustscan, dirsearch, shreder, circl, crow
 \
 ![Demo](Demo/dashboard.png)
 
+
 ## :blue_book: Installation Guide
 You can find the installation guide in the [Installation wiki page](https://github.com/signorrayan/RedTeam_toolkit/wiki/Installation-Guide)
 
