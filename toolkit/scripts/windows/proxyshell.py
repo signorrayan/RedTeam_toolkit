@@ -7,7 +7,9 @@ def scanner(ip):
     ip = ip.strip()
     url = f"https://{ip}/autodiscover/autodiscover.json?@mss.com/owa/?&Email=autodiscover/autodiscover.json%3F@mss.com"
     try:
-        requests.packages.urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+        requests.packages.urllib3.disable_warnings(
+            urllib3.exceptions.InsecureRequestWarning
+        )
         req = requests.get(
             url, timeout=10, verify=False, allow_redirects=False
         )  # nosec
