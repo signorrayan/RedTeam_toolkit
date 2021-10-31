@@ -4,7 +4,7 @@ import sys
 import re
 
 
-requests.packages.urllib3.disable_warnings()
+requests.packages.urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 def scanner(ip):
