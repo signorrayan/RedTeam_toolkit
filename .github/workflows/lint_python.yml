@@ -30,7 +30,7 @@ jobs:
       - run: pip install --upgrade pip wheel
       - run: pip install bandit black flake8 flake8-bugbear
                          flake8-comprehensions isort mypy pyupgrade safety
-      - run: bandit --recursive  --skip B106,B110,B404,B602,B603,B607 .
+      - run: bandit --recursive  --skip B105,B106,B110,B404,B501,B602,B603,B607 .
       - run: black --check .
       - run: flake8 . --count --ignore=B,E203,E722,W503,W605 --max-complexity=28
                       --max-line-length=220 --show-source --statistics
