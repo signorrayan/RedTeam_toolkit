@@ -212,7 +212,7 @@ Example;
     if domain is None:
         domain = ""
 
-    if password == "" and username != "" and options.hashes is None:
+    if password == "" and username != "" and options.hashes is None:  # nosec
         from getpass import getpass
 
         password = getpass("Password:")
