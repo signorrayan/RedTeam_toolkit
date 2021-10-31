@@ -37,7 +37,7 @@ def checkApache(ip):
         req = urllib.request.Request(url)
 
         try:
-            output = urllib.request.urlopen(req, timeout=5)
+            output = urllib.request.urlopen(req, timeout=5) #nosec
             if output.status == 200:
                 content = output.read().decode('utf-8')
                 if 'root:' in content:
