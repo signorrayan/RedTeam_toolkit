@@ -13,10 +13,10 @@ def scanner(ip):
     try:
         req = requests.get(url, timeout=10, verify=False, allow_redirects=False)
         if (req.status_code == 302) and (re.search("errorfe.aspx", req.text)):
-            result = {"message" : f"Host {ip} is vulnerable "}
+            result = {"message": f"Host {ip} is vulnerable "}
         else:
-            result = {"message" : f"Host {ip} is not vulnerable"}
-        return  result
+            result = {"message": f"Host {ip} is not vulnerable"}
+        return result
 
     except Exception:
         return None

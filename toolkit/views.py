@@ -209,6 +209,7 @@ def linux(request):
 
 # Windows Section
 
+
 @login_required(login_url="/forbidden/")
 def windows(request):
     return render(request, "toolkit/windows/index.html")
@@ -264,7 +265,9 @@ def win_proxyshell(request):
                 return render(
                     request,
                     "toolkit/windows/proxyshell.html",
-                    {"error": "Something went wrong... Maybe there is not route to the target!"},
+                    {
+                        "error": "Something went wrong... Maybe there is not route to the target!"
+                    },
                 )
 
         return render(
@@ -278,7 +281,9 @@ def win_proxyshell(request):
 def nightmare(request):
     return render(request, "toolkit/fullscan.html")
 
+
 # End Windows Section
+
 
 @login_required(login_url="/forbidden/")
 def sshbruteforce(request):
@@ -308,6 +313,7 @@ def sshbruteforce(request):
 
 
 # Web Application Section
+
 
 @login_required(login_url="/forbidden/")
 def webapp(request):
@@ -405,7 +411,9 @@ def subdomain(request):
                         return render(request, "toolkit/webapp/subdomain.html", context)
 
                 else:
-                    target_url = str(target_url).replace('https://', '').replace('http://', '')
+                    target_url = (
+                        str(target_url).replace("https://", "").replace("http://", "")
+                    )
                     response = StreamingHttpResponse(
                         subdomain_finder.knockpy(target_url)
                     )  # Accept generator/yield
@@ -423,7 +431,9 @@ def subdomain(request):
 @login_required(login_url="/forbidden/")
 def apache_cve_41773(request):
     if request.method == "GET":
-        return render(request, "toolkit/webapp/cve_2021_41773.html", {"form": IpscanForm()})
+        return render(
+            request, "toolkit/webapp/cve_2021_41773.html", {"form": IpscanForm()}
+        )
 
     else:
         form = IpscanForm(request.POST)

@@ -3,7 +3,10 @@ import subprocess
 import time
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PY_PATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname((os.path.abspath(__file__))))))
+PY_PATH = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))))
+)
+
 
 def knockpy(target_url):
 

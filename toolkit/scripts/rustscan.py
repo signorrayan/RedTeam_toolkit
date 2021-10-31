@@ -39,4 +39,3 @@ def rustscan_script(ip, user_name, function_name):
 
     else:
         exit(1)
-

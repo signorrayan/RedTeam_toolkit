@@ -37,12 +37,12 @@ def checkApache(ip):
         req = urllib.request.Request(url)
 
         try:
-            output = urllib.request.urlopen(req, timeout=5) #nosec
+            output = urllib.request.urlopen(req, timeout=5)  # nosec
             if output.status == 200:
-                content = output.read().decode('utf-8')
-                if 'root:' in content:
+                content = output.read().decode("utf-8")
+                if "root:" in content:
                     message = f"Server {ip} IS VULNERABLE"
-                    result = {'message' : message, 'content' : content}
+                    result = {"message": message, "content": content}
                     return result
 
             else:
@@ -57,14 +57,14 @@ def checkApache(ip):
         except ConnectionResetError:
             message = f"Server {ip} connection reset"
 
-    result = {'message' : message}
+    result = {"message": message}
     return result
 
 
 def checkfile(filename):
-    if os.path.exists(os.getcwd()+"/"+filename):
-        openfile = open(os.getcwd()+"/"+filename,'r')
-        IPs=openfile.readlines()
+    if os.path.exists(os.getcwd() + "/" + filename):
+        openfile = open(os.getcwd() + "/" + filename, "r")
+        IPs = openfile.readlines()
         count = 0
         for line in IPs:
             count += 1
@@ -81,13 +81,15 @@ def checknet(net):
 
 def start(ip):
     return checkApache(ip)
-    #try:
+    # try:
     #    opts, args = getopt.getopt(argv, "f:s:")
-    #except getopt.GetoptError:
+    # except getopt.GetoptError:
     #    usage()
+
+
 #
-    #for opt, arg in opts:
-    #    if opt == '-f':
-    #        checkfile(arg)
-    #    elif opt == '-s':
-    #        checknet(arg)
+# for opt, arg in opts:
+#    if opt == '-f':
+#        checkfile(arg)
+#    elif opt == '-s':
+#        checknet(arg)

@@ -82,13 +82,17 @@ def cve_search(cve_id):
         result = {
             "cve_id": pre_result["id"],
             "cvss": pre_result["cvss"] if "cvss" in pre_result else "Unknown",
-            "complexity": pre_result["access"]["complexity"] if "access" in pre_result else "Unknown",
+            "complexity": pre_result["access"]["complexity"]
+            if "access" in pre_result
+            else "Unknown",
             "summary": pre_result["summary"],
             "published": pre_result["Published"],
             "modified": pre_result["Modified"],
             "capec": [
                 pre_result["capec"][i]["name"] for i in range(len(pre_result["capec"]))
-            ] if "capec" in pre_result else "Unknown",
+            ]
+            if "capec" in pre_result
+            else "Unknown",
         }
         return result
     else:
