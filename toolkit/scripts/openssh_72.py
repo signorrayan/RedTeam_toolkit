@@ -169,7 +169,7 @@ def main():
         )
     for i in range(1, int(args.samples) + 1):
         if not args.silent:
-            sys.stdout.write("..")
+            sys.stdout.write("")
         if not args.silent:
             sys.stdout.flush()
         sample = connect(host, port, "foobar-bleh-nonsense" + str(i))
