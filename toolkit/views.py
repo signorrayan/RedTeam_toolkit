@@ -1,5 +1,6 @@
 import multiprocessing
 import os
+import re
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -396,6 +397,12 @@ def subdomain(request):
             form = SubDomainForm(request.POST)
             if form.is_valid():
                 target_url = form.cleaned_data.get("target_url")
+                target_url = re.search(
+                    r"\w+\.\w+",
+                    target_url.replace("https://", "")
+                    .replace("http://", "")
+                    .replace("www.", ""),
+                )[0]
                 fast_scan = form.cleaned_data.get("fast_scan")
                 if fast_scan:
                     result = subdomain_finder.sublister(target_url)
@@ -411,9 +418,6 @@ def subdomain(request):
                         return render(request, "toolkit/webapp/subdomain.html", context)
 
                 else:
-                    target_url = (
-                        str(target_url).replace("https://", "").replace("http://", "")
-                    )
                     response = StreamingHttpResponse(
                         subdomain_finder.knockpy(target_url)
                     )  # Accept generator/yield

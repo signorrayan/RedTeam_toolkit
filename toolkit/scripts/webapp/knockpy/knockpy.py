@@ -671,7 +671,7 @@ def main():
     domain = Start.arguments()
 
     # wordlist
-    print("This scan could be take time...\nStay on the page\n\n")
+    print("This scan could be take a while...\nStay on the page\n\n")
     local, google, duckduckgo, virustotal = Wordlist.get(domain)
     wordlist = list(dict.fromkeys((local + google + duckduckgo + virustotal)))
     wordlist = sorted(wordlist, key=str.lower)
