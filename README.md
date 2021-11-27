@@ -35,10 +35,11 @@ The open-source projects such as nmap, rustscan, dirsearch, shreder, circl, crow
 
 ## :blue_book: Installation Guide
 You can find the installation guide in the [Installation wiki page](https://github.com/signorrayan/RedTeam_toolkit/wiki/Installation-Guide)
-
+.\
+Please refer to [Additional Information page](https://github.com/signorrayan/RedTeam_toolkit/wiki/Additional-Information) about toolkit modules.
 
 ## :computer: Demo
-You can find the Demo gifs in the [Demo wiki page](https://github.com/signorrayan/RedTeam_toolkit/wiki/Demo)
+You can find the Demo gifs in the [Demo page](https://github.com/signorrayan/RedTeam_toolkit/wiki/Demo)
 
 
 ## :trident: Contributing
@@ -53,7 +54,6 @@ If
 
 
 Please consider contributing to this project .\
-All Python scripts are placed in `/toolkit/scripts/` .\
 If you want to help us, don't be afraid to contribute! We have many things you can do to help out.\
 To contributing you can create an issue or (better) you can **fork & create a pull request**.
 
