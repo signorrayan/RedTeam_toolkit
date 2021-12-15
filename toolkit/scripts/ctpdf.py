@@ -1,7 +1,6 @@
 import os
 import re
 from datetime import datetime
-
 from fpdf import FPDF
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -11,7 +10,6 @@ class PDF(FPDF):
     def header(self):
         # Logo
         self.image(f"{BASE_DIR}/static/toolkit/images/sidebar_logo.png", 10, 8, 33)
-
         self.set_font("Arial", "B", 15)
         # Calculate width of title and position
         w = self.get_string_width(title) + 6
