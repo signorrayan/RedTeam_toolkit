@@ -213,3 +213,31 @@ p {
 .text--center {
   text-align: center;
 }
+
+table {
+  width:800px;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+  text-align: center;
+}
+#t01 tr:nth-child(even) {
+  background-color: #363333;
+}
+#t01 tr:nth-child(odd) {
+ background-color: #363333;
+}
+#t02 tr:nth-child(even) {
+  background-color: #363333;
+}
+#t02 tr:nth-child(odd) {
+ background-color: #363333;
+}
+#t01 th {
+  background-color: #9C0000;
+  color: #010D35;
+}

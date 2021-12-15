@@ -296,7 +296,8 @@ def sshbruteforce(request):
         if form.is_valid():
             target_username = form.cleaned_data.get("username")
             target_ip = form.cleaned_data.get("ip")
-            result = sshbrute.ssh_bruteforce(target_username, target_ip)
+            target_port = form.cleaned_data.get("port")
+            result = sshbrute.ssh_bruteforce(target_username, target_ip, target_port)
             if result is not None:
                 context = {"result": result}
                 return render(request, "toolkit/sshbruteforce.html", context)

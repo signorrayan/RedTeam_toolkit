@@ -12,41 +12,57 @@
 </title>
 <br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br>
-
-<body class="align">
-  <div class="grid">
-      <p class="form" >SSH Dictionary Attack</p>
-    <form method="POST" class="form login">
-      {% csrf_token %}
-      <div class="form__field">
-          </svg><span class="hidden">Username</span></label>
-        <input autocomplete="username" id="login__username" type="text" name="username" class="form__input" placeholder="Username" required>
-      </div>
-
-      <div class="form__field">
-          </svg><span class="hidden">Ip</span></label>
-        <input  type="text" name="ip" class="form__input" placeholder="IP" required>
-      </div>
-
-      <div class="form__field">
-        <input type="submit" value="Start">
-      </div>
-
-    </form>
 {% if result %}
-    <div class="text--center">
-    <p><b>Hostname:</b> {{ result.hostname }}</p>
-    <p><b>Username:</b> {{ result.username }}</p>
-    <p><b>Password:</b> {{ result.password }}</p>
+    <div class="center container">
+        <table id="t01" <table id="t01" style="margin-left:30%;margin-right:25%">
+            <tr>
+                <th style="text-align:center">Hostname</th>
+                <th style="text-align:center">Port</th>
+                <th style="text-align:center">Username</th>
+                <th style="text-align:center">Password</th>
+            </tr>
+            <tr>
+                <td style="text-align:center">{{ result.hostname }}</td>
+                <td style="text-align:center">{{ result.port }}</td>
+                <td style="text-align:center">{{ result.username }}</td>
+                <td style="text-align:center">{{ result.password }}</td>
+            </tr>
+        </table>
     </div>
 {% elif error %}
      <br><div class="text--center" role="alert">
          <h5>{{ error }}</h5>
      </div>
  {% endif %}
+<br><br>
+<body class="align">
+  <div class="grid">
+    <p class="form" >SSH Dictionary Attack</p>
+    <form method="POST" class="form login">
+      {% csrf_token %}
+      <div class="form__field">
+        <span class="hidden">Username</span>
+        <input autocomplete="username" id="login__username" type="text" name="username" class="form__input" placeholder="Username" required>
+      </div>
+
+      <div class="form__field">
+        <span class="hidden">Ip</span>
+        <input  type="text" name="ip" class="form__input" placeholder="IP" required>
+      </div>
+
+      <div class="form__field">
+        <span class="hidden">Port</span>
+        <input  type="text" name="port" class="form__input" placeholder="PORT" required>
+      </div>
+
+      <div class="form__input">
+        <input type="submit" value="Start">
+      </div>
+
+    </form>
 
 
-  </div>
 
-
+</div>
+</body>
 {% endblock %}

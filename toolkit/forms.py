@@ -17,6 +17,7 @@ class CvedesForm(forms.Form):
 class SshbruteForm(forms.Form):
     username = forms.CharField(max_length=20)
     ip = forms.GenericIPAddressField()
+    port = forms.IntegerField(max_value=65535)
 
 
 class URLForm(forms.Form):
