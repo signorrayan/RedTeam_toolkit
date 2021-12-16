@@ -683,7 +683,7 @@ class NetcraftEnum(enumratorBaseThreaded):
         return url
 
     def create_cookies(self, cookie):
-        cookies = dict()
+        cookies = dict()  # noqa: C408
         cookies_list = cookie[0 : cookie.find(";")].split("=")
         cookies[cookies_list[0]] = cookies_list[1]
         # hashlib.sha1 requires utf-8 encoded str
