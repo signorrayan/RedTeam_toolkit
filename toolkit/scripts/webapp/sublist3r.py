@@ -380,7 +380,7 @@ class GoogleEnum(enumratorBaseThreaded):
 
     def check_response_errors(self, resp):
         if (
-            type(resp) is str or type(resp) is unicode
+            type(resp) is str or isinstance(resp, unicode)  # noqa: F821
         ) and "Our systems have detected unusual traffic" in resp:
             self.print_(
                 R + "[!] Error: Google probably now is blocking our requests" + W
@@ -941,7 +941,7 @@ class ThreatCrowd(enumratorBaseThreaded):
                     if self.verbose:
                         self.print_("%s%s: %s%s" % (R, self.engine_name, W, subdomain))
                     self.subdomains.append(subdomain.strip())
-        except Exception as e:
+        except Exception:
             pass
 
 
@@ -1027,7 +1027,7 @@ class PassiveDNS(enumratorBaseThreaded):
     def req(self, url):
         try:
             resp = self.session.get(url, headers=self.headers, timeout=self.timeout)
-        except Exception as e:
+        except Exception:
             resp = None
 
         return self.get_response(resp)
@@ -1049,7 +1049,7 @@ class PassiveDNS(enumratorBaseThreaded):
                     if self.verbose:
                         self.print_("%s%s: %s%s" % (R, self.engine_name, W, subdomain))
                     self.subdomains.append(subdomain.strip())
-        except Exception as e:
+        except Exception:
             pass
 
 
@@ -1238,7 +1238,7 @@ def interactive():
     if args.no_color:
         no_color()
     banner()
-    res = main(
+    res = main(  # noqa: F841
         domain,
         threads,
         savefile,

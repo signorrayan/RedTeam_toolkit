@@ -1,10 +1,9 @@
-import os
-import sys
-import getopt
 import ipaddress
-import urllib.request
-import socket
+import os
 import os.path
+import socket
+import sys
+import urllib.request
 from ipaddress import IPv4Network
 
 
@@ -48,7 +47,7 @@ def checkApache(ip):
             else:
                 message = f"Server {ip} is not Vulnerable"
 
-        except urllib.error.URLError as e:
+        except urllib.error.URLError:
             message = f"[URLError] Server {ip} is not Vulnerable"
 
         except socket.timeout:

@@ -1,6 +1,7 @@
-import urllib3
-import requests
 import re
+
+import requests
+import urllib3
 
 
 def scanner(ip):

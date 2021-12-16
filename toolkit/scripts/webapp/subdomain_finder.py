@@ -1,7 +1,6 @@
 import os
 import subprocess
 import time
-import re
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PY_PATH = os.path.dirname(

@@ -1,6 +1,7 @@
 import os
 import re
 from datetime import datetime
+
 from fpdf import FPDF
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

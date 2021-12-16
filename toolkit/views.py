@@ -9,15 +9,9 @@ from django.http.response import Http404, HttpResponse, StreamingHttpResponse
 from django.shortcuts import redirect, render
 
 from .forms import CvedesForm, IpscanForm, SshbruteForm, SubDomainForm, URLForm
-from .scripts import (
-    cvescanner,
-    dirscanner,
-    nmap,
-    rustscan,
-    sshbrute,
-)
-from .scripts.windows import rdpbrute, proxyshell
-from .scripts.webapp import gather_url, verbtampering, subdomain_finder, cve_2021_41773
+from .scripts import cvescanner, dirscanner, nmap, rustscan, sshbrute
+from .scripts.webapp import cve_2021_41773, gather_url, subdomain_finder, verbtampering
+from .scripts.windows import proxyshell, rdpbrute
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
