@@ -29,9 +29,9 @@ if sys.version > "3":
     import urllib.parse as urlparse
     import urllib.parse as urllib
 else:
-    import urllib
+    import urllib  # type: ignore
 
-    import urlparse
+    import urlparse  # type: ignore
 
 # In case you cannot install some of the required development packages
 # there's also an option to disable the SSL warning:

@@ -196,9 +196,9 @@ Example;
     import re
 
     domain, username, password, address = (
-        re.compile("(?:(?:([^/@:]*)/)?([^@:]*)(?::([^@]*))?@)?(.*)")
+        re.compile("(?:(?:([^/@:]*)/)?([^@:]*)(?::([^@]*))?@)?(.*)")  # type: ignore
         .match(options.target)
-        .groups("")
+        .groups("")  # type: ignore
     )
 
     # In case the password contains '@'
