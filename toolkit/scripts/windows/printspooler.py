@@ -43,7 +43,7 @@ class DRIVER_INFO_2_BLOB(Structure):
 class DRIVER_INFO_2_ARRAY(Structure):
     def __init__(self, data=None, pcReturned=None):
         Structure.__init__(self, data=data)
-        self["drivers"] = list()
+        self["drivers"] = list()  # noqa: C408
         remaining = data
         if data is not None:
             for i in range(pcReturned):
