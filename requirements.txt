@@ -30,7 +30,7 @@ mypy-extensions==0.4.3
 networkx==2.6.3
 numpy==1.22.2
 packaging==21.3
-paramiko==2.9.2
+paramiko==2.10.1
 pbr==5.8.1
 Pillow==9.0.1
 proxy-db==0.3.1
