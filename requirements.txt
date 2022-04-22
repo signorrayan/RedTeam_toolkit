@@ -12,7 +12,7 @@ colorama==0.4.4
 cryptography==36.0.1
 cycler==0.11.0
 dirsearch==0.4.2
-Django==4.0.2
+Django==4.0.4
 dnspython==2.2.0
 fonttools==4.29.1
 fpdf==1.7.2
