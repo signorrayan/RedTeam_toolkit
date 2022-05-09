@@ -24,6 +24,8 @@ urlpatterns = [
     path("webapp/verbtampering", views.verbtamper, name="verbtamper"),
     path("webapp/webcrawler", views.webcrawler, name="webcrawler"),
     path("webapp/subdomain", views.subdomain, name="subdomain"),
-    path("webapp/apache-cve-41773", views.apache_cve_41773, name="apache_cve_41773"),
+    path("webapp/apache-cve-21-41773", views.apache_cve_41773, name="apache_cve_21_41773"),
+    path("webapp/f5-bigip-cve-22-1388", views.f5_bigip_cve_1388, name="f5_bigip_22_1388"),
+    path("webapp/xss_finder", views.xss_finder, name="xss_finder"),
     # <str:filepath>/
 ]
