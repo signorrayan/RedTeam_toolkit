@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+  webapp:
+    build: .
+    command: python manage.py runserver 0.0.0.0:4334
+    container_name: toolkit_webapp
+    ports:
+      - 4334:4334
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: postgres:13.4-bullseye
+    container_name: database
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=redteamuser
+      - POSTGRES_PASSWORD=147r258r
+      - POSTGRES_DB=redteam_toolkit_db
+    restart: always
+
+volumes:
+  postgres_data:
