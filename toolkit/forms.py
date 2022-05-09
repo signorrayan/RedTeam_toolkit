@@ -20,6 +20,11 @@ class SshbruteForm(forms.Form):
     port = forms.IntegerField(max_value=65535)
 
 
+class IpCommandForm(forms.Form):
+    target = forms.GenericIPAddressField()
+    command = forms.CharField(max_length=150)
+
+
 class URLForm(forms.Form):
     target_url = forms.CharField()
 
