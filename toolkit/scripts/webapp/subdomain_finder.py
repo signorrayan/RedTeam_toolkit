@@ -11,7 +11,7 @@ PY_PATH = os.path.dirname(
 def knockpy(target_url):
 
     command = [
-        f"{PY_PATH}/venv/bin/python",
+        "python",
         f"{BASE_DIR}/webapp/knockpy/knockpy.py",
         f"{target_url}",
         "-t",
@@ -36,7 +36,7 @@ def knockpy(target_url):
 
 def sublister(target_url):
     command = [
-        f"{PY_PATH}/venv/bin/python",
+        "python",
         f"{BASE_DIR}/webapp/sublist3r.py",
         "--no-color",
         "-d",
