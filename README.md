@@ -41,8 +41,9 @@ The cybersecurity open-source projects are integrated what will be a powerful to
 ## :blue_book: Installation Guide
 Dockerized version of the Web-App is available now:
 ```bash
+git clone https://github.com/signorrayan/RedTeam_toolkit.git && cd RedTeam_toolkit
 docker-compose -f docker-compose.yml up -d --build && docker-compose -f docker-compose.yml exec webapp python manage.py createsuperuser
-# Create your user and webapp will be available on --------> 127.0.0.1:4334
+# Create your local user and webapp will be available on --------> 127.0.0.1:4334
 ```
 - If you prefer to build the project from scratch, you can find the installation guide in the [Installation wiki page](https://github.com/signorrayan/RedTeam_toolkit/wiki/Installation-Guide)
 .
