@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 
-from decouple import config, Csv
+from decouple import Csv, config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,15 +79,16 @@ WSGI_APPLICATION = "RedTeam_toolkit.wsgi.application"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    "default":
-        {
-            "ENGINE": config("SQL_ENGINE", default='django.db.backends.postgresql_psycopg2'),
-            "NAME": config("SQL_DATABASE", default='redteam_toolkit_db'),
-            "USER": config("SQL_USER", default='redteamuser'),
-            "PASSWORD": config("SQL_PASSWORD", default='147r258r'),
-            "HOST": config("SQL_HOST", default='db'),
-            "PORT": config("SQL_PORT", default=5432),
-        }
+    "default": {
+        "ENGINE": config(
+            "SQL_ENGINE", default='django.db.backends.postgresql_psycopg2'
+        ),
+        "NAME": config("SQL_DATABASE", default='redteam_toolkit_db'),
+        "USER": config("SQL_USER", default='redteamuser'),
+        "PASSWORD": config("SQL_PASSWORD", default='147r258r'),
+        "HOST": config("SQL_HOST", default='db'),
+        "PORT": config("SQL_PORT", default=5432),
+    }
 }
 
 
@@ -114,7 +115,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # SESSION_COOKIE_SECURE = True
 # CSRF_COOKIE_SECURE = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='http://localhost', cast=Csv())
+CSRF_TRUSTED_ORIGINS = config(
+    'CSRF_TRUSTED_ORIGINS', default='http://localhost', cast=Csv()
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
