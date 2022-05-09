@@ -8,9 +8,23 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.http.response import Http404, HttpResponse, StreamingHttpResponse
 from django.shortcuts import redirect, render
 
-from .forms import CvedesForm, IpscanForm, SshbruteForm, SubDomainForm, URLForm, IpCommandForm
+from .forms import (
+    CvedesForm,
+    IpCommandForm,
+    IpscanForm,
+    SshbruteForm,
+    SubDomainForm,
+    URLForm,
+)
 from .scripts import cvescanner, dirscanner, nmap, rustscan, sshbrute
-from .scripts.webapp import cve_2021_41773, gather_url, subdomain_finder, verbtampering, cve_2022_1388, auto_xss_finder
+from .scripts.webapp import (
+    auto_xss_finder,
+    cve_2021_41773,
+    cve_2022_1388,
+    gather_url,
+    subdomain_finder,
+    verbtampering,
+)
 from .scripts.windows import proxyshell, rdpbrute
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -511,6 +525,7 @@ def xss_finder(request):
                 "toolkit/webapp/xss_finder.html",
                 {"error": "Bad data passed in. Try again."},
             )
+
 
 # End WebApplication Section
 
