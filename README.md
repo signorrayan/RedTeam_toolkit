@@ -1,16 +1,19 @@
 ![Logo](Demo/RedTeam_logo3.gif)
 
 \
-[![lint_python](https://github.com/signorrayan/RedTeam_toolkit/actions/workflows/lint_python.yml/badge.svg?branch=master)](https://github.com/signorrayan/RedTeam_toolkit/actions/workflows/lint_python.yml)
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
-[![Linux](https://svgshare.com/i/Zhy.svg)](https://svgshare.com/i/Zhy.svg)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![Docker](https://badgen.net/badge/icon/docker?icon=docker&label)](https://https://docker.com/)
+[![Linux](https://svgshare.com/i/Zhy.svg)](https://svgshare.com/i/Zhy.svg)
+[![lint_python](https://github.com/signorrayan/RedTeam_toolkit/actions/workflows/lint_python.yml/badge.svg?branch=master)](https://github.com/signorrayan/RedTeam_toolkit/actions/workflows/lint_python.yml)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-# RedTeam Toolkit
-Red Team Toolkit is an Open-Source Django Offensive Web-App containing useful offensive tools used in the red-teamming together for the security specialist to identify vulnerabilities.
 
-The open-source projects such as nmap, rustscan, dirsearch, shreder, circl, crowbar, etc are used what will be a powerful toolkit together.
+# RedTeam Toolkit
+Note: Only legal activities should be conducted with this project.\
+Red Team Toolkit is an Open-Source Django Offensive Web-App containing useful offensive tools used in the red-teaming together for the security specialist to identify vulnerabilities.
+
+The cybersecurity open-source projects are integrated what will be a powerful toolkit together.
 
 \
 **Currently it supports the following options:**
@@ -21,7 +24,9 @@ The open-source projects such as nmap, rustscan, dirsearch, shreder, circl, crow
 - SSH Dictionary Attack
 - RDP BruteForce
 - WebApps Section
+  - F5 BIG-IP PoC ( CVE-2022-1388 )
   - Apache Path Traversal PoC ( CVE-2021-41773 )
+  - Automated XSS Finder
   - Web Crawler for gathering URLs
   - SubDomain Enumeration
   - HTTP Verb Tampering
@@ -34,9 +39,14 @@ The open-source projects such as nmap, rustscan, dirsearch, shreder, circl, crow
 
 
 ## :blue_book: Installation Guide
-You can find the installation guide in the [Installation wiki page](https://github.com/signorrayan/RedTeam_toolkit/wiki/Installation-Guide)
-.\
-Please refer to [Additional Information page](https://github.com/signorrayan/RedTeam_toolkit/wiki/Additional-Information) about toolkit modules.
+Dockerized version of the Web-App is available now:
+```bash
+docker-compose -f docker-compose.yml up -d --build && docker-compose -f docker-compose.yml exec webapp python manage.py createsuperuser
+# Create your user and webapp will be available on --------> 127.0.0.1:4334
+```
+- If you prefer to build the project from scratch, you can find the installation guide in the [Installation wiki page](https://github.com/signorrayan/RedTeam_toolkit/wiki/Installation-Guide)
+.
+- Please refer to [Additional Information page](https://github.com/signorrayan/RedTeam_toolkit/wiki/Additional-Information) about toolkit modules.
 
 ## :computer: Demo
 You can find the Demo gifs in the [Demo page](https://github.com/signorrayan/RedTeam_toolkit/wiki/Demo)
