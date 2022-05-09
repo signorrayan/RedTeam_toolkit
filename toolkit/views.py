@@ -8,9 +8,9 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.http.response import Http404, HttpResponse, StreamingHttpResponse
 from django.shortcuts import redirect, render
 
-from .forms import CvedesForm, IpscanForm, SshbruteForm, SubDomainForm, URLForm
+from .forms import CvedesForm, IpscanForm, SshbruteForm, SubDomainForm, URLForm, IpCommandForm
 from .scripts import cvescanner, dirscanner, nmap, rustscan, sshbrute
-from .scripts.webapp import cve_2021_41773, gather_url, subdomain_finder, verbtampering
+from .scripts.webapp import cve_2021_41773, gather_url, subdomain_finder, verbtampering, cve_2022_1388, auto_xss_finder
 from .scripts.windows import proxyshell, rdpbrute
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -456,6 +456,61 @@ def apache_cve_41773(request):
             {"error": "Bad data passed in. Try again."},
         )
 
+
+@login_required(login_url="/forbidden/")
+def f5_bigip_cve_1388(request):
+    if request.method == "GET":
+        return render(
+            request, "toolkit/webapp/cve_2022_1388.html", {"form": IpCommandForm()}
+        )
+
+    else:
+        form = IpCommandForm(request.POST)
+        if form.is_valid():
+            target = form.cleaned_data.get("target")
+            command = form.cleaned_data.get("command")
+            result = cve_2022_1388.exploit(target, command)
+            if result is not None:
+                context = {"result": result}
+                return render(request, "toolkit/webapp/cve_2022_1388.html", context)
+
+            else:
+                return render(
+                    request,
+                    "toolkit/webapp/cve_2022_1388.html",
+                    {"error": "Something went wrong..."},
+                )
+
+        return render(
+            request,
+            "toolkit/webapp/cve_2022_1388.html",
+            {"error": "Bad data passed in. Try again."},
+        )
+
+
+@login_required(login_url="/forbidden/")
+def xss_finder(request):
+    if request.method == "GET":
+        return render(request, "toolkit/webapp/xss_finder.html", {"form": URLForm()})
+
+    else:
+        try:
+            global target_url
+            form = URLForm(request.POST)
+            if form.is_valid():
+                target_url = form.cleaned_data.get("target_url")
+                response = StreamingHttpResponse(
+                    auto_xss_finder.start(target_url)
+                )  # Accept generator/yield
+                response["Content-Type"] = "text/event-stream"
+                return response
+
+        except ValueError:
+            return render(
+                request,
+                "toolkit/webapp/xss_finder.html",
+                {"error": "Bad data passed in. Try again."},
+            )
 
 # End WebApplication Section
 
