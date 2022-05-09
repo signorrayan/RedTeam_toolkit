@@ -7,11 +7,12 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_USER: redteamuser
-          POSTGRES_PASSWORD: 147r258r
-          POSTGRES_DB: redteam_toolkit_db
-          POSTGRES_PORT: 5432
-          POSTGRES_HOST: db
+          DEBUG: ${{ secrets.DEBUG }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         ports:
           - 5432:5432
         
