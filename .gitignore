@@ -24,11 +24,14 @@ coverage.xml
 *.mo
 *.pot
 .env
-
+.env.prod
+.env.prod.db
 # Django stuff:
 *.log
 *.out
-
+Dockerfile.prod
+docker-compose.prod.yml
+entrypoint.prod.sh
 # Sphinx documentation
 docs/_build/
 
@@ -44,9 +47,16 @@ ipython_config.py
 
 # Secrets
 secrets.json
-mypy_cache
+toolkit/.mypy_cache
 /venv
-/toolkit/scripts/webapp/hakrawler
+.pip_cache
+.run
+nginx
+templates
 
 /knockpy_report/
 /toolkit/.mypy_cache/
+toolkit/scripts/webapp/freq
+toolkit/scripts/webapp/gau
+toolkit/scripts/webapp/qsreplace
+toolkit/scripts/webapp/waybackurls
