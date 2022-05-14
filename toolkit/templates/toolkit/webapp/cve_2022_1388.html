@@ -5,7 +5,7 @@
 <html>
 <title>
     {% block title %}
-        Apache Path Traversal - RedTeam Toolkit
+        F5 BIG IP RCE - RedTeam Toolkit
     {% endblock %}
 </title>
 <link rel="stylesheet" type="text/css" href="{% static "toolkit/css/single_input.css" %}" media="all" />
@@ -13,20 +13,16 @@
 <body>
 <div class="wrapper">
 	<div class="container">
-		<h1>Apache Path Traversal</h1>
-        <h5>[ CVE-20.1.51773 ]</h5>
+		<h1>F5 BIG IP RCE</h1>
+        <h5>[ CVE-2022-1388 ]</h5>
 		<form class="form" method="POST">
             {% csrf_token %}
-			<input type="text" name="ip" placeholder="Target IP">
+			<input type="text" name="target" placeholder="Target IP">
+            <input type="text" name="command" placeholder="Command">
 			<button type="submit" id="login-button">Start</button>
 		</form>
         {% if result %}
-            {% if result.content %}
-                <h2> {{ result.message }} </h2>
-                <h2>{{ result.content }}</h2>
-            {% else %}
-                <h3> {{ result.message }} </h3>
-            {% endif %}
+            <h4>{{ result.message }}</h4>
         {% else %}
             <h3> {{ error }} </h3>
         {% endif %}
