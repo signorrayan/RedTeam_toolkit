@@ -7,10 +7,12 @@ services:
     container_name: toolkit_webapp
     ports:
       - 4334:4334
-    env_file:
-      - ./.env
-    depends_on:
-      - db
+#    env_file:
+#      - ./.env
+    links:
+      - db:db
+    environment:
+      POSTGRES_HOST: db
     restart: always
 
   db:
