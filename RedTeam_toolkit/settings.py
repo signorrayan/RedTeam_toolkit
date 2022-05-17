@@ -27,7 +27,7 @@ STATIC_DIR = os.path.join(BASE_DIR, "toolkit/static")
 SECRET_KEY = config("SECRET_KEY", default="R3Dt34mT0o1k17@_@!147!r#258&r%")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG", default=False)
+DEBUG = config("DEBUG", default=True)
 
 # ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(',')])
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
