@@ -44,7 +44,8 @@ Dockerized version of the Web-App is available now:
 git clone https://github.com/signorrayan/RedTeam_toolkit.git && cd RedTeam_toolkit
 docker-compose up -d --build && docker-compose exec webapp python manage.py createsuperuser
 # Create your local user and webapp will be available on --------> 127.0.0.1:4334
-# Note: After restarting your machine, the web app will be automatically launched.
+# Note: The web app will be automatically launched even after restarting your machine.
+# No need to re-launch that again. 
 ```
 - If you prefer to build the project from scratch, you can find the installation guide in the [Installation wiki page](https://github.com/signorrayan/RedTeam_toolkit/wiki/Installation-Guide)
 .
