@@ -245,7 +245,7 @@ def rdpbruteforce(request):
                 return render(
                     request,
                     "toolkit/windows/rdpbruteforce.html",
-                    {"error": "Not Found!"},
+                    {"error": "Couldn't find anything!"},
                 )
 
         return render(
