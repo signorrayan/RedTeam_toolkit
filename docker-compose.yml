@@ -12,7 +12,9 @@ services:
     links:
       - db:db
     environment:
-      POSTGRES_HOST: db
+      SQL_HOST: db
+      SQL_PORT: 5432
+      DATABASE: postgres
     restart: always
 
   db:
