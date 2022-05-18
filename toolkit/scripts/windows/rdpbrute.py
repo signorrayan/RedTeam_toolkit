@@ -2,19 +2,13 @@ import os
 import re
 import subprocess
 
-# from .ctpdf import convert_to_pdf
-# from .checksum import check
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PY_PATH = os.path.dirname(
-    os.path.dirname(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))))
-)
-
 
 def rdpbrute_script(ip):
     p = subprocess.run(
         [
-            f"{PY_PATH}/venv/bin/python",
+            "python",
             f"{BASE_DIR}/scripts/crowbar.py",
             "-q",
             "-b",
