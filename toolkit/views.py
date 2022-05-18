@@ -236,17 +236,22 @@ def rdpbruteforce(request):
         form = IpscanForm(request.POST)
         if form.is_valid():
             ip = form.cleaned_data.get("ip")
-            result = rdpbrute.rdpbrute_script(ip)
-            if result is not None:
-                context = {"result": result}
-                return render(request, "toolkit/windows/rdpbruteforce.html", context)
+            # result = rdpbrute.rdpbrute_script(ip)
+            # if result is not None:
+            # context = {"result": result}
+            # return render(request, "toolkit/windows/rdpbruteforce.html", context)
+            response = StreamingHttpResponse(
+                rdpbrute.rdpbrute_script(ip)
+            )  # Accept generator/yield
+            response["Content-Type"] = "text/event-stream"
+            return response
 
-            else:
-                return render(
-                    request,
-                    "toolkit/windows/rdpbruteforce.html",
-                    {"error": "Couldn't find anything!"},
-                )
+            # else:
+            #     return render(
+            #         request,
+            #         "toolkit/windows/rdpbruteforce.html",
+            #         {"error": "Couldn't find anything!"},
+            #     )
 
         return render(
             request,
