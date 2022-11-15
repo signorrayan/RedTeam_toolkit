@@ -69,3 +69,4 @@ types-urllib3==1.26.14
 typing_extensions==4.2.0
 urllib3==1.26.9
 uro==0.0.4
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
