@@ -1,5 +1,4 @@
 asgiref==3.5.2
-backports.zoneinfo==0.2.1;python_version<"3.9"
 bandit==1.7.4
 bcrypt==3.2.2
 beautifulsoup4==4.11.1
@@ -49,7 +48,7 @@ pytz==2022.1
 PyYAML==6.0
 requests==2.27.1
 requests-mock==1.9.3
-shreder @ git+https://github.com/EntySec/Shreder@fe629fd99306f1cbf0ab5c0abbcbdb75960cf362
+shreder==1.0.0
 six==1.16.0
 smmap==5.0.0
 soupsieve==2.3.2.post1
@@ -69,4 +68,3 @@ types-urllib3==1.26.14
 typing_extensions==4.2.0
 urllib3==1.26.9
 uro==0.0.4
-setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
