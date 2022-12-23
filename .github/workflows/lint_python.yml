@@ -19,9 +19,11 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
+      - uses: actions/setup-python@v4
         with:
-          python-version: '3.8'
+          python-version: '3.10'
+          cache: 'pip'
+
       - name: Install PostgreSQL client
         run: |
           sudo apt-get update
