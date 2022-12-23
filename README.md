@@ -13,7 +13,7 @@
 Note: Only legal activities should be conducted with this project.\
 Red Team Toolkit is an Open-Source Django Offensive Web-App containing useful offensive tools used in the red-teaming together for the security specialist to identify vulnerabilities.
 
-The cybersecurity open-source projects are integrated what will be a powerful toolkit together.
+The cybersecurity open-source projects are integrated which will be a powerful toolkit together.
 
 \
 **Currently it supports the following options:**

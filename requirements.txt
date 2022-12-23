@@ -1,5 +1,5 @@
 asgiref==3.5.2
-backports.zoneinfo==0.2.1
+backports.zoneinfo==0.2.1;python_version<"3.9"
 bandit==1.7.4
 bcrypt==3.2.2
 beautifulsoup4==4.11.1

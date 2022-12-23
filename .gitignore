@@ -44,6 +44,7 @@ ipython_config.py
 /media/
 !/media/.gitkeep
 /toolkit/media/
+/.*/
 
 # Secrets
 secrets.json
