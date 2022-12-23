@@ -48,7 +48,7 @@ pytz==2022.1
 PyYAML==6.0
 requests==2.27.1
 requests-mock==1.9.3
-shreder==1.0.0
+shreder @ git+https://github.com/EntySec/Shreder
 six==1.16.0
 smmap==5.0.0
 soupsieve==2.3.2.post1
