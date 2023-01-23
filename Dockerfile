@@ -10,7 +10,7 @@ RUN go install github.com/lc/gau/v2/cmd/gau@latest \
  
 
 ## Pull official base image
-FROM python:3.9.16-bullseye
+FROM python:3.12.0a3-slim-bullseye
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
