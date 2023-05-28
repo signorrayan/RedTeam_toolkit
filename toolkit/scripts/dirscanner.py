@@ -6,7 +6,6 @@ from .ctpdf import convert_to_pdf
 
 
 def dirscan_script(ip, user_name, function_name):
-
     command = [
         "dirsearch",
         "-e",

@@ -216,7 +216,6 @@ class enumratorBase(object):
         return
 
     def send_req(self, query, page_no=1):
-
         url = self.base_url.format(query=query, page_no=page_no)
         try:
             resp = self.session.get(url, headers=self.headers, timeout=self.timeout)

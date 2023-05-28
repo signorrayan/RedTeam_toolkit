@@ -38,9 +38,7 @@ class Request:
     def https(url):
         headers = {"user-agent": random.SystemRandom().choice(config["user_agent"])}
         try:
-            resp = requests.get(
-                "https://" + url, headers=headers, timeout=config["timeout"]
-            )
+            resp = requests.get("https://" + url, headers=headers, timeout=10)
             return [
                 resp.status_code,
                 resp.headers["Server"] if "Server" in resp.headers.keys() else "",
@@ -51,9 +49,7 @@ class Request:
     def http(url):
         headers = {"user-agent": random.SystemRandom().choice(config["user_agent"])}
         try:
-            resp = requests.get(
-                "http://" + url, headers=headers, timeout=config["timeout"]
-            )
+            resp = requests.get("http://" + url, headers=headers, timeout=10)
             return [
                 resp.status_code,
                 resp.headers["Server"] if "Server" in resp.headers.keys() else "",
@@ -63,7 +59,7 @@ class Request:
 
     def bs4scrape(params):
         target, url, headers = params
-        resp = requests.get(url, headers=headers, timeout=config["timeout"])
+        resp = requests.get(url, headers=headers, timeout=10)
 
         pattern = "http(s)?:\/\/(.*)\.%s" % target
         subdomains = []
@@ -116,7 +112,7 @@ class Wordlist:
             return []
         url = "https://www.virustotal.com/vtapi/v2/domain/report"
         params = {"apikey": apikey, "domain": domain}
-        resp = requests.get(url, params=params)
+        resp = requests.get(url, params=params, timeout=10)
         resp = resp.json()
         subdomains = (
             [item.replace("." + domain, "") for item in resp["subdomains"]]
@@ -485,7 +481,6 @@ class Start:
 
     def parse_and_exit(args):
         if len(args) == 3 and args[1] in ["--report", "--plot", "--csv", "--set"]:
-
             # report
             if args[1] == "--report":
                 if args[2].endswith(".json"):

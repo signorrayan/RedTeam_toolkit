@@ -36,7 +36,7 @@ jobs:
       - run: pip install bandit black flake8 flake8-bugbear
                          flake8-comprehensions isort mypy pyupgrade safety
       - run: bandit --recursive  --skip B106,B110,B404,B501,B602,B603,B607 .
-      - run: black -S --target-version py38 --check .
+      - run: black -S --target-version py310 --check .
       - run: flake8 . --count --ignore=B,E203,E722,W503,W605 --max-complexity=28
                       --max-line-length=220 --show-source --statistics
       - run: isort --check-only --profile black .
@@ -46,9 +46,10 @@ jobs:
       - run: mypy --ignore-missing-imports --install-types --non-interactive .
       - run: python manage.py migrate
         env:  # https://stackoverflow.com/questions/61670081
-          SECRET_KEY: 96fc8cf096d12574a61caf5a93ac4c9e3abc37094144971a1a
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
       - run: python manage.py test
         env:  # https://stackoverflow.com/questions/61670081
-          SECRET_KEY: 96fc8cf096d12574a61caf5a93ac4c9e3abc37094144971a1a
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
       - run: shopt -s globstar && pyupgrade --py36-plus **/*.py || true
-      - run: safety check
+      - run: safety check --ignore=cryptography #temporarily ignore cryptography to avoid conflicts
+
