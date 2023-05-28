@@ -481,7 +481,6 @@ class Start:
 
     def parse_and_exit(args):
         if len(args) == 3 and args[1] in ["--report", "--plot", "--csv", "--set"]:
-
             # report
             if args[1] == "--report":
                 if args[2].endswith(".json"):

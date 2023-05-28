@@ -35,7 +35,6 @@ def main():
 
 class AddressAction(argparse.Action):
     def __call__(self, parser, args, values, option=None):
-
         if args.username:
             if len(args.username) > 1:
                 args.username = (

@@ -9,7 +9,6 @@ PY_PATH = os.path.dirname(
 
 
 def knockpy(target_url):
-
     command = [
         "python",
         f"{BASE_DIR}/webapp/knockpy/knockpy.py",

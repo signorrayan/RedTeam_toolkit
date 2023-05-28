@@ -726,7 +726,6 @@ if __name__ == "__main__":
     for target in targets:
         target = str(target).strip()
         if target:
-
             # target => domain
             # record_type =>
             # options.subs => file the contain the subdomains list
