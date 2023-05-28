@@ -153,7 +153,11 @@ def methods_from_http_options(console, target_url, options, proxies, cookies):
     # logger.verbose("Pulling available methods from server with an OPTIONS request")
     try:
         r = requests.options(
-            url=target_url, proxies=proxies, cookies=cookies, verify=options.verify, timeout=10
+            url=target_url,
+            proxies=proxies,
+            cookies=cookies,
+            verify=options.verify,
+            timeout=10,
         )
     except requests.exceptions.ProxyError:
         # logger.error("Invalid proxy specified ")

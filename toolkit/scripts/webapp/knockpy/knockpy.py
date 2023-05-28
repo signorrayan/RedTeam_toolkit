@@ -38,9 +38,7 @@ class Request:
     def https(url):
         headers = {"user-agent": random.SystemRandom().choice(config["user_agent"])}
         try:
-            resp = requests.get(
-                "https://" + url, headers=headers, timeout=10
-            )
+            resp = requests.get("https://" + url, headers=headers, timeout=10)
             return [
                 resp.status_code,
                 resp.headers["Server"] if "Server" in resp.headers.keys() else "",
@@ -51,9 +49,7 @@ class Request:
     def http(url):
         headers = {"user-agent": random.SystemRandom().choice(config["user_agent"])}
         try:
-            resp = requests.get(
-                "http://" + url, headers=headers, timeout=10
-            )
+            resp = requests.get("http://" + url, headers=headers, timeout=10)
             return [
                 resp.status_code,
                 resp.headers["Server"] if "Server" in resp.headers.keys() else "",
