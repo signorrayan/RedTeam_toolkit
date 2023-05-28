@@ -58,8 +58,8 @@ shreder @ git+https://github.com/EntySec/Shreder
 six==1.16.0
 smmap==5.0.0
 soupsieve==2.3.2.post1
-SQLAlchemy==1.4.45
-sqlparse==0.4.3
+SQLAlchemy==2.0.1
+sqlparse==0.4.4
 stevedore==4.1.1
 toml==0.10.2
 tomli==2.0.1
