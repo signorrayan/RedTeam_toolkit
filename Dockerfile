@@ -19,7 +19,7 @@ ENV PYTHONUNBUFFERED 1
 # Install packages
 RUN apt-get update \
     && apt-get -y install --no-install-recommends software-properties-common libpq5 python3-dev musl-dev git\
-    netcat-traditional golang nmap openvpn freerdp2-x11 tigervnc-viewer apt-utils ca-certificates vim \
+    netcat-traditional golang nmap openvpn freerdp2-x11 tigervnc-viewer apt-utils ca-certificates vim build-essential\
     && rm -rf /var/lib/apt/lists/*
 
 # set work directory
