@@ -13,7 +13,7 @@ cryptography==38.0.0
 cycler==0.11.0
 defusedxml==0.7.1
 dirsearch==0.4.3.post1
-Django==4.1.9
+Django==4.1.10
 dnspython==2.2.1
 fonttools==4.38.0
 fpdf==1.7.2
