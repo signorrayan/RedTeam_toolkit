@@ -2,7 +2,7 @@ asgiref==3.6.0
 bandit==1.7.4
 bcrypt==4.0.1
 beautifulsoup4==4.11.1
-certifi==2022.12.7
+certifi==2023.7.22
 cffi==1.15.1
 chardet==5.1.0
 charset-normalizer==2.0.12
