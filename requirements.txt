@@ -15,7 +15,7 @@ defusedxml==0.7.1
 dirsearch==0.4.3.post1
 Django==4.1.9
 dnspython==2.2.1
-fonttools==4.38.0
+fonttools==4.43.0
 fpdf==1.7.2
 gitdb==4.0.10
 GitPython==3.1.30
