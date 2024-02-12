@@ -1,5 +1,5 @@
 asgiref==3.6.0
-bandit==1.7.4
+bandit==1.7.7
 bcrypt==4.0.1
 beautifulsoup4==4.11.1
 certifi==2022.12.7
