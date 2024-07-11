@@ -75,3 +75,4 @@ typing_extensions==4.4.0
 urllib3==1.26.13
 uro==0.0.4
 setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
